@@ -2,4 +2,4 @@
 
 ---
 
-## Axel - Baptiste - Noah - Kylian
+## Axel - Baptiste - Notax - Kylian
