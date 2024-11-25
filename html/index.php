@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$serveur = "localhost";
-$utilisateur = "dev1";
+$serveur = "192.168.100.27";
+$utilisateur = "dev";
 $motdepasse = "sio2425";
 $nomBDD = "AP_BTS2";
 $erreur = "";
