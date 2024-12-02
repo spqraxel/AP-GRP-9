@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$serveur = "192.168.100.27";
-$utilisateur = "dev";
+$serveur = "localhost";
+$utilisateur = "dev1";
 $motdepasse = "sio2425";
 $nomBDD = "AP_BTS2";
 $erreur = "";
@@ -40,10 +40,10 @@ try {
                     }
 
                     if ($resultat['id_metier'] == 1) {
-                        header("Location: Site_clinique.php");
+                        header("Location: secretaire.php");
                         exit();
                     } elseif ($resultat['id_metier'] == 2) {
-                        header("Location: site_clinique_admin.php");
+                        header("Location: admin.php");
                         exit();
                     } else {
                         $erreur = "Vous n'avez pas les droits.";
