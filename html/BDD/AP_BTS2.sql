@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 07 oct. 2024 à 09:54
+-- Généré le : lun. 02 déc. 2024 à 10:12
 -- Version du serveur : 10.11.6-MariaDB-0+deb12u1
--- Version de PHP : 8.2.20
+-- Version de PHP : 8.2.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Chambre` (
   `id_chambre` int(11) NOT NULL,
-  `numero_chambre` int(11) NOT NULL,
   `type_chambre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
