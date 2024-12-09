@@ -15,6 +15,17 @@ try {
     $erreur = "Erreur de connexion : " . $e->getMessage();
 }
 
+$table1 = "Chambre";
+$table2 = "Couverture_sociale";
+$table3 = "Metier";
+$table4 = "Patient";
+$table5 = "Personne";
+$table6 = "Piece_jointe";
+$table7 = "Pre_admission";
+$table8 = "Professionnel";
+$table9 = "Service";
+$table10 = "Type_pre_admission";
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,7 +39,7 @@ try {
 
 </header>
 <body>
-    <form method="POST">
+    <form method="POST" action="">
 
     <h6>COORDONÉES PERSONNES À PRÉVENIR </h6>
 
@@ -52,9 +63,13 @@ try {
     <input type="text" id="Adresse_personne1" name="Adresse_personne1" required>
     <br><br>
 
-    <button>Suivant</button>
+    <a href="Pre_admission_Confiance.php"><button>Retour</button></a>
     
-    <button>Deconnexion</button>
+    <a href="Pre_admission_Piece_Jointe.php"><button>Suivant</button></a>
+    
+    <form action="Logout.php" method="post">
+        <button type="submit">Se déconnecter</button>
+    </form>
 </form>
 </body>
 

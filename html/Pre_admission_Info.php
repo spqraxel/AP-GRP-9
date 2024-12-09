@@ -2,6 +2,7 @@
 require('Logout.php');
 session_start();
 
+// Connexion à la base de données
 $serveur = "192.168.100.27:3306";
 $utilisateur = "dev";
 $motdepasse = "sio2425";
@@ -13,8 +14,56 @@ try {
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     $erreur = "Erreur de connexion : " . $e->getMessage();
+    die($erreur); // Arrête le script si la connexion échoue
 }
 
+// Traitement du formulaire
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Récupération et nettoyage des données
+    $secu_sociale = htmlspecialchars($_POST['secu_sociale']);
+    $civ = htmlspecialchars($_POST['civ']);
+    $nom_naissance = htmlspecialchars($_POST['Nom_naissance']);
+    $nom_epouse = htmlspecialchars($_POST['Nom_epouse']);
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $date_naissance = htmlspecialchars($_POST['date_naissance']);
+    $adresse = htmlspecialchars($_POST['Adresse']);
+    $cp = htmlspecialchars($_POST['CP']);
+    $ville = htmlspecialchars($_POST['Ville']);
+    $email = htmlspecialchars($_POST['Email']);
+    $telephone = htmlspecialchars($_POST['Téléphone']);
+
+    // Vérification des champs obligatoires
+    if (empty($secu_sociale) || empty($civ) || empty($nom_naissance) || empty($prenom) || empty($date_naissance) || empty($adresse) || empty($cp) || empty($ville) || empty($email) || empty($telephone)) {
+        echo "<p>Veuillez remplir tous les champs requis.</p>";
+    } else {
+        try {
+            // Préparer la requête SQL
+            $stmt = $connexion->prepare("
+                INSERT INTO Patient (secu_sociale, civilite, nom_naissance, nom_epouse, prenom, date_naissance, adresse, cp, ville, email, telephone)
+                VALUES (:secu_sociale, :civ, :nom_naissance, :nom_epouse, :prenom, :date_naissance, :adresse, :cp, :ville, :email, :telephone)
+            ");
+
+            // Lier les paramètres
+            $stmt->bindParam(':secu_sociale', $secu_sociale);
+            $stmt->bindParam(':civ', $civ);
+            $stmt->bindParam(':nom_naissance', $nom_naissance);
+            $stmt->bindParam(':nom_epouse', $nom_epouse);
+            $stmt->bindParam(':prenom', $prenom);
+            $stmt->bindParam(':date_naissance', $date_naissance);
+            $stmt->bindParam(':adresse', $adresse);
+            $stmt->bindParam(':cp', $cp);
+            $stmt->bindParam(':ville', $ville);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':telephone', $telephone);
+
+            // Exécuter la requête
+            $stmt->execute();
+            echo "<p>Enregistrement réussi.</p>";
+        } catch (PDOException $e) {
+            echo "<p>Erreur lors de l'insertion : " . $e->getMessage() . "</p>";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,7 +77,7 @@ try {
 
 </header>
 <body>
-    <form method="POST"></form>
+    <form method="POST" action=""></form>
     <h6>INFORMATIONS CONCERNANT LE PATIENT</h6>
 
     <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
@@ -79,8 +128,11 @@ try {
     <input type="text" id="Téléphone" name="Téléphone" required>
     <br><br>
     
-    <button>Suivant</button>
-    
-    <button>Deconnexion</button>
+    <a href=""><button>Retour</button></a>
+    <a href="Pre_admission_Inscription.php"><button>Suivant</button></a>
+
+    <form action="Logout.php" method="post">
+        <button type="submit">Se déconnecter</button>
+    </form>
     </form>
 </body>

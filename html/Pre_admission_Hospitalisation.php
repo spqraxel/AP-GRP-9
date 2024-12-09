@@ -1,4 +1,4 @@
-<?php
+<a?php
 require('Logout.php');
 session_start();
 
@@ -15,6 +15,16 @@ try {
     $erreur = "Erreur de connexion : " . $e->getMessage();
 }
 
+$table1 = "Chambre";
+$table2 = "Couverture_sociale";
+$table3 = "Metier";
+$table4 = "Patient";
+$table5 = "Personne";
+$table6 = "Piece_jointe";
+$table7 = "Pre_admission";
+$table8 = "Professionnel";
+$table9 = "Service";
+$table10 = "Type_pre_admission";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,7 +38,7 @@ try {
 
 </header>
 <body>
-    <form method="POST">
+    <form method="POST" action="">
     <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
     <input type="text" id="secu_sociale" name="secu_sociale" required>
     <br><br>
@@ -63,9 +73,12 @@ try {
     </select>
     <br><br>
 
-    <button>Suivant</button>
+    <a href="Pre_admission_Inscription.php"><button>Retour</button></a>
+    <a href="Pre_admission_Confiance.php"><button>Suivant</button></a>
     
-    <button>Deconnexion</button>
+    <form action="Logout.php" method="post">
+        <button type="submit">Se déconnecter</button>
+    </form>
     </form>
 </body>
 
