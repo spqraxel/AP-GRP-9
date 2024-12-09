@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <img src="img/LPFS_logo.png" alt="Logo" class="logo">
             <div class="nav-links">
                 <a href="admin.php">Accueil</a>
-                <a href="Pre_admission.php">Pré-admission</a>
+                <a href="Pre_admission_Info.php">Pré-admission</a>
             </div>
         </nav>
 </header>
