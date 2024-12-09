@@ -73,8 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Pré admission</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
-<header>
-
+<header class="navbar">
+        <nav>
+            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
+            <div class="nav-links">
+                <a href="admin.php">Accueil</a>
+                <a href="Pre_admission.php">Pré-admission</a>
+            </div>
+        </nav>
 </header>
 <body>
     <form method="POST" action=""></form>

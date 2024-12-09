@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <header class="navbar">
-    <nav>
-            <a href="secretaire.php">Accueil</a>
-            <a href="Pre_admission_Info.php">Pré-admission</a>
-            <a href="Site_clinique.php">Déconnexion</a>
-    </nav>
+        <nav>
+            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
+            <div class="nav-links">
+                <a href="admin.php">Accueil</a>
+                <a href="Pre_admission.php">Pré-admission</a>
+            </div>
+        </nav>
 </header>
 <body>
     <div class="container">
