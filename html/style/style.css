@@ -107,3 +107,12 @@ h1 {
 .requis{
     color: red;
 }
+
+/*Style formulaire pré-admission*/
+
+.container-pre-admission {
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: calc(100% - 20px);
+}
