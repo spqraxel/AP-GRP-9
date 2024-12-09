@@ -46,5 +46,4 @@ $table10 = "Type_pre_admission";
 </header>
 <body>
     <H1>Fin de pré admission</H1>
-</form>
 </body>

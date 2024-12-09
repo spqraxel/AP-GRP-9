@@ -44,6 +44,7 @@ $table10 = "Type_pre_admission";
         </nav>
 </header>
 <body>
+<div class="container-pre-admission">
     <form method="POST" action="">
     <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
     <input type="text" id="secu_sociale" name="secu_sociale" required>
@@ -86,6 +87,7 @@ $table10 = "Type_pre_admission";
         <button type="submit">Se déconnecter</button>
     </form>
     </form>
+</div>
 </body>
 
 

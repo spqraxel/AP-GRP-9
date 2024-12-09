@@ -45,6 +45,7 @@ $table10 = "Type_pre_admission";
         </nav>
 </header>
 <body>
+    <div class="container-pre-admission">
     <form method="POST" action="">
 
     <h6>COORDONÉES PERSONNES À PRÉVENIR </h6>
@@ -77,6 +78,7 @@ $table10 = "Type_pre_admission";
         <button type="submit">Se déconnecter</button>
     </form>
 </form>
+</div>
 </body>
 
 

@@ -83,62 +83,64 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </nav>
 </header>
 <body>
-    <form method="POST" action=""></form>
-    <h6>INFORMATIONS CONCERNANT LE PATIENT</h6>
+    <div class="container-pre-admission">
+        <form method="POST" action=""></form>
+        <h6>INFORMATIONS CONCERNANT LE PATIENT</h6>
 
-    <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
-    <input type="text" id="secu_sociale" name="secu_sociale" required>
-    <br><br>
+        <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
+        <input type="text" id="secu_sociale" name="secu_sociale" required>
+        <br><br>
 
-    <label for="civ">Civilité<span class= "requis">*</span></label>
-    <select id="civ" name="civ" required>
-        <option value="choissir" selected disabled hidden>choix</option>
-        <option value="Femme">Femme</option>
-        <option value="Homme">Homme</option>      
-    </select>
-    <br><br>
+        <label for="civ">Civilité<span class= "requis">*</span></label>
+        <select id="civ" name="civ" required>
+            <option value="choissir" selected disabled hidden>choix</option>
+            <option value="Femme">Femme</option>
+            <option value="Homme">Homme</option>      
+        </select>
+        <br><br>
 
-    <label for="Nom_naissance">Nom de naissance<span class= "requis">*</span></label>
-    <input type="text" id="Nom_naissance" name="Nom_naissance" required>
-    <br><br>
+        <label for="Nom_naissance">Nom de naissance<span class= "requis">*</span></label>
+        <input type="text" id="Nom_naissance" name="Nom_naissance" required>
+        <br><br>
 
-    <label for="Nom_epouse">Nom d'épouse</label>
-    <input type="text" id="Nom_epouse" name="Nom_epouse" >
-    <br><br> 
+        <label for="Nom_epouse">Nom d'épouse</label>
+        <input type="text" id="Nom_epouse" name="Nom_epouse" >
+        <br><br> 
    
-    <label for="prenom">Prénom<span class= "requis">*</span></label>
-    <input type="text" id="prenom" name="prenom" required>
-    <br><br>
+        <label for="prenom">Prénom<span class= "requis">*</span></label>
+        <input type="text" id="prenom" name="prenom" required>
+        <br><br>
 
-    <label for="date_naissance">Date de naissance<span class= "requis">*</span></label>
-    <input type="date" id="date_naissance" name="date_naissance" required>
-    <br><br>
+        <label for="date_naissance">Date de naissance<span class= "requis">*</span></label>
+        <input type="date" id="date_naissance" name="date_naissance" required>
+        <br><br>
 
-    <label for="Adresse">Adresse<span class= "requis">*</span></label>
-    <input type="text" id="Adresse" name="Adresse" required>
-    <br><br>
+        <label for="Adresse">Adresse<span class= "requis">*</span></label>
+        <input type="text" id="Adresse" name="Adresse" required>
+        <br><br>
 
-    <label for="CP">CP<span class= "requis">*</span></label>
-    <input type="text" id="CP" name="CP" required>
-    <br><br>
+        <label for="CP">CP<span class= "requis">*</span></label>
+        <input type="text" id="CP" name="CP" required>
+        <br><br>
 
-    <label for="Ville">Ville<span class= "requis">*</span></label>
-    <input type="text" id="Ville" name="Ville" required>
-    <br><br>
+        <label for="Ville">Ville<span class= "requis">*</span></label>
+        <input type="text" id="Ville" name="Ville" required>
+        <br><br>
 
-    <label for="Email">Email <span class= "requis">*</span></label>
-    <input type="text" id="Email" name="Email" required>
-    <br><br>
+        <label for="Email">Email <span class= "requis">*</span></label>
+        <input type="text" id="Email" name="Email" required>
+        <br><br>
 
-    <label for="Téléphone">Téléphone<span class= "requis">*</span></label>
-    <input type="text" id="Téléphone" name="Téléphone" required>
-    <br><br>
+        <label for="Téléphone">Téléphone<span class= "requis">*</span></label>
+        <input type="text" id="Téléphone" name="Téléphone" required>
+        <br><br>
     
-    <a href=""><button>Retour</button></a>
-    <a href="Pre_admission_Inscription.php"><button>Suivant</button></a>
+        <a href=""><button>Retour</button></a>
+        <a href="Pre_admission_Inscription.php"><button>Suivant</button></a>
 
-    <form action="Logout.php" method="post">
-        <button type="submit">Se déconnecter</button>
-    </form>
-    </form>
+        <form action="Logout.php" method="post">
+            <button type="submit">Se déconnecter</button>
+        </form>
+        </form>
+    </div>
 </body>
