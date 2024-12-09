@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </nav>
 </header>
 <body>
-    <form method="POST" action=""></form>
+    <form method="POST" action="">
     <h6>INFORMATIONS CONCERNANT LE PATIENT</h6>
 
     <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
@@ -137,8 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <a href=""><button>Retour</button></a>
     <a href="Pre_admission_Inscription.php"><button>Suivant</button></a>
 
-    <form action="Logout.php" method="post">
-        <button type="submit">Se déconnecter</button>
-    </form>
+    <a href="?logout=true"><button type="submit">Se déconnecter</button></a> 
     </form>
 </body>

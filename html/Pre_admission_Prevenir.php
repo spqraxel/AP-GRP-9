@@ -73,9 +73,7 @@ $table10 = "Type_pre_admission";
     
     <a href="Pre_admission_Piece_Jointe.php"><button>Suivant</button></a>
     
-    <form action="Logout.php" method="post">
-        <button type="submit">Se déconnecter</button>
-    </form>
+    <a href="?logout=true"><button type="submit">Se déconnecter</button></a>
 </form>
 </body>
 
