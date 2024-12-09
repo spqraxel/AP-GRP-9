@@ -138,9 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <a href=""><button>Retour</button></a>
         <a href="Pre_admission_Inscription.php"><button>Suivant</button></a>
 
-        <form action="Logout.php" method="post">
-            <button type="submit">Se déconnecter</button>
-        </form>
+        <a href="?logout=true">Se déconnecter</a>
         </form>
     </div>
 </body>

@@ -84,9 +84,7 @@ $table10 = "Type_pre_admission";
     <a href="Pre_admission_Info.php"><button>Retour</button></a>
     <a href="Pre_admission_Hospitalisation.php"><button>Suivant</button></a>
     
-    <form action="Logout.php" method="post">
-        <button type="submit">Se déconnecter</button>
-    </form>
+    <a href="?logout=true">Se déconnecter</a>
     </form>
     </div>
 </body>
