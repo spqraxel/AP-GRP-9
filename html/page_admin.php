@@ -1,50 +1,42 @@
-<html lang="fr">
-    
 <?php
-    session_start();
+require('Logout.php');
+session_start();
 
-    // Vérifier si l'utilisateur est connecté
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        // Rediriger l'utilisateur vers la page de connexion
-        header("location: index.php");
-        exit;
-    }
+$serveur = "192.168.100.27:3306";
+$utilisateur = "dev";
+$motdepasse = "sio2425";
+$nomBDD = "AP_BTS2";
+$erreur = "";
 
-    // Vérifier les autorisations d'accès à la page
-    if ( $_SESSION['id_metier'] !== 1) {
-    // Rediriger l'utilisateur vers une autre page ou afficher un message d'erreur
-    header("location: index.php"); // Ou une autre page appropriée
-    exit;
+try {
+    $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);
+    $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    $erreur = "Erreur de connexion : " . $e->getMessage();
 }
-?>
 
+?>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Personnel</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Page de connexion</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+    <div class="container">
+        <img src="img/LPFS_logo.png" alt="Logo" class="image-au-dessus">
+        <h1>Bienvenue sur la page de connexion</h1>
+        <form method="POST" action="">
+            <label for="email">Adresse mail :</label>
+            <input type="email" id="email" name="mail" class="information" placeholder="Saisissez votre Adresse mail" required>
 
-    <header>
-        <div class="nav-bar">
-            <div class="left">
-                <img src="./img/LPFS_logo.png" alt="LPFS logo">
-                <h1>Menu Admin</h1>
-            </div>
-            <div class="bouton">
-                <a onclick="history.back()" class="btn-shine">Retour</a>
-                <a href="inscription.php" class="btn-shine">Ajout Patient</a>
-                <a href="patients.php" class="btn-shine">Liste Patient</a>
-                <a href="deconnexion.php" class="btn-shine">Deconnexion</a>
-            </div>
-        </div>
-    </header>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="mdp" class="information" placeholder="Saisissez votre mot de passe" required>
 
-    
-<div class="container">
-    
-</div>
-
+            <button type="submit" class="button">Se connecter</button>
+        </form>
+    </div>
 </body>
 </html>
