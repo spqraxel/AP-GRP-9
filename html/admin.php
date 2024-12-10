@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+require('Logout.php');
+session_start();
+?>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +21,6 @@
     </header>
 <body>
     <div class="container">
-    <div></div>  
+    </div>  
 </body>
 </html>

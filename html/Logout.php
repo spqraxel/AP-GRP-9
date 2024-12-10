@@ -7,7 +7,7 @@
         exit;
     }
 
-    if (!isset($_SESSION['id_metier']) !== 2 && $_SESSION['id_metier'] !== 1){
+    if ($_SESSION['id_metier'] !== 2 && $_SESSION['id_metier'] !== 1){
         header("location: index.php");
         exit;
     }
@@ -18,5 +18,3 @@
         header("location: index.php");
         exit;
     }
-
-    // <a href= "?logout=true"></a>

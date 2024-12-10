@@ -1,4 +1,4 @@
-<a?php
+<?php
 require('Logout.php');
 session_start();
 
@@ -87,5 +87,5 @@ $table10 = "Type_pre_admission";
     </form>
 </div>
 </body>
-
+</html>
 

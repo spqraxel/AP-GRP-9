@@ -77,5 +77,5 @@ $table10 = "Type_pre_admission";
 </form>
     </div>
 </body>
-
+</html>
 

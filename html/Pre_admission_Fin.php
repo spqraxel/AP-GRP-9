@@ -47,3 +47,4 @@ $table10 = "Type_pre_admission";
 <body>
     <H1>Fin de pré admission</H1>
 </body>
+</html>
