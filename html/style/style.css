@@ -1,151 +1,158 @@
-/*Style page connexion*/
-
+/* Style global pour toutes les pages */
 * {
-    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Police par défaut pour tout le site */
+    box-sizing: border-box; /* Assure une gestion uniforme des marges et des bordures */
 }
 
 html, body {
     height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url('../img/Image_de_fonds.jpeg') no-repeat center center fixed;
-    background-size: cover;
+    background: url('../img/Image_de_fonds.jpeg') no-repeat center center fixed; /* Image de fond fixe et centrée */
+    background-size: cover; /* L'image de fond couvre toute la fenêtre */
 }
 
-.container-index {
-    width: 330px;
-    padding: 35px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.image-au-dessus {
-    display: block;
-    margin: 0 auto 20px;
-    width: 150px;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-.label-login {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.information-login {
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 15px;
-    width: calc(100% - 20px);
-}
-
-.button-login {
-    display: inline-block;
-    padding: 8px 18px;
-    margin-top: 10px;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    text-align: center;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
-
-/*Style page changement de mot de passe*/
-
-
-.container-mdp {
-    width: 330px;
-    padding: 35px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-
-.label-mdp {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.information-mdp {
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 15px;
-    width: calc(100% - 20px);
-}
-
-.button-mdp {
-    display: inline-block;
-    padding: 8px 18px;
-    margin-top: 10px;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    text-align: center;
-}
-
-/*Style navbar*/
-
+/* Style de la navbar */
 .navbar {
-    background-color: #007bff;
-    padding: 10px;
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+    color: white;
+    padding: 10px 20px;
+    z-index: 1000; /* Assure que la navbar est toujours au-dessus */
 }
 
-.logo {
-    height: 40px;
-    margin-right: auto; 
+/* Conteneur du logo */
+.logo-container .logo {
+    height: 50px; /* Taille limite pour l'image */
+    width: auto; /* Garde les proportions de l'image */
 }
 
-.nav-links {
-    margin-left: auto;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
+/* Liens de la navbar */
+.page a {
     color: white;
     text-decoration: none;
-    font-size: 14px;
+    margin-left: 20px;
+    font-size: 16px;
 }
 
-.nav-links a:hover {
-    text-decoration: underline;
+.page a:hover {
+    text-decoration: underline; /* Soulignement au survol */
 }
 
-/*Style page secrétaire*/
-
-
-
-/*Style page admin*/
-
-/*Style page pre-admission */ 
-
-.requis{
-    color: red;
+/* Style pour le conteneur de la page de connexion */
+.container-index {
+    position: absolute; /* Positionnement absolu pour pouvoir le centrer */
+    top: 40%; /* Position verticale centrée */
+    left: 50%; /* Position horizontale centrée */
+    transform: translate(-50%, -50%); /* Décalage pour centrer exactement */
+    margin-top: 80px; /* Crée un espace pour éviter que la navbar cache le contenu */
+    width: 400px; /* Largeur fixe */
+    padding: 35px; /* Espacement interne */
+    background-color: #f9f9f9; /* Couleur de fond blanche/grise */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    text-align: center; /* Centrer le texte */
 }
 
-/*Style formulaire pré-admission*/
+/* Style pour l'image au-dessus du formulaire de connexion */
+.image-au-dessus {
+    display: block;
+    margin: 0 auto 20px; /* Centrer horizontalement et espacer en bas */
+    width: 150px; /* Taille fixe de l'image */
+}
 
+/* Style pour le titre de la page */
+h1 {
+    margin-bottom: 20px; /* Espacement sous le titre */
+}
+
+/* Style pour les étiquettes des champs de formulaire (login) */
+.label-login {
+    display: block;
+    margin-bottom: 5px; /* Espacement sous chaque label */
+}
+
+/* Style pour les champs de saisie du formulaire (login) */
+.information-login {
+    border-radius: 5px; /* Coins arrondis */
+    padding: 10px; /* Espacement interne */
+    margin-bottom: 15px; /* Espacement sous les champs */
+    width: calc(100% - 20px); /* Largeur dynamique pour rester responsive */
+}
+
+/* Style pour les boutons de connexion */
+.button-login {
+    display: inline-block;
+    padding: 8px 18px; /* Taille du bouton */
+    margin-top: 10px; /* Espacement au-dessus */
+    border-radius: 5px; /* Coins arrondis */
+    background-color: #007bff; /* Couleur de fond bleue */
+    color: #fff; /* Texte blanc */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    text-align: center; /* Centrer le texte dans le bouton */
+}
+
+/* Changement de couleur du bouton lors du survol */
+.button:hover {
+    background-color: #0056b3; /* Couleur plus sombre au survol */
+}
+
+/* Style spécifique pour le conteneur de la page de changement de mot de passe */
+.container-mdp {
+    position: absolute; /* Positionnement absolu pour pouvoir le centrer */
+    top: 50%; /* Position verticale centrée */
+    left: 50%; /* Position horizontale centrée */
+    transform: translate(-50%, -50%); /* Décalage pour centrer exactement */
+    width: 400px; /* Largeur fixe */
+    padding: 35px; /* Espacement interne */
+    background-color: #f9f9f9; /* Couleur de fond blanche/grise */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    text-align: center; /* Centrer le texte */
+}
+
+/* Style pour les étiquettes des champs de formulaire (mot de passe) */
+.label-mdp {
+    display: block;
+    margin-bottom: 5px; /* Espacement sous chaque label */
+}
+
+/* Style pour les champs de saisie du formulaire (mot de passe) */
+.information-mdp {
+    border-radius: 5px; /* Coins arrondis */
+    padding: 10px; /* Espacement interne */
+    margin-bottom: 15px; /* Espacement sous les champs */
+    width: calc(100% - 20px); /* Largeur dynamique pour rester responsive */
+}
+
+/* Style pour les boutons de validation de mot de passe */
+.button-mdp {
+    display: inline-block;
+    padding: 8px 18px; /* Taille du bouton */
+    margin-top: 10px; /* Espacement au-dessus */
+    border-radius: 5px; /* Coins arrondis */
+    background-color: #007bff; /* Couleur de fond bleue */
+    color: #fff; /* Texte blanc */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    text-align: center; /* Centrer le texte dans le bouton */
+}
+
+/* Style pour les champs requis dans les formulaires de pré-admission */
+.requis {
+    color: red; /* Texte rouge pour indiquer les champs obligatoires */
+}
+
+/* Style pour le conteneur du formulaire de pré-admission */
 .container-pre-admission {
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 15px;
-    width: calc(100% - 20px);
+    border-radius: 5px; /* Coins arrondis */
+    padding: 10px; /* Espacement interne */
+    margin-bottom: 15px; /* Espacement sous les champs */
+    width: calc(100% - 20px); /* Largeur dynamique */
+    background-color: #f9f9f9; /* Couleur de fond blanche/grise */
 }
