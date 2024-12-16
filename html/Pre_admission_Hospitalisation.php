@@ -47,12 +47,12 @@ $table10 = "Type_pre_admission";
 <body>
 <div class="container-pre-admission">
     <form method="POST" action="">
-    <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
+    <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis">*</span></label>
     <br>
     <input type="text" id="secu_sociale" name="secu_sociale" required>
     <br><br>
 
-    <label for="Pré-admission">Pré-admission pour:<span class= "requis">*</span></label>
+    <label for="Pré-admission">Pré-admission pour :<span class= "requis">*</span></label>
     <br>
     <select id="Pré-admission" name="Pré-admission" required>
         <option value="choix" selected disabled hidden>choix</option>   
@@ -61,24 +61,24 @@ $table10 = "Type_pre_admission";
     </select>
     <br><br>
 
-    <label for="hospitalisation">Date d'hospitalisation<span class= "requis">*</span></label>
+    <label for="hospitalisation">Date d'hospitalisation :<span class= "requis">*</span></label>
     <br>
     <input type="date" id="date_hospitalisation" name="date_hospitalisation" required>
     <br><br>
 
-    <label for="H_intervention">Heure de l'intervention<span class= "requis">*</span></label>
+    <label for="H_intervention">Heure de l'intervention :<span class= "requis">*</span></label>
     <br>
     <input type="time" id="H_intervention" name="H_intervention" required>
     <br><br>
 
-    <label for="medecin">Nom du médecin<span class= "requis">*</span></label>
+    <label for="medecin">Nom du médecin :<span class= "requis">*</span></label>
     <br>
     <select id="medecin" name="medecin" required>
         <option value="choissir" selected disabled hidden>choix</option>    
     </select>
     <br><br>
 
-    <label for="Chambre_particuliere">Chambre particulière?<span class= "requis">*</span></label>
+    <label for="Chambre_particuliere">Chambre particulière ? :<span class= "requis">*</span></label>
     <br>
     <select id="Chambre_particuliere" name="Chambre_particuliere" required>
         <option value="choissir" selected disabled hidden>choix</option> 

@@ -38,6 +38,7 @@ try {
     <h6>Connexion</h6>
     <form method="POST">
         <label for="Pré-admission">Pré-admission pour:<span class= "requis">*</span></label>
+        <br>
         <select id="Pré-admission" name="Pré-admission" required>
             <option value="choix" selected disabled hidden>choix</option>   
             <option value="Ambulatoire">Ambulatoire chirurgie</option>
@@ -46,14 +47,17 @@ try {
         <br><br>
         
         <label for="hospitalisation">Date d'hospitalisation<span class= "requis">*</span></label>
+        <br>
         <input type="date" id="date_hospitalisation" name="date_hospitalisation" required>
         <br><br>
 
         <label for="H_intervention">Heure de l'intervention<span class= "requis">*</span></label>
+        <br>
         <input type="time" id="H_intervention" name="H_intervention" required>
         <br><br>
 
         <label for="medecin">Nom du médecin<span class= "requis">*</span></label>
+        <br>
         <select id="medecin" name="medecin" required>
             <option value="choissir" selected disabled hidden>choix</option>    
         </select>
@@ -63,6 +67,7 @@ try {
 
         <h6>INFORMATIONS CONCERNANT LE PATIENT</h6>
         <label for="civ">Civ.<span class= "requis">*</span></label>
+        <br>
         <select id="civ" name="civ" required>
             <option value="choissir" selected disabled hidden>choix</option>
             <option value="Fille">Fille</option>
@@ -71,10 +76,12 @@ try {
         <br><br>
 
         <label for="Nom_naissance">Nom de naissance<span class= "requis">*</span></label>
+        <br>
         <input type="text" id="Nom_naissance" name="Nom_naissance" required>
         <br><br>
 
         <label for="Nom_epouse">Nom d'épouse</label>
+        <br>
         <input type="text" id="Nom_epouse" name="Nom_epouse" >
         <br><br>
 
