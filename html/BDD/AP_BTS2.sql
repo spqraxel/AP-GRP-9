@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 02 déc. 2024 à 10:12
+-- Généré le : lun. 16 déc. 2024 à 10:42
 -- Version du serveur : 10.11.6-MariaDB-0+deb12u1
 -- Version de PHP : 8.2.24
 
@@ -73,7 +73,7 @@ INSERT INTO `Metier` (`id_metier`, `nom_metier`) VALUES
 --
 
 CREATE TABLE `Patient` (
-  `id_patient` int(15) NOT NULL,
+  `num_secu` int(15) NOT NULL,
   `nom_patient` varchar(50) NOT NULL,
   `prenom_patient` varchar(50) NOT NULL,
   `date_naissance` date NOT NULL,
@@ -217,7 +217,7 @@ ALTER TABLE `Metier`
 -- Index pour la table `Patient`
 --
 ALTER TABLE `Patient`
-  ADD PRIMARY KEY (`id_patient`),
+  ADD PRIMARY KEY (`num_secu`),
   ADD KEY `id_pers1` (`id_pers1`),
   ADD KEY `id_pers2` (`id_pers2`);
 
@@ -318,7 +318,7 @@ ALTER TABLE `Type_pre_admission`
 -- Contraintes pour la table `Couverture_sociale`
 --
 ALTER TABLE `Couverture_sociale`
-  ADD CONSTRAINT `Couverture_sociale_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`id_patient`);
+  ADD CONSTRAINT `Couverture_sociale_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`num_secu`);
 
 --
 -- Contraintes pour la table `Patient`
@@ -331,14 +331,14 @@ ALTER TABLE `Patient`
 -- Contraintes pour la table `Piece_jointe`
 --
 ALTER TABLE `Piece_jointe`
-  ADD CONSTRAINT `Piece_jointe_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`id_patient`);
+  ADD CONSTRAINT `Piece_jointe_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`num_secu`);
 
 --
 -- Contraintes pour la table `Pre_admission`
 --
 ALTER TABLE `Pre_admission`
   ADD CONSTRAINT `Pre_admission_ibfk_1` FOREIGN KEY (`id_pro`) REFERENCES `Professionnel` (`id_pro`),
-  ADD CONSTRAINT `Pre_admission_ibfk_2` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`id_patient`),
+  ADD CONSTRAINT `Pre_admission_ibfk_2` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`num_secu`),
   ADD CONSTRAINT `Pre_admission_ibfk_3` FOREIGN KEY (`id_choix_pre_admission`) REFERENCES `Type_pre_admission` (`id_type_admission`),
   ADD CONSTRAINT `Pre_admission_ibfk_4` FOREIGN KEY (`id_service`) REFERENCES `Service` (`id_service`),
   ADD CONSTRAINT `Pre_admission_ibfk_5` FOREIGN KEY (`id_chambre`) REFERENCES `Chambre` (`id_chambre`);
