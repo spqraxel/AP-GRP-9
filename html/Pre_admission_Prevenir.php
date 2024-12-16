@@ -77,8 +77,8 @@ $table10 = "Type_pre_admission";
     <br><br>
 
     <div class="navigation">
-        <a href="Pre_admission_Confiance.php" class="fleche gauche" title="Retour"></a>
-        <a href="Pre_admission_Piece_Jointe.php" class="fleche  droite" title="Suivant"></a>
+        <a href="Pre_admission_Confiance.php" class="fleche-gauche" title="Retour"></a>
+        <a href="Pre_admission_Piece_Jointe.php" class="fleche-droite" title="Suivant"></a>
     </div>
 
 </form>

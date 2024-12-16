@@ -154,7 +154,7 @@ error_reporting(E_ALL);
         <br><br>
     
     <div class="navigation">
-        <a href="Pre_admission_Inscription.php" class="fleche  droite" title="Suivant"></a>
+        <a href="Pre_admission_Inscription.php" class="fleche-droite" title="Suivant"></a>
     </div>
 
     </form>

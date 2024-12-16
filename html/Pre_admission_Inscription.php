@@ -88,8 +88,8 @@ $table10 = "Type_pre_admission";
         <br><br>
 
     <div class="navigation">
-        <a href="Pre_admission_Info.php" class="fleche gauche" title="Retour"></a>
-        <a href="Pre_admission_Hospitalisation.php" class="fleche  droite" title="Suivant"></a>
+        <a href="Pre_admission_Info.php" class="fleche-gauche" title="Retour"></a>
+        <a href="Pre_admission_Hospitalisation.php" class="fleche-droite" title="Suivant"></a>
     </div>
 
     </form>

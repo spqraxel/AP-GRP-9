@@ -168,3 +168,10 @@ h1 {
     background-color: #fff;
 }
 
+.fleche-gauche {
+    background-image: url('img/fleche_gauche.png'); 
+}
+
+.fleche-droite{
+    background-image: url('img/fleche_droite.png');
+}
