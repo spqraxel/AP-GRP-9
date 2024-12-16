@@ -34,17 +34,17 @@ $table10 = "Type_pre_admission";
     <title>Pré admission</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
-<header class="navbar">
-        <nav>
-            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
-            <div class="nav-links">
-                <a href="admin.php">Accueil</a>
-                <a href="Pre_admission_Info.php">Pré-admission</a>
-                <a href="?logout=true">Se déconnecter</a>
-            </div>
-        </nav>
-</header>
 <body>
+<header class="navbar">
+        <div class="logo-container">
+            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
+        </div>
+        <div class="page">
+            <a href="admin.php">Accueil</a>
+            <a href="Pre_admission_Info.php">Pré-admission</a>        
+            <a href="?logout=true">Se déconnecter</a>
+        </div>
+    </header>
 <div class="container-pre-admission">
     <form method="POST" action="">
     <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
@@ -86,7 +86,7 @@ $table10 = "Type_pre_admission";
         <option value="chambre_double">chambre double</option>    
     </select>
     <br><br>
-    
+
     <div class="navigation">
         <a href="Pre_admission_Inscription.php" class="fleche gauche" title="Retour"></a>
         <a href="Pre_admission_Confiance.php" class="fleche  droite" title="Suivant"></a>
