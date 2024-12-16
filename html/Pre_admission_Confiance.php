@@ -41,6 +41,7 @@ $table10 = "Type_pre_admission";
             <div class="nav-links">
                 <a href="admin.php">Accueil</a>
                 <a href="Pre_admission_Info.php">Pré-admission</a>
+                <a href="?logout=true">Se déconnecter</a>
             </div>
         </nav>
 </header>
@@ -51,29 +52,33 @@ $table10 = "Type_pre_admission";
     <h6>COORDONÉES PERSONNES DE CONFIANCE</h6>
 
     <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
+    <br>
     <input type="text" id="secu_sociale" name="secu_sociale" required>
     <br><br>
 
     <label for="Nom_naissance_personne2">Nom de naissance<span class= "requis">*</span></label>
+    <br>
     <input type="text" id="Nom_naissance_personne2" name="Nom_naissance_personne2" required>
     <br><br>
 
     <label for="prenom_personne2">Prénom<span class= "requis">*</span></label>
+    <br>
     <input type="text" id="prenom_personne2" name="prenom_personne2" required>
     <br><br>
 
     <label for="Téléphone_personne2">Téléphone<span class= "requis">*</span></label>
+    <br>
     <input type="text" id="Téléphone_personne2" name="Téléphone_personne2" required>
     <br><br>
 
     <label for="Adresse_personne2">Adresse<span class= "requis">*</span></label>
+    <br>
     <input type="text" id="Adresse_personne2" name="Adresse_personne2" required>
     <br><br>
 
     <a href="Pre_admission_Hospitalisation.php"><button>Retour</button></a>
     <a href="Pre_admission_Prevenir.php"><button>Suivant</button></a>
     
-    <a href="?logout=true">Se déconnecter</a>
 </form>
     </div>
 </body>

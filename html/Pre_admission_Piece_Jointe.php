@@ -53,22 +53,27 @@ $table10 = "Type_pre_admission";
     <h6>PIECE JOINT DU PATIENT</h6>
     
     <label for="secu_sociale">Numéro de sécurité sociale<span class= "requis">*</span></label>
+    <br>
     <input type="text" id="secu_sociale" name="secu_sociale" required>
     <br><br>
 
     <label for="file1">Carte d'identité(recto/verso)</label>
+    <br>
     <input type="file" id="file1" name="identité">
     <br><br>
 
     <label for="file2">Carte vitale</label>
+    <br>
     <input type="file" id="file2" name="vitale">
     <br><br>
 
     <label for="file2">Carte de mutuelle</label>
+    <br>
     <input type="file" id="file3" name="mutuelle">
     <br><br>
 
     <label for="file2">Livret de famille (pour enfants mineurs)</label>
+    <br>
     <input type="file" id="file4" name="Livret">
     <br><br>
 

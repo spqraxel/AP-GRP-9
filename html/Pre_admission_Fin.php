@@ -43,6 +43,7 @@ $table10 = "Type_pre_admission";
         <div class="page">
             <a href="admin.php">Accueil</a>
             <a href="Pre_admission_Info.php">Pré-admission</a>
+            <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>
     <H1>Fin de pré admission</H1>

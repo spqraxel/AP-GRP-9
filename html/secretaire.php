@@ -18,6 +18,7 @@ session_start();
         <div class="page">
             <a href="admin.php">Accueil</a>
             <a href="Pre_admission_Info.php">Pré-admission</a>
+            <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>
     <div class="container">
