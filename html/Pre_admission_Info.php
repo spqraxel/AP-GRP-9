@@ -32,37 +32,75 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = htmlspecialchars($_POST['Email']);
     $telephone = htmlspecialchars($_POST['Téléphone']);
 
+    $limiteAgeMax = strtotime('-120 years');
+
     // Vérification des champs obligatoires
-    if (empty($secu_sociale) || empty($civ) || empty($nom_naissance) || empty($prenom) || empty($date_naissance) || empty($adresse) || empty($cp) || empty($ville) || empty($email) || empty($telephone)) {
-        echo "<p>Veuillez remplir tous les champs requis.</p>";
+    if (empty($secu_sociale) || strlen($secu_sociale) !== 15 || !ctype_digit($secu_sociale)) {
+        $erreur = "Le numéro de sécurité sociale doit contenir exactement 15 chiffres.";
+    } elseif (empty($nom_naissance)) {
+        $erreur = "Le prénom est obligatoires.";
+    } elseif (empty($prenom)) {
+        $erreur = "Le nom est obligatoires.";
+    } elseif (empty($date_naissance) || strtotime($date_naissance) > time() || strtotime($date_naissance) < $limiteAgeMax) {
+        $erreur = "La date de naissance n'est pas valide.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erreur = "L'adresse e-mail n'est pas valide.";
+    } elseif (empty($telephone) || strlen($telephone) > 10 || !ctype_digit($telephone)) {
+        $erreur = "Le numéro de téléphone doit contenir 10 chiffres.";
+    } elseif (empty($cp) || strlen($cp) > 5 || !ctype_digit($cp)) {
+        $erreur = "Le code postal doit contenir 5 chiffres.";
+    } elseif (empty($civ)) {
+        $erreur = "Le champ civilité est obligatoire.";
+    } elseif (empty($adresse)) {
+        $erreur = "Le champ adresse est obligatoire.";
+    } elseif (empty($ville)) {
+        $erreur = "Le champ ville est obligatoire.";
+    } elseif (!verifierCodePostalVille($cp, $ville)) {
+        $error_message = "Le code postal ne correspond pas à la ville.";
     } else {
-        try {
-            // Préparer la requête SQL
-            $stmt = $connexion->prepare("
-                INSERT INTO Patient (secu_sociale, civilite, nom_naissance, nom_epouse, prenom, date_naissance, adresse, cp, ville, email, telephone)
-                VALUES (:secu_sociale, :civ, :nom_naissance, :nom_epouse, :prenom, :date_naissance, :adresse, :cp, :ville, :email, :telephone)
-            ");
+        // Validation de la clé de contrôle du numéro de sécurité sociale
+        $cle = substr($num_secu, -2);
+        $numSecuSansCle = substr($num_secu, 0, -2);
+        $cleCalculee = 97 - ($numSecuSansCle % 97);
 
-            // Lier les paramètres
-            $stmt->bindParam(':secu_sociale', $secu_sociale);
-            $stmt->bindParam(':civ', $civ);
-            $stmt->bindParam(':nom_naissance', $nom_naissance);
-            $stmt->bindParam(':nom_epouse', $nom_epouse);
-            $stmt->bindParam(':prenom', $prenom);
-            $stmt->bindParam(':date_naissance', $date_naissance);
-            $stmt->bindParam(':adresse', $adresse);
-            $stmt->bindParam(':cp', $cp);
-            $stmt->bindParam(':ville', $ville);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':telephone', $telephone);
+    
+        if ($cle != $cleCalculee) {
+            $erreur = "La clé de contrôle du numéro de sécurité sociale est incorrecte.";
+        } else {
+            // Vérification de la correspondance entre civilité et numéro de sécurité sociale
+            $premierChiffre = substr($num_secu, 0, 1);
+            if (($civilite == "0" && $premierChiffre != "1") || ($civilite == "1" && $premierChiffre != "2")) {
+                $erreur = "La civilité sélectionnée ne correspond pas au numéro de sécurité sociale.";
+            } else {
+                try {
+                    // Préparer la requête SQL
+                    $stmt = $connexion->prepare("
+                        INSERT INTO Patient (secu_sociale, civilite, nom_naissance, nom_epouse, prenom, date_naissance, adresse, cp, ville, email, telephone)
+                        VALUES (:secu_sociale, :civ, :nom_naissance, :nom_epouse, :prenom, :date_naissance, :adresse, :cp, :ville, :email, :telephone)
+                    ");
 
-            // Exécuter la requête
-            $stmt->execute();
-            echo "<p>Enregistrement réussi.</p>";
-        } catch (PDOException $e) {
-            echo "<p>Erreur lors de l'insertion : " . $e->getMessage() . "</p>";
+                    // Lier les paramètres
+                    $stmt->bindParam(':secu_sociale', $secu_sociale);
+                    $stmt->bindParam(':civ', $civ);
+                    $stmt->bindParam(':nom_naissance', $nom_naissance);
+                    $stmt->bindParam(':nom_epouse', $nom_epouse);
+                    $stmt->bindParam(':prenom', $prenom);
+                    $stmt->bindParam(':date_naissance', $date_naissance);
+                    $stmt->bindParam(':adresse', $adresse);
+                    $stmt->bindParam(':cp', $cp);
+                    $stmt->bindParam(':ville', $ville);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':telephone', $telephone);
+
+                    // Exécuter la requête
+                    $stmt->execute();
+                    echo "<p>Enregistrement réussi.</p>";
+                } catch (PDOException $e) {
+                    echo "<p>Erreur lors de l'insertion : " . $e->getMessage() . "</p>";
+                }
+            }
         }
-    }
+    }   
 }
 
 // Activer l'affichage des erreurs
