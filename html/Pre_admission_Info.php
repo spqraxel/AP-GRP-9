@@ -94,7 +94,7 @@ error_reporting(E_ALL);
         <form method="POST" action=""></form>
         <h6>INFORMATIONS CONCERNANT LE PATIENT</h6>
 
-        <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis">*</span></label>
+        <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="secu_sociale" name="secu_sociale" required>
         <br><br>
@@ -108,7 +108,7 @@ error_reporting(E_ALL);
         </select>
         <br><br>
 
-        <label for="Nom_naissance">Nom de naissance :<span class= "requis">*</span></label>
+        <label for="Nom_naissance">Nom de naissance :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="Nom_naissance" name="Nom_naissance" required>
         <br><br>
@@ -118,32 +118,32 @@ error_reporting(E_ALL);
         <input type="text" id="Nom_epouse" name="Nom_epouse" >
         <br><br> 
    
-        <label for="prenom">Prénom :<span class= "requis">*</span></label>
+        <label for="prenom">Prénom :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="prenom" name="prenom" required>
         <br><br>
 
-        <label for="date_naissance">Date de naissance :<span class= "requis">*</span></label>
+        <label for="date_naissance">Date de naissance :<span class= "requis"> *</span></label>
         <br>
         <input type="date" id="date_naissance" name="date_naissance" required>
         <br><br>
 
-        <label for="Adresse">Adresse :<span class= "requis">*</span></label>
+        <label for="Adresse">Adresse :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="Adresse" name="Adresse" required>
         <br><br>
 
-        <label for="CP">CP :<span class= "requis">*</span></label>
+        <label for="CP">CP :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="CP" name="CP" required>
         <br><br>
 
-        <label for="Ville">Ville :<span class= "requis">*</span></label>
+        <label for="Ville">Ville :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="Ville" name="Ville" required>
         <br><br>
 
-        <label for="Email">Email :<span class= "requis">*</span></label>
+        <label for="Email">Email :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="Email" name="Email" required>
         <br><br>

@@ -52,7 +52,7 @@ $table10 = "Type_pre_admission";
 
     <h6>PIECE JOINT DU PATIENT</h6>
     
-    <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis">*</span></label>
+    <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
     <br>
     <input type="text" id="secu_sociale" name="secu_sociale" required>
     <br><br>

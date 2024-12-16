@@ -49,12 +49,12 @@ $table10 = "Type_pre_admission";
     <h6>COUVERTURE SOCIALE</h6>
     <div class="container-pre-admission">
     <form method="POST" action="">
-    <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis">*</span></label>
+    <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
     <br>
     <input type="text" id="secu_sociale" name="secu_sociale" required>
     <br><br>
 
-    <label for="assure">Le patient est-il l'assuré ? :<span class= "requis">*</span></label>
+    <label for="assure">Le patient est-il l'assuré ? :<span class= "requis"> *</span></label>
     <br>
     <select id="assure" name="assure" required>
         <option value="choissir">choix</option>
@@ -63,7 +63,7 @@ $table10 = "Type_pre_admission";
     </select>
     <br><br>
 
-    <label for="ALD">Le patient est-il en ALD ? :<span class= "requis">*</span></label>
+    <label for="ALD">Le patient est-il en ALD ? :<span class= "requis"> *</span></label>
     <br>
     <select id="ALD" name="ALD" required>
         <option value="choissir">choix</option>
@@ -71,18 +71,18 @@ $table10 = "Type_pre_admission";
         <option value="ALD_non">Non</option>
     </select>
     <br><br>
-    
-    <label for="org_secu">Organisme de sécurité sociale / Nom de la caisse d'assurance maladie :<span class= "requis">*</span></label>
+
+    <label for="org_secu">Organisme de sécurité sociale / Nom de la caisse d'assurance maladie :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="org_secu" name="org_secu" required>
         <br><br>        
         
-        <label for="mut_ass">Nom de la mutuelle ou de l'assurance :<span class= "requis">*</span></label>
+        <label for="mut_ass">Nom de la mutuelle ou de l'assurance :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="mut_ass" name="mut_ass" required>
         <br><br>
 
-        <label for="Nadherent">Numéro d'adhérent :<span class= "requis">*</span></label>
+        <label for="Nadherent">Numéro d'adhérent :<span class= "requis"> *</span></label>
         <br>
         <input type="text" id="Nadherent" name="Nadherent" required>
         <br><br>
