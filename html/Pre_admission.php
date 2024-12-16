@@ -24,16 +24,17 @@ try {
     <title>Pré admission</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
-<header class="navbar">
-        <nav>
-            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
-            <div class="nav-links">
-                <a href="admin.php">Accueil</a>
-                <a href="Pre_admission.php">Pré-admission</a>
-            </div>
-        </nav>
-</header>
 <body>
+    <header class="navbar"> 
+        <div class="logo-container">
+            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
+        </div>
+        <div class="page">
+            <a href="admin.php">Accueil</a>
+            <a href="Pre_admission_Info.php">Pré-admission</a>        
+            <a href="?logout=true">Se déconnecter</a>
+        </div>
+    </header>
     <h6>Connexion</h6>
     <form method="POST">
         <label for="Pré-admission">Pré-admission pour:<span class= "requis">*</span></label>

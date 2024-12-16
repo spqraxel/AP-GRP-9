@@ -86,7 +86,8 @@ error_reporting(E_ALL);
         </div>
         <div class="page">
             <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Info.php">Pré-admission</a>
+            <a href="Pre_admission_Info.php">Pré-admission</a>        
+            <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>
     <div class="container-pre-admission">
@@ -143,8 +144,6 @@ error_reporting(E_ALL);
     
         <a href=""><button>Retour</button></a>
         <a href="Pre_admission_Inscription.php"><button>Suivant</button></a>
-
-        <a href="?logout=true">Se déconnecter</a>
         </form>
     </div>
 </body>
