@@ -77,8 +77,8 @@ $table10 = "Type_pre_admission";
     <input type="file" id="file4" name="Livret">
     <br><br>
 
-    <a href="Pre_admission_Prevenir.php"><button>Retour</button></a>
-    <a href="Pre_admission_Fin.php"><button>Suivant</button></a>
+    <a href="Pre_admission_Prevenir.php"><button class="button-fleche-gauche">Retour</button></a>
+    <a href="Pre_admission_Fin.php"><button class="button-fleche-droite">Suivant</button></a>
 
     <a href="?logout=true">Se déconnecter</a>
 </form>

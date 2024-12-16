@@ -76,9 +76,9 @@ $table10 = "Type_pre_admission";
     <input type="text" id="Adresse_personne1" name="Adresse_personne1" required>
     <br><br>
 
-    <a href="Pre_admission_Confiance.php"><button>Retour</button></a>
+    <a href="Pre_admission_Confiance.php"><button class="button-fleche-gauche">Retour</button></a>
     
-    <a href="Pre_admission_Piece_Jointe.php"><button>Suivant</button></a>
+    <a href="Pre_admission_Piece_Jointe.php"><button class="button-fleche-droite">Suivant</button></a>
     
 </form>
 </div>

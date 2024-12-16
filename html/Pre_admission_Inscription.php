@@ -46,8 +46,8 @@ $table10 = "Type_pre_admission";
             <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>
-    <h6>COUVERTURE SOCIALE</h6>
     <div class="container-pre-admission">
+    <h6>COUVERTURE SOCIALE</h6>
     <form method="POST" action="">
     <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
     <br>
@@ -87,8 +87,8 @@ $table10 = "Type_pre_admission";
         <input type="text" id="Nadherent" name="Nadherent" required>
         <br><br>
 
-    <a href="Pre_admission_Info.php"><button>Retour</button></a>
-    <a href="Pre_admission_Hospitalisation.php"><button>Suivant</button></a>
+    <a href="Pre_admission_Info.php"><button class="button-fleche-gauche">Retour</button></a>
+    <a href="Pre_admission_Hospitalisation.php"><button class="button-fleche-droite">Suivant</button></a>
     
     </form>
     </div>

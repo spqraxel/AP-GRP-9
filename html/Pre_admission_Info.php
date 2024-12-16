@@ -153,8 +153,7 @@ error_reporting(E_ALL);
         <input type="text" id="Téléphone" name="Téléphone" required>
         <br><br>
     
-        <a href=""><button>Retour</button></a>
-        <a href="Pre_admission_Inscription.php"><button>Suivant</button></a>
+        <a href="Pre_admission_Inscription.php"><button class="button-fleche-droite">Suivant</button></a>
         </form>
     </div>
 </body>
