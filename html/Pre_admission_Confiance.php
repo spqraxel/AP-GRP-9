@@ -76,9 +76,11 @@ $table10 = "Type_pre_admission";
     <input type="text" id="Adresse_personne2" name="Adresse_personne2" required>
     <br><br>
 
-    <a href="Pre_admission_Hospitalisation.php"><button class="button-fleche-gauche">Retour</button></a>
-    <a href="Pre_admission_Prevenir.php"><button class="button-fleche-droite">Suivant</button></a>
-    
+    <div class="navigation">
+        <a href="Pre_admission_Hospitalisation.php" class="fleche gauche" title="Retour"></a>
+        <a href="Pre_admission_Prevenir.php" class="fleche  droite" title="Suivant"></a>
+    </div>
+
 </form>
     </div>
 </body>

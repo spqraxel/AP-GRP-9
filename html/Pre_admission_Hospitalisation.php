@@ -86,10 +86,12 @@ $table10 = "Type_pre_admission";
         <option value="chambre_double">chambre double</option>    
     </select>
     <br><br>
-
-    <a href="Pre_admission_Inscription.php"><button class="button-fleche-gauche">Retour</button></a>
-    <a href="Pre_admission_Confiance.php"><button class="button-fleche-droite">Suivant</button></a>
     
+    <div class="navigation">
+        <a href="Pre_admission_Inscription.php" class="fleche gauche" title="Retour"></a>
+        <a href="Pre_admission_Confiance.php" class="fleche  droite" title="Suivant"></a>
+    </div>
+
     </form>
 </div>
 </body>

@@ -153,8 +153,11 @@ error_reporting(E_ALL);
         <input type="text" id="Téléphone" name="Téléphone" required>
         <br><br>
     
-        <a href="Pre_admission_Inscription.php"><button class="button-fleche-droite">Suivant</button></a>
-        </form>
+    <div class="navigation">
+        <a href="Pre_admission_Inscription.php" class="fleche  droite" title="Suivant"></a>
+    </div>
+
+    </form>
     </div>
 </body>
 </html>

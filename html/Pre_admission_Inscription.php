@@ -87,9 +87,11 @@ $table10 = "Type_pre_admission";
         <input type="text" id="Nadherent" name="Nadherent" required>
         <br><br>
 
-    <a href="Pre_admission_Info.php"><button class="button-fleche-gauche">Retour</button></a>
-    <a href="Pre_admission_Hospitalisation.php"><button class="button-fleche-droite">Suivant</button></a>
-    
+    <div class="navigation">
+        <a href="Pre_admission_Info.php" class="fleche gauche" title="Retour"></a>
+        <a href="Pre_admission_Hospitalisation.php" class="fleche  droite" title="Suivant"></a>
+    </div>
+
     </form>
     </div>
 </body>
