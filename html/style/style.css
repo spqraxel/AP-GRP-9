@@ -21,8 +21,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
-    color: white;
+    background-color: cyan; /* Fond semi-transparent */
     padding: 10px 20px;
     z-index: 1000; /* Assure que la navbar est toujours au-dessus */
 }
