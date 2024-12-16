@@ -155,6 +155,10 @@ h1 {
     width: calc(100% - 20px); /* Largeur dynamique */
     background-color: #f9f9f9; /* Couleur de fond blanche/grise */
 }
+.navigation {
+    display: flex;
+    gap: 50px;
+}
 
 .fleche {
     display: inline-block;
@@ -166,12 +170,20 @@ h1 {
     cursor: pointer;
     transition: all 0.3s ease;
     background-color: #fff;
+    background-size: cover; /* Adapte l'image à la taille du conteneur */
+    background-position: center;
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
 }
 
 .fleche-gauche {
-    background-image: url('img/fleche_gauche.png'); 
+    background-image: url('img/fleche_gauche.png');
 }
 
-.fleche-droite{
+.fleche-droite {
     background-image: url('img/fleche_droite.png');
+}
+
+.fleche:hover {
+    transform: scale(1.1); /* Effet de zoom au survol */
+    border-color: #0056b3; /* Change la couleur de la bordure */
 }
