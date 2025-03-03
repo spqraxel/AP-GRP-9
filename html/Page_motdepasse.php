@@ -23,7 +23,7 @@ try {
         if ($new_password !== $confirm_password) {
             $erreur = "Les mots de passe ne correspondent pas.";
         } elseif (!preg_match($pattern, $new_password)) {
-            $erreur = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
+            $erreur = "Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
         } else {
             // Hachage du mot de passe avant stockage
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
