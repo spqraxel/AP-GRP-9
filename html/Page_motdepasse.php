@@ -18,15 +18,25 @@ try {
         $confirm_password = $_POST['confirm_password'];
         $mail = $_SESSION['mail_pro']; // Récupère l'e-mail de la session
 
-        if ($new_password === $confirm_password) {
+        $pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/";
+
+        if ($new_password !== $confirm_password) {
+            $erreur = "Les mots de passe ne correspondent pas.";
+        } elseif (!preg_match($pattern, $new_password)) {
+            $erreur = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
+        } else {
+            // Hachage du mot de passe avant stockage
+            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
             // Mise à jour du mot de passe et du statut de première connexion
             $requete = $connexion->prepare("UPDATE Professionnel SET mdp_pro = :mdp_pro, premiere_connection = 0 WHERE mail_pro = :mail_pro");
-            $requete->bindParam(':mdp_pro', $new_password);
+            $requete->bindParam(':mdp_pro', $hashed_password);
             $requete->bindParam(':mail_pro', $mail);
             $requete->execute();
 
             $success = "Mot de passe mis à jour avec succès !";
-            // Rediriger vers la page appropriée après la mise à jour
+            
+            // Redirection vers la page appropriée après la mise à jour
             if ($_SESSION['id_metier'] == 1) {
                 header("Location: scretaire.php");
                 exit();
@@ -34,8 +44,6 @@ try {
                 header("Location: admin.php");
                 exit();
             }
-        } else {
-            $erreur = "Les mots de passe ne correspondent pas.";
         }
     }
 } catch (PDOException $e) {
