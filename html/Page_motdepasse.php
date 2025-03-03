@@ -28,10 +28,10 @@ try {
             $success = "Mot de passe mis à jour avec succès !";
             // Rediriger vers la page appropriée après la mise à jour
             if ($_SESSION['id_metier'] == 1) {
-                header("Location: Site_clinique.php");
+                header("Location: scretaire.php");
                 exit();
             } elseif ($_SESSION['id_metier'] == 2) {
-                header("Location: site_clinique_admin.php");
+                header("Location: admin.php");
                 exit();
             }
         } else {
