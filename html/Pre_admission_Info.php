@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "Le numéro de telephone doit contenir 10 chiffres.";
     } elseif (empty($CP) || strlen($CP) > 5 || !ctype_digit($CP)) {
         $erreur = "Le code postal doit contenir 5 chiffres.";
-    } elseif (empty($civilite)) {
+    } elseif (empty($civilite !== "0" && $civilite !== "1")) {
         $erreur = "Le champ civilité est obligatoire.";
     } elseif (empty($adresse)) {
         $erreur = "Le champ adresse est obligatoire.";
@@ -148,15 +148,16 @@ error_reporting(E_ALL);
         </div>
     </header>
     <div class="container-pre-admission">
-        <!-- Affichage des erreurs -->
-        <?php if (!empty($erreur)): ?>
-            <div class="error-message"><?php echo $erreur; ?></div>
-        <?php endif; ?>
 
         <!-- Formulaire -->
         <form method="POST" action="Pre_admission_Info.php">
             <h6>INFORMATIONS CONCERNANT LE PATIENT <br>Etape 1 sur 6</h6>
             <br>
+
+            <!-- Affichage des erreurs -->
+            <?php if (!empty($erreur)): ?>
+                <div class="error-message"><?php echo $erreur; ?></div>
+            <?php endif; ?>
 
             <label for="num_secu">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
             <br>
@@ -166,7 +167,7 @@ error_reporting(E_ALL);
             <label for="civilite">Civilité:<span class= "requis">*</span></label>
             <br>
             <select id="civilite" name="civilite" required>
-                <option value="choissir" selected disabled hidden>choix</option>
+                <option value="-1" selected disabled hidden>choix</option>
                 <option value="1">Femme</option>
                 <option value="0">Homme</option>      
             </select>
