@@ -142,13 +142,13 @@ error_reporting(E_ALL);
         </div>
         <div class="page">
             <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Info.php">Pré-admission</a>        
+            <a href="Pre_admission_Info.php">Pré-admission | Etape 1 sur 6</a>        
             <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>
     <div class="container-pre-admission">
         <form method="POST" action=""></form>
-        <h6>INFORMATIONS CONCERNANT LE PATIENT</h6>
+        <h6>INFORMATIONS CONCERNANT LE PATIENT | Etape 1 sur 6</h6>
 
         <label for="num_secu">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
         <br>

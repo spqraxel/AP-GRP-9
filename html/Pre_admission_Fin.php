@@ -32,7 +32,7 @@ $table10 = "Type_pre_admission";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré admission</title>
+    <title>Pré admission | Fin</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>

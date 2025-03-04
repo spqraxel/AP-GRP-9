@@ -38,14 +38,14 @@ $table10 = "Type_pre_admission";
         </div>
         <div class="page">
             <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Info.php">Pré-admission</a>        
+            <a href="Pre_admission_Info.php">Pré-admission | Etape 4 sur 6</a>        
             <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>
     <div class="container-pre-admission">
     <form method="POST" action="">
     
-    <h6>COORDONÉES PERSONNES DE CONFIANCE</h6>
+    <h6>COORDONÉES PERSONNES DE CONFIANCE | Etape 4 sur 6</h6>
 
     <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
     <br>
