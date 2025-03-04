@@ -148,77 +148,79 @@ error_reporting(E_ALL);
         </div>
     </header>
     <div class="container-pre-admission">
-        <form method="POST" action=""></form>
-        <h6>INFORMATIONS CONCERNANT LE PATIENT <br>Etape 1 sur 6</h6>
-        <br>
-
+        <!-- Affichage des erreurs -->
         <?php if (!empty($erreur)): ?>
             <div class="error-message"><?php echo $erreur; ?></div>
         <?php endif; ?>
 
-        <label for="num_secu">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
-        <br>
-        <input type="text" id="num_secu" name="num_secu" required>
-        <br><br>
+        <!-- Formulaire -->
+        <form method="POST" action="Pre_admission_Info.php">
+            <h6>INFORMATIONS CONCERNANT LE PATIENT <br>Etape 1 sur 6</h6>
+            <br>
 
-        <label for="civilite">Civilité:<span class= "requis">*</span></label>
-        <br>
-        <select id="civilite" name="civilite" required>
-            <option value="choissir" selected disabled hidden>choix</option>
-            <option value="1">Femme</option>
-            <option value="0">Homme</option>      
-        </select>
-        <br><br>
+            <label for="num_secu">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
+            <br>
+            <input type="text" id="num_secu" name="num_secu" required>
+            <br><br>
 
-        <label for="nom_patient">Nom de naissance :<span class= "requis"> *</span></label>
-        <br>
-        <input type="text" id="nom_patient" name="nom_patient" required>
-        <br><br>
+            <label for="civilite">Civilité:<span class= "requis">*</span></label>
+            <br>
+            <select id="civilite" name="civilite" required>
+                <option value="choissir" selected disabled hidden>choix</option>
+                <option value="1">Femme</option>
+                <option value="0">Homme</option>      
+            </select>
+            <br><br>
 
-        <label for="nom_epouse">Nom d'épouse :</label>
-        <br>
-        <input type="text" id="nom_epouse" name="nom_epouse" >
-        <br><br> 
-   
-        <label for="prenom_patient">Prénom :<span class= "requis"> *</span></label>
-        <br>
-        <input type="text" id="prenom_patient" name="prenom_patient" required>
-        <br><br>
+            <label for="nom_patient">Nom de naissance :<span class= "requis"> *</span></label>
+            <br>
+            <input type="text" id="nom_patient" name="nom_patient" required>
+            <br><br>
 
-        <label for="date_naissance">Date de naissance :<span class= "requis"> *</span></label>
-        <br>
-        <input type="date" id="date_naissance" name="date_naissance" required>
-        <br><br>
+            <label for="nom_epouse">Nom d'épouse :</label>
+            <br>
+            <input type="text" id="nom_epouse" name="nom_epouse">
+            <br><br> 
 
-        <label for="adresse">Adresse :<span class= "requis"> *</span></label>
-        <br>
-        <input type="text" id="adresse" name="adresse" required>
-        <br><br>
+            <label for="prenom_patient">Prénom :<span class= "requis"> *</span></label>
+            <br>
+            <input type="text" id="prenom_patient" name="prenom_patient" required>
+            <br><br>
 
-        <label for="CP">CP :<span class= "requis"> *</span></label>
-        <br>
-        <input type="text" id="CP" name="CP" required>
-        <br><br>
+            <label for="date_naissance">Date de naissance :<span class= "requis"> *</span></label>
+            <br>
+            <input type="date" id="date_naissance" name="date_naissance" required>
+            <br><br>
 
-        <label for="ville">Ville :<span class= "requis"> *</span></label>
-        <br>
-        <input type="text" id="ville" name="ville" required>
-        <br><br>
+            <label for="adresse">Adresse :<span class= "requis"> *</span></label>
+            <br>
+            <input type="text" id="adresse" name="adresse" required>
+            <br><br>
 
-        <label for="email_patient">Email :<span class= "requis"> *</span></label>
-        <br>
-        <input type="text" id="email_patient" name="email_patient" required>
-        <br><br>
+            <label for="CP">CP :<span class= "requis"> *</span></label>
+            <br>
+            <input type="text" id="CP" name="CP" required>
+            <br><br>
 
-        <label for="telephone_patient">Téléphone :<span class= "requis">*</span></label>
-        <br>
-        <input type="text" id="telephone_patient" name="telephone_patient" required>
-        <br><br>
-     
-        <div class="navigation">
-            <button type="submit" class="button-next">Suivant</button>
-        </div>
-    </form>
+            <label for="ville">Ville :<span class= "requis"> *</span></label>
+            <br>
+            <input type="text" id="ville" name="ville" required>
+            <br><br>
+
+            <label for="email_patient">Email :<span class= "requis"> *</span></label>
+            <br>
+            <input type="text" id="email_patient" name="email_patient" required>
+            <br><br>
+
+            <label for="telephone_patient">Téléphone :<span class= "requis">*</span></label>
+            <br>
+            <input type="text" id="telephone_patient" name="telephone_patient" required>
+            <br><br>
+
+            <div class="navigation">
+                <button type="submit" class="button-next">Suivant</button>
+            </div>
+        </form>
     </div>
 </body>
 </html>
