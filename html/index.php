@@ -91,7 +91,7 @@ try {
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="mdp" class="information-login" placeholder="Saisissez votre mot de passe" required>
                 <div class="g-recaptcha" data-sitekey="6Ld7XUwqAAAAAFtyYWKefN4cktaecl2LdHoHPORk"></div>
-                <button type="submit" class="button">Se connecter</button>
+                <button type="submit" class="button-mdp">Se connecter</button>
             </div>
         </form>
     </div>
