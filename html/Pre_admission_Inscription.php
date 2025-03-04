@@ -59,7 +59,7 @@ $table10 = "Type_pre_admission";
     <label for="ALD">Le patient est-il en ALD ? :<span class= "requis"> *</span></label>
     <br>
     <select id="ALD" name="ALD" required>
-        <option value="choissir">choix</option>
+        <option value="choisir">choix</option>
         <option value="ALD_oui">Oui</option>  
         <option value="ALD_non">Non</option>
     </select>

@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 try {
                     // Préparer la requête SQL
                     $stmt = $connexion->prepare("
-                        INSERT INTO Patient (num_secu, civilite, nom_patient, nom_epouse, prenom_patient, date_naissance, adresse, CP, ville, email_patient, telephone_patient, id_pers1, id_pers1)
+                        INSERT INTO Patient (num_secu, civilite, nom_patient, nom_epouse, prenom_patient, date_naissance, adresse, CP, ville, email_patient, telephone_patient, id_pers1, id_pers2)
                         VALUES (:num_secu, :civilite, :nom_patient, :nom_epouse, :prenom_patient, :date_naissance, :adresse, :CP, :ville, :email_patient, :telephone_patient, 1, 1)
                     ");
 
