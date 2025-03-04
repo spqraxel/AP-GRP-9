@@ -28,7 +28,7 @@ $table10 = "Type_pre_admission";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré admission</title>
+    <title>Pré admission | Etape 2 sur 6</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -38,12 +38,12 @@ $table10 = "Type_pre_admission";
         </div>
         <div class="page">
             <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Info.php">Pré-admission | Etape 2 sur 6</a>        
+            <a href="Pre_admission_Info.php">Pré-admission</a>        
             <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>
     <div class="container-pre-admission">
-    <h6>COUVERTURE SOCIALE | Etape 2 sur 6</h6>
+    <h6>COUVERTURE SOCIALE <br>| Etape 2 sur 6</h6>
     <form method="POST" action="">
     <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
     <br>
