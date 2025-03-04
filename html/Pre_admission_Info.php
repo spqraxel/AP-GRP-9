@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "La date de naissance n'est pas valide.";
     } elseif (!filter_var($email_patient, FILTER_VALIDATE_EMAIL)) {
         $erreur = "L'adresse e-mail n'est pas valide.";
-    } elseif (empty($telephone) || strlen($telephone) > 10 || !ctype_digit($telephone)) {
-        $erreur = "Le numéro de telephone_patient doit contenir 10 chiffres.";
+    } elseif (empty($telephone_patient) || strlen($telephone_patient) > 10 || !ctype_digit($telephone_patient)) {
+        $erreur = "Le numéro de telephone doit contenir 10 chiffres.";
     } elseif (empty($CP) || strlen($CP) > 5 || !ctype_digit($CP)) {
         $erreur = "Le code postal doit contenir 5 chiffres.";
     } elseif (empty($civilite)) {
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "Le champ adresse est obligatoire.";
     } elseif (empty($ville)) {
         $erreur = "Le champ ville est obligatoire.";
-    } elseif (!verifierCodePostalville($CP, $ville)) {
+    } elseif (!verifierCodePostalVille($CP, $ville)) {
         $error_message = "Le code postal ne correspond pas à la ville.";
     } else {
         // Validation de la clé de contrôle du numéro de sécurité sociale
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Préparer la requête SQL
                     $stmt = $connexion->prepare("
                         INSERT INTO Patient (num_secu, civilite, nom_patient, nom_epouse, prenom_patient, date_naissance, adresse, CP, ville, email_patient, telephone)
-                        VALUES (:num_secu, :civilite, :nom_patient, :nom_epouse, :prenom_patient, :date_naissance, :adresse, :CP, :ville, :email_patient, :telephone)
+                        VALUES (:num_secu, :civilite, :nom_patient, :nom_epouse, :prenom_patient, :date_naissance, :adresse, :CP, :ville, :email_patient, :telephone_patient)
                     ");
 
                     // Lier les paramètres
@@ -112,7 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     // Exécuter la requête
                     $stmt->execute();
-                    echo "<p>Enregistrement réussi.</p>";
+                    header('Location: Pre_admission_Inscription.php');
+                    exit();
                 } catch (PDOException $e) {
                     echo "<p>Erreur lors de l'insertion : " . $e->getMessage() . "</p>";
                 }
@@ -128,7 +129,7 @@ error_reporting(E_ALL);
 
 ?>
 <!DOCTYPE html>
-<ml lang="fr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -148,8 +149,12 @@ error_reporting(E_ALL);
     </header>
     <div class="container-pre-admission">
         <form method="POST" action=""></form>
-        <h6>INFORMATIONS CONCERNANT LE PATIENT <br>| Etape 1 sur 6</h6>
+        <h6>INFORMATIONS CONCERNANT LE PATIENT <br>Etape 1 sur 6</h6>
         <br>
+
+        <?php if (!empty($erreur)): ?>
+            <div class="error-message"><?php echo $erreur; ?></div>
+        <?php endif; ?>
 
         <label for="num_secu">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
         <br>
@@ -209,12 +214,10 @@ error_reporting(E_ALL);
         <br>
         <input type="text" id="telephone_patient" name="telephone_patient" required>
         <br><br>
-    
-        <button type="submit" class="button-next">Suivant</button>
-        
-            <div class="navigation">
-                <a href="Pre_admission_Inscription.php" class="fleche-droite" title="Suivant"></a>
-            </div>
+     
+        <div class="navigation">
+            <button type="submit" class="button-next">Suivant</button>
+        </div>
     </form>
     </div>
 </body>

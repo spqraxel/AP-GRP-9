@@ -45,7 +45,7 @@ $table10 = "Type_pre_admission";
     <div class="container-pre-admission">
     <form method="POST" action="">
 
-    <h6>COORDONÉES PERSONNES À PRÉVENIR <br>| Etape 5 sur 6</h6>
+    <h6>COORDONÉES PERSONNES À PRÉVENIR <br>Etape 5 sur 6</h6>
 
     <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
     <br>

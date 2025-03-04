@@ -42,7 +42,7 @@ $table10 = "Type_pre_admission";
         </div>
     </header>
 <div class="container-pre-admission">
-    <h6>Pré-admission <br>| Etape 3 sur 6</h6>
+    <h6>Pré-admission <br>Etape 3 sur 6</h6>
     <form method="POST" action="">
     <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
     <br>
