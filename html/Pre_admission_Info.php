@@ -149,6 +149,7 @@ error_reporting(E_ALL);
     <div class="container-pre-admission">
         <form method="POST" action=""></form>
         <h6>INFORMATIONS CONCERNANT LE PATIENT | Etape 1 sur 6</h6>
+        <br>
 
         <label for="num_secu">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
         <br>
@@ -209,10 +210,11 @@ error_reporting(E_ALL);
         <input type="text" id="telephone_patient" name="telephone_patient" required>
         <br><br>
     
-    <div class="navigation">
-        <a href="Pre_admission_Inscription.php" class="fleche-droite" title="Suivant"></a>
-    </div>
-
+        <button type="submit" class="button-next">Suivant</button>
+        
+            <div class="navigation">
+                <a href="Pre_admission_Inscription.php" class="fleche-droite" title="Suivant"></a>
+            </div>
     </form>
     </div>
 </body>
