@@ -3,11 +3,7 @@ require('Logout.php');
 session_start();
 
 // Connexion à la base de données
-$serveur = "192.168.100.27:3306";
-$utilisateur = "dev";
-$motdepasse = "sio2425";
-$nomBDD = "AP_BTS2";
-$erreur = "";
+require('logs.php');
 
 try {
     $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);
@@ -15,6 +11,28 @@ try {
 } catch (PDOException $e) {
     $erreur = "Erreur de connexion : " . $e->getMessage();
     die($erreur); // Arrête le script si la connexion échoue
+}
+
+function verifierCodePostalVille($cp, $ville) {
+    $url = "http://api.zippopotam.us/fr/$cp"; // URL de l'API avec le code postal
+    $response = @file_get_contents($url);
+
+    if ($response === FALSE) {
+        return false; // API inaccessible ou code postal invalide
+    }
+
+    $data = json_decode($response, true);
+
+    if (!empty($data['places'])) {
+        foreach ($data['places'] as $place) {
+            // Vérifie si une des villes correspond (en ignorant la casse)
+            if (strtolower($place['place name']) === strtolower($ville)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 // Traitement du formulaire
@@ -50,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (empty($CP) || strlen($CP) > 5 || !ctype_digit($CP)) {
         $erreur = "Le code postal doit contenir 5 chiffres.";
     } elseif (empty($civilite)) {
-        $erreur = "Le champ civiliteilité est obligatoire.";
+        $erreur = "Le champ civilité est obligatoire.";
     } elseif (empty($adresse)) {
         $erreur = "Le champ adresse est obligatoire.";
     } elseif (empty($ville)) {
@@ -67,15 +85,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($cle != $cleCalculee) {
             $erreur = "La clé de contrôle du numéro de sécurité sociale est incorrecte.";
         } else {
-            // Vérification de la correspondance entre civiliteilité et numéro de sécurité sociale
+            // Vérification de la correspondance entre civilité et numéro de sécurité sociale
             $premierChiffre = substr($num_secu, 0, 1);
-            if (($civiliteilite == "0" && $premierChiffre != "1") || ($civiliteilite == "1" && $premierChiffre != "2")) {
-                $erreur = "La civiliteilité sélectionnée ne correspond pas au numéro de sécurité sociale.";
+            if (($civilite == "0" && $premierChiffre != "1") || ($civilite == "1" && $premierChiffre != "2")) {
+                $erreur = "La civilité sélectionnée ne correspond pas au numéro de sécurité sociale.";
             } else {
                 try {
                     // Préparer la requête SQL
                     $stmt = $connexion->prepare("
-                        INSERT INTO Patient (num_secu, civiliteilite, nom_patient, nom_epouse, prenom_patient, date_naissance, adresse, CP, ville, email_patient, telephone)
+                        INSERT INTO Patient (num_secu, civilite, nom_patient, nom_epouse, prenom_patient, date_naissance, adresse, CP, ville, email_patient, telephone)
                         VALUES (:num_secu, :civilite, :nom_patient, :nom_epouse, :prenom_patient, :date_naissance, :adresse, :CP, :ville, :email_patient, :telephone)
                     ");
 
@@ -141,8 +159,8 @@ error_reporting(E_ALL);
         <br>
         <select id="civilite" name="civilite" required>
             <option value="choissir" selected disabled hidden>choix</option>
-            <option value="Femme">Femme</option>
-            <option value="Homme">Homme</option>      
+            <option value="1">Femme</option>
+            <option value="0">Homme</option>      
         </select>
         <br><br>
 

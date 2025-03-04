@@ -18,25 +18,3 @@
         header("location: index.php");
         exit;
     }
-    
-    function verifierCodePostalVille($cp, $ville) {
-        $url = "http://api.zippopotam.us/fr/$cp"; // URL de l'API avec le code postal
-        $response = @file_get_contents($url);
-    
-        if ($response === FALSE) {
-            return false; // API inaccessible ou code postal invalide
-        }
-    
-        $data = json_decode($response, true);
-    
-        if (!empty($data['places'])) {
-            foreach ($data['places'] as $place) {
-                // Vérifie si une des villes correspond (en ignorant la casse)
-                if (strtolower($place['place name']) === strtolower($ville)) {
-                    return true;
-                }
-            }
-        }
-    
-        return false;
-    }
