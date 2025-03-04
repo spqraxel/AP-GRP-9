@@ -1,19 +1,25 @@
-<!DOCTYPE html>
 <?php
-require('Logout.php');
 session_start();
-require('logs.php'); 
+require('Logout.php');
+require('logs.php');
 
-if (!isset($conn) || $conn->connect_error) {
-    die("Échec de la connexion : " . $conn->connect_error);
+// Vérifier si la connexion à la base de données est établie
+if (!isset($connexion)) {
+    die("Échec de la connexion : " . $connexion->connect_error);
 }
 
-$sql_Service = "SELECT * FROM Service";
-$result_Service = $conn->query($sql_Service);
+// Récupérer les données des tables Service et Professionnel
+try {
+    $sql_Service = "SELECT * FROM Service";
+    $result_Service = $connexion->query($sql_Service);
 
-$sql_Professionnel = "SELECT * FROM Professionnel";
-$result_Professionnel = $conn->query($sql_Professionnel);
+    $sql_Professionnel = "SELECT * FROM Professionnel";
+    $result_Professionnel = $connexion->query($sql_Professionnel);
+} catch (PDOException $e) {
+    die("Erreur lors de la récupération des données : " . $e->getMessage());
+}
 ?>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +34,7 @@ $result_Professionnel = $conn->query($sql_Professionnel);
         </div>
         <div class="page">
             <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Info.php">Pré-admission</a>        
+            <a href="Pre_admission_Info.php">Pré-admission</a>
             <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>
@@ -41,29 +47,21 @@ $result_Professionnel = $conn->query($sql_Professionnel);
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
-                <th>Mot de passe</th>
                 <th>ID Métier</th>
                 <th>ID Service</th>
                 <th>Première Connexion</th>
             </tr>
-            <?php
-            if ($result_Professionnel->num_rows > 0) {
-                while ($row = $result_Professionnel->fetch_assoc()) {
-                    echo "<tr>
-                        <td>" . htmlspecialchars($row["id_pro"]) . "</td>
-                        <td>" . htmlspecialchars($row["nom_pro"]) . "</td>
-                        <td>" . htmlspecialchars($row["prenom_pro"]) . "</td>
-                        <td>" . htmlspecialchars($row["mail_pro"]) . "</td>
-                        <td>" . htmlspecialchars($row["mdp_pro"]) . "</td>
-                        <td>" . htmlspecialchars($row["id_metier"]) . "</td>
-                        <td>" . htmlspecialchars($row["id_service"]) . "</td>
-                        <td>" . htmlspecialchars($row["premiere_connection"]) . "</td>
-                    </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='8'>Aucun professionnel trouvé</td></tr>";
-            }
-            ?>
+            <?php while ($row = $result_Professionnel->fetch(PDO::FETCH_ASSOC)) : ?>
+                <tr>
+                    <td><?= htmlspecialchars($row["id_pro"]) ?></td>
+                    <td><?= htmlspecialchars($row["nom_pro"]) ?></td>
+                    <td><?= htmlspecialchars($row["prenom_pro"]) ?></td>
+                    <td><?= htmlspecialchars($row["mail_pro"]) ?></td>
+                    <td><?= htmlspecialchars($row["id_metier"]) ?></td>
+                    <td><?= htmlspecialchars($row["id_service"]) ?></td>
+                    <td><?= htmlspecialchars($row["premiere_connection"]) ?></td>
+                </tr>
+            <?php endwhile; ?>
         </table>
 
         <h2>Liste des Services</h2>
@@ -74,26 +72,15 @@ $result_Professionnel = $conn->query($sql_Professionnel);
                 <th>Nom du Service</th>
                 <th>Adresse Réseau</th>
             </tr>
-            <?php
-            if ($result_Service->num_rows > 0) {
-                while ($row = $result_Service->fetch_assoc()) {
-                    echo "<tr>
-                        <td>" . htmlspecialchars($row["id_service"]) . "</td>
-                        <td>" . htmlspecialchars($row["VLAN"]) . "</td>
-                        <td>" . htmlspecialchars($row["nom_service"]) . "</td>
-                        <td>" . htmlspecialchars($row["addr_reseau"]) . "</td>
-                    </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>Aucun service trouvé</td></tr>";
-            }
-            ?>
+            <?php while ($row = $result_Service->fetch(PDO::FETCH_ASSOC)) : ?>
+                <tr>
+                    <td><?= htmlspecialchars($row["id_service"]) ?></td>
+                    <td><?= htmlspecialchars($row["VLAN"]) ?></td>
+                    <td><?= htmlspecialchars($row["nom_service"]) ?></td>
+                    <td><?= htmlspecialchars($row["addr_reseau"]) ?></td>
+                </tr>
+            <?php endwhile; ?>
         </table>
     </main>
-
 </body>
 </html>
-
-<?php
-$conn->close();
-?>
