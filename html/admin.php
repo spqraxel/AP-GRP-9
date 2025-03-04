@@ -26,6 +26,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Admin</title>
     <link rel="stylesheet" href="style/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="navbar">
@@ -50,6 +51,7 @@ try {
                 <th>ID Métier</th>
                 <th>ID Service</th>
                 <th>Première Connexion</th>
+                <th>Actions</th>
             </tr>
             <?php while ($row = $result_Professionnel->fetch(PDO::FETCH_ASSOC)) : ?>
                 <tr>
@@ -60,6 +62,10 @@ try {
                     <td><?= htmlspecialchars($row["id_metier"]) ?></td>
                     <td><?= htmlspecialchars($row["id_service"]) ?></td>
                     <td><?= htmlspecialchars($row["premiere_connection"]) ?></td>
+                    <td>
+                        <a href="modifier_pro.php?id=<?= $row['id_pro'] ?>"><i class="fas fa-edit"></i></a>
+                        <a href="supprimer_pro.php?id=<?= $row['id_pro'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce professionnel ?');"><i class="fas fa-trash-alt"></i></a>
+                    </td>
                 </tr>
             <?php endwhile; ?>
         </table>
@@ -71,6 +77,7 @@ try {
                 <th>VLAN</th>
                 <th>Nom du Service</th>
                 <th>Adresse Réseau</th>
+                <th>Actions</th>
             </tr>
             <?php while ($row = $result_Service->fetch(PDO::FETCH_ASSOC)) : ?>
                 <tr>
@@ -78,6 +85,10 @@ try {
                     <td><?= htmlspecialchars($row["VLAN"]) ?></td>
                     <td><?= htmlspecialchars($row["nom_service"]) ?></td>
                     <td><?= htmlspecialchars($row["addr_reseau"]) ?></td>
+                    <td>
+                        <a href="modifier_service.php?id=<?= $row['id_service'] ?>"><i class="fas fa-edit"></i></a>
+                        <a href="supprimer_service.php?id=<?= $row['id_service'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');"><i class="fas fa-trash-alt"></i></a>
+                    </td>
                 </tr>
             <?php endwhile; ?>
         </table>
