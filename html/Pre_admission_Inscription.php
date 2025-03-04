@@ -43,12 +43,9 @@ $table10 = "Type_pre_admission";
         </div>
     </header>
     <div class="container-pre-admission">
-    <h6>COUVERTURE SOCIALE <br>| Etape 2 sur 6</h6>
     <form method="POST" action="">
-    <label for="secu_sociale">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
+    <h6>COUVERTURE SOCIALE <br>Etape 2 sur 6</h6>
     <br>
-    <input type="text" id="secu_sociale" name="secu_sociale" required>
-    <br><br>
 
     <label for="assure">Le patient est-il l'assuré ? :<span class= "requis"> *</span></label>
     <br>
