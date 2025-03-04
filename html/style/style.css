@@ -152,9 +152,13 @@ h1 {
     border-radius: 5px; /* Coins arrondis */
     padding: 10px; /* Espacement interne */
     margin-bottom: 15px; /* Espacement sous les champs */
-    width: calc(100% - 20px); /* Largeur dynamique */
+    width: 500px; /* Largeur dynamique */
     background-color: #f9f9f9; /* Couleur de fond blanche/grise */
+    margin-top: 50px;
+    display: flex;
+    text-align: center;
 }
+
 .navigation {
     display: flex;
     gap: 50px;
