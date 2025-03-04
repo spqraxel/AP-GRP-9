@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "Le numéro de telephone doit contenir 10 chiffres.";
     } elseif (empty($CP) || strlen($CP) > 5 || !ctype_digit($CP)) {
         $erreur = "Le code postal doit contenir 5 chiffres.";
-    } elseif (empty($civilite !== "0" && $civilite !== "1")) {
+    } elseif ($civilite !== "0" && $civilite !== "1") {
         $erreur = "Le champ civilité est obligatoire.";
     } elseif (empty($adresse)) {
         $erreur = "Le champ adresse est obligatoire.";
