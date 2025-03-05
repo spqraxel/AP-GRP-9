@@ -92,10 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 try {
                     // Préparer la requête SQL
-                    $stmt = $connexion->prepare("
-                        INSERT INTO Patient (num_secu, civilite, nom_patient, nom_epouse, prenom_patient, date_naissance, adresse, CP, ville, email_patient, telephone_patient, id_pers1, id_pers2)
-                        VALUES (:num_secu, :civilite, :nom_patient, :nom_epouse, :prenom_patient, :date_naissance, :adresse, :CP, :ville, :email_patient, :telephone_patient, 1, 1)
-                    ");
+                    $stmt = $connexion->prepare("INSERT INTO Patient (num_secu, nom_patient, prenom_patient, date_naissance, adresse, CP, ville, email_patient, telephone_patient, nom_epouse, civilite, id_pers1, id_pers2 ) 
+                    VALUES (:num_secu, :nom_patient, :prenom_patient, :date_naissance, :adresse, :CP, :ville, :email_patient, :telephone_patient, :nom_epouse, :civilite, 1, 1)");
 
                     // Lier les paramètres
                     $stmt->bindParam(':num_secu', $num_secu);

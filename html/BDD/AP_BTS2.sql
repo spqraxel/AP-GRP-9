@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 16 déc. 2024 à 10:42
+-- Généré le : mer. 05 mars 2025 à 15:29
 -- Version du serveur : 10.11.6-MariaDB-0+deb12u1
 -- Version de PHP : 8.2.24
 
@@ -39,7 +39,7 @@ CREATE TABLE `Chambre` (
 --
 
 CREATE TABLE `Couverture_sociale` (
-  `id_patient` int(15) NOT NULL,
+  `id_patient` bigint(15) NOT NULL,
   `org_secu` varchar(300) NOT NULL,
   `assure` tinyint(1) NOT NULL,
   `ALD` tinyint(1) NOT NULL,
@@ -73,7 +73,7 @@ INSERT INTO `Metier` (`id_metier`, `nom_metier`) VALUES
 --
 
 CREATE TABLE `Patient` (
-  `num_secu` int(15) NOT NULL,
+  `num_secu` bigint(15) NOT NULL,
   `nom_patient` varchar(50) NOT NULL,
   `prenom_patient` varchar(50) NOT NULL,
   `date_naissance` date NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE `Personne` (
 --
 
 CREATE TABLE `Piece_jointe` (
-  `id_patient` int(15) NOT NULL,
+  `id_patient` bigint(15) NOT NULL,
   `carte_identite_recto` varchar(1000) NOT NULL,
   `carte_identite_verso` varchar(1000) NOT NULL,
   `carte_mutuelle` varchar(1000) NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE `Piece_jointe` (
 
 CREATE TABLE `Pre_admission` (
   `id_pre_admission` int(6) NOT NULL,
-  `id_patient` int(15) NOT NULL,
+  `id_patient` bigint(15) NOT NULL,
   `id_choix_pre_admission` int(1) NOT NULL,
   `date_hospitalisation` date NOT NULL,
   `heure_intervention` time NOT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE `Professionnel` (
 
 INSERT INTO `Professionnel` (`id_pro`, `nom_pro`, `prenom_pro`, `mail_pro`, `mdp_pro`, `id_metier`, `id_service`, `premiere_connection`) VALUES
 (3, 'Miranda Matos ', 'Noah', 'noah.mima@gmail.com', '123456', 1, 1, 0),
-(4, 'Root', 'Root', 'root@gmail.com', 'root12345', 2, 1, 1);
+(4, 'Root', 'Root', 'root@gmail.com', '1234', 2, 1, 0);
 
 -- --------------------------------------------------------
 
