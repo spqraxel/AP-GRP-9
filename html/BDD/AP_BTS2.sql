@@ -96,8 +96,8 @@ CREATE TABLE `Patient` (
 
 CREATE TABLE `Personne` (
   `id_pers` int(11) NOT NULL,
-  `nom_pers` int(50) NOT NULL,
-  `prenom_pers` int(50) NOT NULL,
+  `nom_pers` varchar(50) NOT NULL,
+  `prenom_pers` varchar(50) NOT NULL,
   `telephone_pers` int(10) NOT NULL,
   `adresse_pers` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
