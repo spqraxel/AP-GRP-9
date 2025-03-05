@@ -14,25 +14,25 @@ try {
 }
 
 function verifierCodePostalVille($cp, $ville) {
-    $url = "http://api.zippopotam.us/fr/$cp"; // URL de l'API avec le code postal
+    $url = "https://geo.api.gouv.fr/communes?codePostal=" . urlencode($cp); // URL de l'API
     $response = @file_get_contents($url);
 
     if ($response === FALSE) {
-        return false; // API inaccessible ou code postal invalide
+        return false; // API inaccessible ou erreur de requête
     }
 
     $data = json_decode($response, true);
 
-    if (!empty($data['places'])) {
-        foreach ($data['places'] as $place) {
-            // Vérifie si une des villes correspond (en ignorant la casse)
-            if (strtolower($place['place name']) === strtolower($ville)) {
+    if (is_array($data) && !empty($data)) {
+        foreach ($data as $commune) {
+            // Vérifie si la ville correspond en ignorant la casse
+            if (isset($commune['nom']) && strtolower($commune['nom']) === strtolower($ville)) {
                 return true;
             }
         }
     }
 
-    return false;
+    return false; // Aucune correspondance trouvée
 }
 
 // Traitement du formulaire
