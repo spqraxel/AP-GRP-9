@@ -154,7 +154,9 @@ error_reporting(E_ALL);
 
             <!-- Affichage des erreurs -->
             <?php if (!empty($erreur)): ?>
-                <div class="error-message"><?php echo $erreur; ?></div>
+                <div class="error-message">
+                    <p><?php echo $erreur; ?></p>
+                </div>
             <?php endif; ?>
 
             <label for="num_secu">Numéro de sécurité sociale :<span class= "requis"> *</span></label>
