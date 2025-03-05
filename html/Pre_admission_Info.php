@@ -63,9 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "La date de naissance n'est pas valide.";
     } elseif (!filter_var($email_patient, FILTER_VALIDATE_EMAIL)) {
         $erreur = "L'adresse e-mail n'est pas valide.";
-    } elseif (empty($telephone_patient) || strlen($telephone_patient) > 10 || !ctype_digit($telephone_patient)) {
+    } elseif (empty($telephone_patient) || strlen($telephone_patient) !== 10 || !ctype_digit($telephone_patient)) {
         $erreur = "Le numéro de telephone doit contenir 10 chiffres.";
-    } elseif (empty($CP) || strlen($CP) > 5 || !ctype_digit($CP)) {
+    } elseif (empty($CP) || strlen($CP) !== 5 || !ctype_digit($CP)) {
         $erreur = "Le code postal doit contenir 5 chiffres.";
     } elseif ($civilite !== "0" && $civilite !== "1") {
         $erreur = "Le champ civilité est obligatoire.";
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (empty($ville)) {
         $erreur = "Le champ ville est obligatoire.";
     } elseif (!verifierCodePostalVille($CP, $ville)) {
-        $error_message = "Le code postal ne correspond pas à la ville.";
+        $erreur = "Le code postal ne correspond pas à la ville.";
     } else {
         // Validation de la clé de contrôle du numéro de sécurité sociale
         $cle = substr($num_secu, -2);
@@ -155,7 +155,7 @@ error_reporting(E_ALL);
             <!-- Affichage des erreurs -->
             <?php if (!empty($erreur)): ?>
                 <div class="error-message">
-                    <p><?php echo $erreur; ?></p>
+                    <p><?php echo htmlspecialchars($erreur); ?></p>
                 </div>
             <?php endif; ?>
 
