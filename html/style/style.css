@@ -141,3 +141,48 @@ input, select {
 .error-message p {
     color: red;
 }
+
+/* Style pour les tableaux affichant les données */
+.table-container {
+    width: 90%;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.table-style {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background-color: #fff;
+}
+
+.table-style th, .table-style td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.table-style th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.table-style tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-style tr:hover {
+    background-color: #ddd;
+}
+
