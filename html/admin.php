@@ -41,57 +41,51 @@ try {
     </header>
 
     <main>
-        <h2>Liste des Professionnels</h2>
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-                <th>ID Métier</th>
-                <th>ID Service</th>
-                <th>Première Connexion</th>
-                <th>Actions</th>
-            </tr>
-            <?php while ($row = $result_Professionnel->fetch(PDO::FETCH_ASSOC)) : ?>
+        <div class="table-container">
+            <h2>Liste des Professionnels</h2>
+            <table class="table-style">
                 <tr>
-                    <td><?= htmlspecialchars($row["id_pro"]) ?></td>
-                    <td><?= htmlspecialchars($row["nom_pro"]) ?></td>
-                    <td><?= htmlspecialchars($row["prenom_pro"]) ?></td>
-                    <td><?= htmlspecialchars($row["mail_pro"]) ?></td>
-                    <td><?= htmlspecialchars($row["id_metier"]) ?></td>
-                    <td><?= htmlspecialchars($row["id_service"]) ?></td>
-                    <td><?= htmlspecialchars($row["premiere_connection"]) ?></td>
-                    <td>
-                        <a href="modifier_pro.php?id=<?= $row['id_pro'] ?>"><i class="fas fa-edit"></i></a>
-                        <a href="supprimer_pro.php?id=<?= $row['id_pro'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce professionnel ?');"><i class="fas fa-trash-alt"></i></a>
-                    </td>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>ID Métier</th>
+                    <th>ID Service</th>
+                    <th>Première Connexion</th>
                 </tr>
-            <?php endwhile; ?>
-        </table>
+                <?php while ($row = $result_Professionnel->fetch(PDO::FETCH_ASSOC)) : ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row["id_pro"]) ?></td>
+                        <td><?= htmlspecialchars($row["nom_pro"]) ?></td>
+                        <td><?= htmlspecialchars($row["prenom_pro"]) ?></td>
+                        <td><?= htmlspecialchars($row["mail_pro"]) ?></td>
+                        <td><?= htmlspecialchars($row["id_metier"]) ?></td>
+                        <td><?= htmlspecialchars($row["id_service"]) ?></td>
+                        <td><?= htmlspecialchars($row["premiere_connection"]) ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </table>
+        </div>
 
-        <h2>Liste des Services</h2>
-        <table border="1">
-            <tr>
-                <th>ID Service</th>
-                <th>VLAN</th>
-                <th>Nom du Service</th>
-                <th>Adresse Réseau</th>
-                <th>Actions</th>
-            </tr>
-            <?php while ($row = $result_Service->fetch(PDO::FETCH_ASSOC)) : ?>
+        <div class="table-container">
+            <h2>Liste des Services</h2>
+            <table class="table-style">
                 <tr>
-                    <td><?= htmlspecialchars($row["id_service"]) ?></td>
-                    <td><?= htmlspecialchars($row["VLAN"]) ?></td>
-                    <td><?= htmlspecialchars($row["nom_service"]) ?></td>
-                    <td><?= htmlspecialchars($row["addr_reseau"]) ?></td>
-                    <td>
-                        <a href="modifier_service.php?id=<?= $row['id_service'] ?>"><i class="fas fa-edit"></i></a>
-                        <a href="supprimer_service.php?id=<?= $row['id_service'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');"><i class="fas fa-trash-alt"></i></a>
-                    </td>
+                    <th>ID Service</th>
+                    <th>VLAN</th>
+                    <th>Nom du Service</th>
+                    <th>Adresse Réseau</th>
                 </tr>
-            <?php endwhile; ?>
-        </table>
+                <?php while ($row = $result_Service->fetch(PDO::FETCH_ASSOC)) : ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row["id_service"]) ?></td>
+                        <td><?= htmlspecialchars($row["VLAN"]) ?></td>
+                        <td><?= htmlspecialchars($row["nom_service"]) ?></td>
+                        <td><?= htmlspecialchars($row["addr_reseau"]) ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </table>
+        </div>
     </main>
 </body>
 </html>
