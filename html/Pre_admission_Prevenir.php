@@ -209,7 +209,7 @@ error_reporting(E_ALL);
             </div>
 
             <div class="navigation">
-                <button type="button" onclick="window.location.href='Pre_admission_Confiance.php'" class="button-previous">Retour</button>
+                <button type="button" onclick="window.location.href='Pre_admission_Confiance.php'" class="button-next">Retour</button>
                 <button type="submit" class="button-next">Terminer</button>
             </div>
         </form>

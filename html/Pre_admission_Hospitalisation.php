@@ -163,7 +163,7 @@ error_reporting(E_ALL);
             <br><br>
 
             <div class="navigation">
-                <button type="button" onclick="window.location.href='Pre_admission_Piece_Jointe.php'" class="button-previous">Retour</button>
+                <button type="button" onclick="window.location.href='Pre_admission_Piece_Jointe.php'" class="button-next">Retour</button>
                 <button type="submit" class="button-next">Suivant</button>
             </div>
         </form>
