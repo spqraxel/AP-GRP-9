@@ -226,3 +226,15 @@ input[type="file"] {
 .table-style tr:hover {
     background-color: #dce9ff;
 }
+/* Style pour les icônes d'action */
+.icon-action {
+    width: 24px; /* Ajuste la taille des icônes */
+    height: 24px;
+    margin: 0 5px; /* Espacement entre les icônes */
+    cursor: pointer; /* Change le curseur pour indiquer qu'elles sont cliquables */
+    transition: transform 0.2s ease-in-out;
+}
+
+.icon-action:hover {
+    transform: scale(1.2); /* Effet d'agrandissement au survol */
+}
