@@ -52,7 +52,8 @@ try {
                     <th>ID Métier</th>
                     <th>ID Service</th>
                     <th>Première Connexion</th>
-                    <th>Actions</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
                 </tr>
                 <?php while ($row = $result_Professionnel->fetch(PDO::FETCH_ASSOC)) : ?>
                     <tr>
@@ -67,6 +68,8 @@ try {
                             <a href="modifier.php?id=<?= $row['id_pro'] ?>">
                                 <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
                             </a>
+                        </td>
+                        <td>
                             <a href="supprimer.php?id=<?= $row['id_pro'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
                                 <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
                             </a>
@@ -84,7 +87,8 @@ try {
                     <th>VLAN</th>
                     <th>Nom du Service</th>
                     <th>Adresse Réseau</th>
-                    <th>Actions</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
                 </tr>
                 <?php while ($row = $result_Service->fetch(PDO::FETCH_ASSOC)) : ?>
                     <tr>
@@ -93,10 +97,12 @@ try {
                         <td><?= htmlspecialchars($row["nom_service"]) ?></td>
                         <td><?= htmlspecialchars($row["addr_reseau"]) ?></td>
                         <td>
-                            <a href="modifier_service.php?id=<?= $row['id_service'] ?>">
+                            <a href="modifier.php?id=<?= $row['id_pro'] ?>">
                                 <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
                             </a>
-                            <a href="supprimer_service.php?id=<?= $row['id_service'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
+                        </td>
+                        <td>
+                            <a href="supprimer.php?id=<?= $row['id_pro'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
                                 <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
                             </a>
                         </td>
