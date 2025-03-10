@@ -173,3 +173,56 @@ input[type="file"] {
 .hidden {
     display: none;
 }
+
+/* Conteneur des tables */
+.table-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Titres des sections */
+.table-container h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Style de la table */
+.table-style {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* En-tête de la table */
+.table-style th {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+/* Lignes de la table */
+.table-style td, .table-style th {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternance des couleurs pour les lignes */
+.table-style tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Effet au survol des lignes */
+.table-style tr:hover {
+    background-color: #dce9ff;
+}
