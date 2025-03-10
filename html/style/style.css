@@ -142,26 +142,34 @@ input, select {
     color: red;
 }
 
-/* Style pour les tableaux affichant les données */
-.table-container {
-    width: 90%;
-    margin: 40px auto;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
+
+/* pré admission */
+.form-group {
+    margin-bottom: 15px;
 }
 
-h2 {
-    text-align: center;
-    font-size: 25px;
-    color: #333;
+.form-group.hidden {
+    display: none;
 }
 
-.table-style {
+input[type="file"] {
     width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    background-color: #fff;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.patient-choice {
+    margin-bottom: 20px;
+}
+
+.button-choice {
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
 }

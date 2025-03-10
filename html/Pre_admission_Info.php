@@ -2,7 +2,6 @@
 require('Logout.php');
 session_start();
 
-// Connexion à la base de données
 require('logs.php');
 
 try {
@@ -10,15 +9,15 @@ try {
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     $erreur = "Erreur de connexion : " . $e->getMessage();
-    die($erreur); // Arrête le script si la connexion échoue
+    die($erreur);
 }
 
 function verifierCodePostalVille($cp, $ville) {
-    $url = "https://geo.api.gouv.fr/communes?codePostal=" . urlencode($cp); // URL de l'API
+    $url = "https://geo.api.gouv.fr/communes?codePostal=" . urlencode($cp);
     $response = @file_get_contents($url);
 
     if ($response === FALSE) {
-        return false; // API inaccessible ou erreur de requête
+        return false;
     }
 
     $data = json_decode($response, true);
@@ -32,7 +31,7 @@ function verifierCodePostalVille($cp, $ville) {
         }
     }
 
-    return false; // Aucune correspondance trouvée
+    return false;
 }
 
 // Traitement du formulaire
@@ -91,41 +90,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (($civilite == "0" && $premierChiffre != "1") || ($civilite == "1" && $premierChiffre != "2")) {
                 $erreur = "La civilité sélectionnée ne correspond pas au numéro de sécurité sociale.";
             } else {
-                try {
-                    // Préparer la requête SQL
-                    $stmt = $connexion->prepare("
-                        INSERT INTO Patient (
-                            num_secu, nom_patient, prenom_patient, date_naissance, adresse, CP, ville, 
-                            email_patient, telephone_patient, nom_epouse, civilite, id_pers1, id_pers2
-                        ) VALUES (
-                            :num_secu, :nom_patient, :prenom_patient, :date_naissance, :adresse, :CP, :ville, 
-                            :email_patient, :telephone_patient, :nom_epouse, :civilite, 1, 1
-                        )
-                    ");
+                // Stocker les données dans la session
+                $_SESSION['etape1'] = [
+                    'num_secu' => $num_secu,
+                    'civilite' => $civilite,
+                    'nom_patient' => $nom_patient,
+                    'nom_epouse' => $nom_epouse,
+                    'prenom_patient' => $prenom_patient,
+                    'date_naissance' => $date_naissance,
+                    'adresse' => $adresse,
+                    'CP' => $CP,
+                    'ville' => $ville,
+                    'email_patient' => $email_patient,
+                    'telephone_patient' => $telephone_patient,
+                ];
 
-                    // Lier les paramètres
-                    $stmt->bindParam(':num_secu', $num_secu);
-                    $stmt->bindParam(':civilite', $civilite);
-                    $stmt->bindParam(':nom_patient', $nom_patient);
-                    $stmt->bindParam(':nom_epouse', $nom_epouse);
-                    $stmt->bindParam(':prenom_patient', $prenom_patient);
-                    $stmt->bindParam(':date_naissance', $date_naissance);
-                    $stmt->bindParam(':adresse', $adresse);
-                    $stmt->bindParam(':CP', $CP);
-                    $stmt->bindParam(':ville', $ville);
-                    $stmt->bindParam(':email_patient', $email_patient);
-                    $stmt->bindParam(':telephone_patient', $telephone_patient);
-
-                    // Exécuter la requête
-                    $stmt->execute();
-
-                    unset($_SESSION['form_data']);
-
-                    header('Location: Pre_admission_Inscription.php');
-                    exit();
-                } catch (PDOException $e) {
-                    $erreur = "Erreur lors de l'insertion : " . $e->getMessage();
-                }
+                // Rediriger vers l'étape 2
+                header('Location: Pre_admission_Inscription.php');
+                exit();
             }
         }
     }
@@ -152,7 +134,7 @@ error_reporting(E_ALL);
         </div>
         <div class="page">
             <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Info.php">Pré-admission</a>        
+            <a href="Pre_admission_Choix.php">Pré-admission</a>        
             <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>

@@ -24,32 +24,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chambre`
+-- Structure de la table `Chambre`
 --
 
-DROP TABLE IF EXISTS `chambre`;
-CREATE TABLE IF NOT EXISTS `chambre` (
+DROP TABLE IF EXISTS `Chambre`;
+CREATE TABLE IF NOT EXISTS `Chambre` (
   `id_chambre` int NOT NULL AUTO_INCREMENT,
   `type_chambre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_chambre`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `chambre`
+-- Déchargement des données de la table `Chambre`
 --
 
-INSERT INTO `chambre` (`id_chambre`, `type_chambre`) VALUES
+INSERT INTO `Chambre` (`id_chambre`, `type_chambre`) VALUES
 (1, 'chambre simple'),
 (2, 'chambre double');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `couverture_sociale`
+-- Structure de la table `Couverture_sociale`
 --
 
-DROP TABLE IF EXISTS `couverture_sociale`;
-CREATE TABLE IF NOT EXISTS `couverture_sociale` (
+DROP TABLE IF EXISTS `Couverture_sociale`;
+CREATE TABLE IF NOT EXISTS `Couverture_sociale` (
   `id_patient` bigint NOT NULL,
   `org_secu` varchar(300) COLLATE utf8mb4_general_ci NOT NULL,
   `assure` tinyint(1) NOT NULL,
@@ -62,32 +62,32 @@ CREATE TABLE IF NOT EXISTS `couverture_sociale` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `metier`
+-- Structure de la table `Metier`
 --
 
-DROP TABLE IF EXISTS `metier`;
-CREATE TABLE IF NOT EXISTS `metier` (
+DROP TABLE IF EXISTS `Metier`;
+CREATE TABLE IF NOT EXISTS `Metier` (
   `id_metier` int NOT NULL AUTO_INCREMENT,
   `nom_metier` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_metier`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `metier`
+-- Déchargement des données de la table `Metier`
 --
 
-INSERT INTO `metier` (`id_metier`, `nom_metier`) VALUES
+INSERT INTO `Metier` (`id_metier`, `nom_metier`) VALUES
 (1, 'Secretaire'),
 (2, 'Administrateur');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `patient`
+-- Structure de la table `Patient`
 --
 
-DROP TABLE IF EXISTS `patient`;
-CREATE TABLE IF NOT EXISTS `patient` (
+DROP TABLE IF EXISTS `Patient`;
+CREATE TABLE IF NOT EXISTS `Patient` (
   `num_secu` bigint NOT NULL,
   `nom_patient` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `prenom_patient` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
@@ -109,11 +109,11 @@ CREATE TABLE IF NOT EXISTS `patient` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `personne`
+-- Structure de la table `Personne`
 --
 
-DROP TABLE IF EXISTS `personne`;
-CREATE TABLE IF NOT EXISTS `personne` (
+DROP TABLE IF EXISTS `Personne`;
+CREATE TABLE IF NOT EXISTS `Personne` (
   `id_pers` int NOT NULL AUTO_INCREMENT,
   `nom_pers` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `prenom_pers` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
@@ -123,21 +123,21 @@ CREATE TABLE IF NOT EXISTS `personne` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `personne`
+-- Déchargement des données de la table `Personne`
 --
 
-INSERT INTO `personne` (`id_pers`, `nom_pers`, `prenom_pers`, `telephone_pers`, `adresse_pers`) VALUES
+INSERT INTO `Personne` (`id_pers`, `nom_pers`, `prenom_pers`, `telephone_pers`, `adresse_pers`) VALUES
 (1, 'test1', 'bertrand', '0759544001', 'test'),
 (2, 'test2', 'jaqueline', '0795954400', 'test');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `piece_jointe`
+-- Structure de la table `Piece_jointe`
 --
 
-DROP TABLE IF EXISTS `piece_jointe`;
-CREATE TABLE IF NOT EXISTS `piece_jointe` (
+DROP TABLE IF EXISTS `Piece_jointe`;
+CREATE TABLE IF NOT EXISTS `Piece_jointe` (
   `id_patient` bigint NOT NULL,
   `carte_identite_recto` longblob NOT NULL,
   `carte_identite_verso` longblob NOT NULL,
@@ -151,11 +151,11 @@ CREATE TABLE IF NOT EXISTS `piece_jointe` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `pre_admission`
+-- Structure de la table `Pre_admission`
 --
 
-DROP TABLE IF EXISTS `pre_admission`;
-CREATE TABLE IF NOT EXISTS `pre_admission` (
+DROP TABLE IF EXISTS `Pre_admission`;
+CREATE TABLE IF NOT EXISTS `Pre_admission` (
   `id_pre_admission` int NOT NULL AUTO_INCREMENT,
   `id_patient` bigint NOT NULL,
   `id_choix_pre_admission` int NOT NULL,
@@ -175,11 +175,11 @@ CREATE TABLE IF NOT EXISTS `pre_admission` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `professionnel`
+-- Structure de la table `Professionnel`
 --
 
-DROP TABLE IF EXISTS `professionnel`;
-CREATE TABLE IF NOT EXISTS `professionnel` (
+DROP TABLE IF EXISTS `Professionnel`;
+CREATE TABLE IF NOT EXISTS `Professionnel` (
   `id_pro` int NOT NULL AUTO_INCREMENT,
   `nom_pro` varchar(300) COLLATE utf8mb4_general_ci NOT NULL,
   `prenom_pro` varchar(300) COLLATE utf8mb4_general_ci NOT NULL,
@@ -194,21 +194,21 @@ CREATE TABLE IF NOT EXISTS `professionnel` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `professionnel`
+-- Déchargement des données de la table `Professionnel`
 --
 
-INSERT INTO `professionnel` (`id_pro`, `nom_pro`, `prenom_pro`, `mail_pro`, `mdp_pro`, `id_metier`, `id_service`, `premiere_connection`) VALUES
+INSERT INTO `Professionnel` (`id_pro`, `nom_pro`, `prenom_pro`, `mail_pro`, `mdp_pro`, `id_metier`, `id_service`, `premiere_connection`) VALUES
 (3, 'Miranda Matos ', 'Noah', 'noah.mima@gmail.com', '123456', 1, 1, 0),
 (4, 'Root', 'Root', 'root@gmail.com', '1234', 2, 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `service`
+-- Structure de la table `Service`
 --
 
-DROP TABLE IF EXISTS `service`;
-CREATE TABLE IF NOT EXISTS `service` (
+DROP TABLE IF EXISTS `Service`;
+CREATE TABLE IF NOT EXISTS `Service` (
   `id_service` int NOT NULL AUTO_INCREMENT,
   `VLAN` int NOT NULL,
   `nom_service` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
@@ -217,10 +217,10 @@ CREATE TABLE IF NOT EXISTS `service` (
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `service`
+-- Déchargement des données de la table `Service`
 --
 
-INSERT INTO `service` (`id_service`, `VLAN`, `nom_service`, `addr_reseau`) VALUES
+INSERT INTO `Service` (`id_service`, `VLAN`, `nom_service`, `addr_reseau`) VALUES
 (1, 100, 'Administration', '127.0.0.0/255'),
 (2, 10, 'SERVEUR', '127.0.0.0/255'),
 (3, 200, 'VOICE', '127.0.0.0/255'),
@@ -235,21 +235,21 @@ INSERT INTO `service` (`id_service`, `VLAN`, `nom_service`, `addr_reseau`) VALUE
 -- --------------------------------------------------------
 
 --
--- Structure de la table `type_pre_admission`
+-- Structure de la table `Type_pre_admission`
 --
 
-DROP TABLE IF EXISTS `type_pre_admission`;
-CREATE TABLE IF NOT EXISTS `type_pre_admission` (
+DROP TABLE IF EXISTS `Type_pre_admission`;
+CREATE TABLE IF NOT EXISTS `Type_pre_admission` (
   `id_type_admission` int NOT NULL AUTO_INCREMENT,
   `type_admission` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_type_admission`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `type_pre_admission`
+-- Déchargement des données de la table `Type_pre_admission`
 --
 
-INSERT INTO `type_pre_admission` (`id_type_admission`, `type_admission`) VALUES
+INSERT INTO `Type_pre_admission` (`id_type_admission`, `type_admission`) VALUES
 (1, 'Chirurgie ambulatoire'),
 (2, 'Hospitalisation');
 
@@ -258,40 +258,40 @@ INSERT INTO `type_pre_admission` (`id_type_admission`, `type_admission`) VALUES
 --
 
 --
--- Contraintes pour la table `couverture_sociale`
+-- Contraintes pour la table `Couverture_sociale`
 --
-ALTER TABLE `couverture_sociale`
-  ADD CONSTRAINT `Couverture_sociale_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`num_secu`);
+ALTER TABLE `Couverture_sociale`
+  ADD CONSTRAINT `Couverture_sociale_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`num_secu`);
 
 --
--- Contraintes pour la table `patient`
+-- Contraintes pour la table `Patient`
 --
-ALTER TABLE `patient`
-  ADD CONSTRAINT `Patient_ibfk_1` FOREIGN KEY (`id_pers1`) REFERENCES `personne` (`id_pers`),
-  ADD CONSTRAINT `Patient_ibfk_2` FOREIGN KEY (`id_pers2`) REFERENCES `personne` (`id_pers`);
+ALTER TABLE `Patient`
+  ADD CONSTRAINT `Patient_ibfk_1` FOREIGN KEY (`id_pers1`) REFERENCES `Personne` (`id_pers`),
+  ADD CONSTRAINT `Patient_ibfk_2` FOREIGN KEY (`id_pers2`) REFERENCES `Personne` (`id_pers`);
 
 --
--- Contraintes pour la table `piece_jointe`
+-- Contraintes pour la table `Piece_jointe`
 --
-ALTER TABLE `piece_jointe`
-  ADD CONSTRAINT `Piece_jointe_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`num_secu`);
+ALTER TABLE `Piece_jointe`
+  ADD CONSTRAINT `Piece_jointe_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`num_secu`);
 
 --
--- Contraintes pour la table `pre_admission`
+-- Contraintes pour la table `Pre_admission`
 --
-ALTER TABLE `pre_admission`
-  ADD CONSTRAINT `Pre_admission_ibfk_1` FOREIGN KEY (`id_pro`) REFERENCES `professionnel` (`id_pro`),
-  ADD CONSTRAINT `Pre_admission_ibfk_2` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`num_secu`),
-  ADD CONSTRAINT `Pre_admission_ibfk_3` FOREIGN KEY (`id_choix_pre_admission`) REFERENCES `type_pre_admission` (`id_type_admission`),
-  ADD CONSTRAINT `Pre_admission_ibfk_4` FOREIGN KEY (`id_service`) REFERENCES `service` (`id_service`),
-  ADD CONSTRAINT `Pre_admission_ibfk_5` FOREIGN KEY (`id_chambre`) REFERENCES `chambre` (`id_chambre`);
+ALTER TABLE `Pre_admission`
+  ADD CONSTRAINT `Pre_admission_ibfk_1` FOREIGN KEY (`id_pro`) REFERENCES `Professionnel` (`id_pro`),
+  ADD CONSTRAINT `Pre_admission_ibfk_2` FOREIGN KEY (`id_patient`) REFERENCES `Patient` (`num_secu`),
+  ADD CONSTRAINT `Pre_admission_ibfk_3` FOREIGN KEY (`id_choix_pre_admission`) REFERENCES `Type_pre_admission` (`id_type_admission`),
+  ADD CONSTRAINT `Pre_admission_ibfk_4` FOREIGN KEY (`id_service`) REFERENCES `Service` (`id_service`),
+  ADD CONSTRAINT `Pre_admission_ibfk_5` FOREIGN KEY (`id_chambre`) REFERENCES `Chambre` (`id_chambre`);
 
 --
--- Contraintes pour la table `professionnel`
+-- Contraintes pour la table `Professionnel`
 --
-ALTER TABLE `professionnel`
-  ADD CONSTRAINT `Professionnel_ibfk_1` FOREIGN KEY (`id_metier`) REFERENCES `metier` (`id_metier`),
-  ADD CONSTRAINT `Professionnel_ibfk_2` FOREIGN KEY (`id_service`) REFERENCES `service` (`id_service`);
+ALTER TABLE `Professionnel`
+  ADD CONSTRAINT `Professionnel_ibfk_1` FOREIGN KEY (`id_metier`) REFERENCES `Metier` (`id_metier`),
+  ADD CONSTRAINT `Professionnel_ibfk_2` FOREIGN KEY (`id_service`) REFERENCES `Service` (`id_service`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

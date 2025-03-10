@@ -88,7 +88,7 @@ error_reporting(E_ALL);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré admission | Etape 6 sur 6</title>
+    <title>Pré admission</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -105,7 +105,7 @@ error_reporting(E_ALL);
     <div class="container-pre-admission">
         <!-- Formulaire -->
         <form method="POST" action="">
-            <h6>Pré-admission <br>Etape 6 sur 6</h6>
+            <h6>Pré-admission</h6>
             <br>
 
             <!-- Affichage des erreurs -->
@@ -163,7 +163,7 @@ error_reporting(E_ALL);
             <br><br>
 
             <div class="navigation">
-                <button type="button" onclick="window.location.href='Pre_admission_Piece_Jointe.php'" class="button-next">Retour</button>
+                <button type="button" onclick="window.location.href='Pre_admission_Choix.php'" class="button-next">Retour</button>
                 <button type="submit" class="button-next">Suivant</button>
             </div>
         </form>
