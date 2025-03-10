@@ -72,11 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     INSERT INTO Piece_jointe (
                         id_patient, carte_identite_recto, carte_identite_verso, carte_vitale, carte_mutuelle, livret_famille, autorisation_mineur
                     ) VALUES (
-                       105065917022066, :carte_identite_recto, :carte_identite_verso, :carte_vitale, :carte_mutuelle, :livret_famille, :autorisation_mineur
+                        :num_secu, :carte_identite_recto, :carte_identite_verso, :carte_vitale, :carte_mutuelle, :livret_famille, :autorisation_mineur
                     )
                 ");
 
                 // Lier les paramètres
+                $stmt->bindParam(':num_secu', $_SESSION['etape1']['num_secu']); // Données de l'étape 1
                 $stmt->bindParam(':carte_identite_recto', $carte_identite_recto_bin, PDO::PARAM_LOB);
                 $stmt->bindParam(':carte_identite_verso', $carte_identite_verso_bin, PDO::PARAM_LOB);
                 $stmt->bindParam(':carte_vitale', $carte_vitale_bin, PDO::PARAM_LOB);

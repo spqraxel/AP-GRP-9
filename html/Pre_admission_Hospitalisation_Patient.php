@@ -48,11 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 INSERT INTO Pre_admission (
                     id_patient, id_choix_pre_admission, date_hospitalisation, heure_intervention, id_pro, id_service, id_chambre
                 ) VALUES (
-                    105065917022066, :id_choix_pre_admission, :date_hospitalisation, :heure_intervention, :id_pro, :id_service, :id_chambre
+                    :num_secu, :id_choix_pre_admission, :date_hospitalisation, :heure_intervention, :id_pro, :id_service, :id_chambre
                 )
             ");
 
             // Lier les paramètres
+            $stmt->bindParam(':num_secu', $_SESSION['etape1']['num_secu']); // Données de l'étape 1
             $stmt->bindParam(':id_choix_pre_admission', $pre_admission);
             $stmt->bindParam(':date_hospitalisation', $date_hospitalisation);
             $stmt->bindParam(':heure_intervention', $heure_intervention);
