@@ -42,6 +42,11 @@ try {
         $stmt->execute();
 
         $donneesPatient = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Formater la date d'hospitalisation en français
+        $datePreAdmission = isset($donneesPatient['date_hospitalisation']) 
+            ? date('d/m/Y', strtotime($donneesPatient['date_hospitalisation'])) 
+            : 'Inconnu';
     } else {
         $erreur = "Aucun numéro de sécurité sociale trouvé dans la session.";
     }
@@ -97,7 +102,7 @@ try {
         const nomPatient = "<?php echo $donneesPatient['nom_patient'] ?? 'Inconnu'; ?>";
         const prenomPatient = "<?php echo $donneesPatient['prenom_patient'] ?? 'Inconnu'; ?>";
         const numSecu = "<?php echo $donneesPatient['num_secu'] ?? 'Inconnu'; ?>";
-        const datePreAdmission = "<?php echo $donneesPatient['date_hospitalisation'] ?? 'Inconnu'; ?>";
+        const datePreAdmission = "<?php echo $datePreAdmission ?? 'Inconnu'; ?>";
         const heureIntervention = "<?php echo $donneesPatient['heure_intervention'] ?? 'Inconnu'; ?>";
         const service = "<?php echo $donneesPatient['service'] ?? 'Inconnu'; ?>";
         const medecin = "<?php echo $donneesPatient['medecin'] ?? 'Inconnu'; ?>";
