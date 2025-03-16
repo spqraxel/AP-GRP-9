@@ -33,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "Veuillez sélectionner le type de pré-admission.";
     } elseif (empty($date_hospitalisation)) {
         $erreur = "La date d'hospitalisation est obligatoire.";
+    } elseif (strtotime($date_hospitalisation) < strtotime(date('Y-m-d'))) {
+        $erreur = "La date d'hospitalisation ne peut pas être dans le passé.";
     } elseif (empty($heure_intervention)) {
         $erreur = "L'heure de l'intervention est obligatoire.";
     } elseif (empty($service) || $service === "-1") {

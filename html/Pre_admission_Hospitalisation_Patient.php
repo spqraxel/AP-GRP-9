@@ -33,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "Veuillez sélectionner le type de pré-admission.";
     } elseif (empty($date_hospitalisation)) {
         $erreur = "La date d'hospitalisation est obligatoire.";
+    } elseif (strtotime($date_hospitalisation) < strtotime(date('Y-m-d'))) {
+        $erreur = "La date d'hospitalisation ne peut pas être dans le passé.";
     } elseif (empty($heure_intervention)) {
         $erreur = "L'heure de l'intervention est obligatoire.";
     } elseif (empty($service) || $service === "-1") {
@@ -88,7 +90,7 @@ error_reporting(E_ALL);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré admission</title>
+    <title>Pré admission | Etape 6 sur 6</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -105,7 +107,7 @@ error_reporting(E_ALL);
     <div class="container-pre-admission">
         <!-- Formulaire -->
         <form method="POST" action="">
-            <h6>Pré-admission</h6>
+            <h6>Pré-admission <br>Etape 6 sur 6</h6>
             <br>
 
             <!-- Affichage des erreurs -->
