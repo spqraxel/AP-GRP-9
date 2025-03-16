@@ -65,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->execute();
 
             // Nettoyer les données de session après l'insertion
-            unset($_SESSION['etape1']);
             unset($_SESSION['etape2']);
             unset($_SESSION['etape3']);
             unset($_SESSION['form_data']);
