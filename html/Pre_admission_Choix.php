@@ -23,11 +23,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: Pre_admission_Info.php');
         exit();
     } elseif (isset($_POST['patient_existant'])) {
-        // Rediriger vers Pre_admission_Hospitalisation.php avec l'ID du patient sélectionné
+        // Récupérer l'ID du patient sélectionné
         $selectedPatient = $_POST['existing-patient'];
         if ($selectedPatient !== "-1") {
-            header('Location: Pre_admission_Hospitalisation_Patient.php?patient_id=' . $selectedPatient);
-            exit();
+            // Récupérer les informations du patient sélectionné
+            $query = "SELECT num_secu, nom_patient, prenom_patient, date_naissance, adresse, CP, ville, email_patient, telephone_patient, nom_epouse, civilite FROM Patient WHERE num_secu = :num_secu";
+            $stmt = $connexion->prepare($query);
+            $stmt->bindParam(':num_secu', $selectedPatient, PDO::PARAM_STR);
+            $stmt->execute();
+            $patient = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($patient) {
+                // Stocker les informations du patient dans la session etape1
+                $_SESSION['etape1'] = [
+                    'num_secu' => $patient['num_secu'],
+                    'nom_patient' => $patient['nom_patient'],
+                    'prenom_patient' => $patient['prenom_patient'],
+                    'date_naissance' => $patient['date_naissance'],
+                    'adresse' => $patient['adresse'],
+                    'CP' => $patient['CP'],
+                    'ville' => $patient['ville'],
+                    'email_patient' => $patient['email_patient'],
+                    'telephone_patient' => $patient['telephone_patient'],
+                    'nom_epouse' => $patient['nom_epouse'],
+                    'civilite' => $patient['civilite']
+                ];
+
+                // Rediriger vers Pre_admission_Hospitalisation_Patient.php
+                header('Location: Pre_admission_Hospitalisation_Patient.php');
+                exit();
+            } else {
+                $erreur = "Patient non trouvé.";
+            }
         } else {
             $erreur = "Veuillez sélectionner un patient existant.";
         }
