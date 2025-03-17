@@ -1,16 +1,21 @@
 <?php
 session_start();
 require('Logout.php');
-require('logs.php');
 
-$table = "professionnel"; // Modification pour correspondre à la table professionnel
+$serveur = "192.168.10.26:3306";
+$utilisateur = "dev";
+$motdepasse = "sio2425";
+$nomBDD = "AP_BTS2";
+$erreur = "";
 
 try {
-    $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motDePasse);
+    $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    echo "Erreur de connexion : " . $e->getMessage();
+    $erreur = "Erreur de connexion : " . $e->getMessage();
 }
+
+$table = "professionnel"; // Modification pour correspondre à la table professionnel
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération des données du formulaire
@@ -86,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="number" id="id_service" name="id_service" required><br><br>
 
             <div class="button-container">
-                <button><a href="Modif_admin.php" class="btn-shine">Retour</a></button>
+                <button><a href="admin.php" class="btn-shine">Retour</a></button>
                 <button type="submit" class="btn-submit">Ajouter le professionnel</button>
             </div>
         </form>
