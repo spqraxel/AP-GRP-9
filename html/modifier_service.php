@@ -2,6 +2,8 @@
 <?php
 require('Logout.php');
 session_start();
+
+require('logs.php');
 ?>
 <html lang="fr">
 <head>

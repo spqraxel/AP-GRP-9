@@ -1,7 +1,7 @@
 <?php
+require('Logout.php');
 session_start();
 
-require('Logout.php');
 require('logs.php');
 
 try {

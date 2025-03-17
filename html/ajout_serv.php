@@ -1,6 +1,7 @@
 <?php
-session_start();
 require('Logout.php');
+session_start();
+
 require('logs.php');
 
 $table = "Service"; // Table modifiée pour correspondre à la table Service
