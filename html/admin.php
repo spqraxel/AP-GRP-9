@@ -43,6 +43,7 @@ try {
     <main>
         <div class="table-container">
             <h2>Liste des Professionnels</h2>
+            <button>Ajouter un professionnel</button>
             <table class="table-style">
                 <tr>
                     <th>ID</th>
@@ -65,7 +66,7 @@ try {
                         <td><?= htmlspecialchars($row["id_service"]) ?></td>
                         <td><?= htmlspecialchars($row["premiere_connection"]) ?></td>
                         <td>
-                            <a href="modifier.php?id=<?= $row['id_pro'] ?>">
+                            <a href="modifier_pro.php?id=<?= $row['id_pro'] ?>">
                                 <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
                             </a>
                         </td>
@@ -80,7 +81,8 @@ try {
         </div>
 
         <div class="table-container">
-            <h2>Liste des Services</h2>
+            <h2>Liste des services</h2>
+            <button>Ajouter un Service</button>
             <table class="table-style">
                 <tr>
                     <th>ID Service</th>
@@ -97,7 +99,7 @@ try {
                         <td><?= htmlspecialchars($row["nom_service"]) ?></td>
                         <td><?= htmlspecialchars($row["addr_reseau"]) ?></td>
                         <td>
-                            <a href="modifier.php?id=<?= $row['id_pro'] ?>">
+                            <a href="modifier_service.php?id=<?= $row['id_pro'] ?>">
                                 <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
                             </a>
                         </td>
