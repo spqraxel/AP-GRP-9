@@ -1,27 +1,9 @@
 <?php
 require('Logout.php');
 
-$serveur = "192.168.10.27:3306";
-$utilisateur = "dev";
-$motdepasse = "sio2425";
-$nomBDD = "AP_BTS2";
-$erreur = "";
-
-try {
-    $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);
-    $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    $erreur = "Erreur de connexion : " . $e->getMessage();
-}
+require('logs.php');
 
 $table = "Service"; // Table modifiée pour correspondre à la table Service
-
-try {
-    $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motDePasse);
-    $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "Erreur de connexion : " . $e->getMessage();
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération des données du formulaire
