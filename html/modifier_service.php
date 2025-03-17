@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
 require('Logout.php');
-session_start();
 
 require('logs.php');
 ?>
