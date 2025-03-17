@@ -8,13 +8,16 @@ if (!isset($connexion)) {
     die("Échec de la connexion : " . $connexion->connect_error);
 }
 
-// Récupérer les données des tables Service et Professionnel
+// Récupérer les données des tables Service, Professionnel et Pre_admission
 try {
     $sql_Service = "SELECT * FROM Service";
     $result_Service = $connexion->query($sql_Service);
 
     $sql_Professionnel = "SELECT * FROM Professionnel";
     $result_Professionnel = $connexion->query($sql_Professionnel);
+
+    $sql_Pre_admission = "SELECT * FROM Pre_admission";
+    $result_Pre_admission = $connexion->query($sql_Pre_admission);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération des données : " . $e->getMessage());
 }
@@ -41,9 +44,13 @@ try {
     </header>
 
     <main>
+        <!-- Liste des Professionnels -->
         <div class="table-container">
             <h2>Liste des Professionnels</h2>
-            <button>Ajouter un professionnel</button>
+            <a href="ajout_pro.php">
+                <button type="button">Ajouter un professionnel</button>
+            </a>
+
             <table class="table-style">
                 <tr>
                     <th>ID</th>
@@ -80,6 +87,7 @@ try {
             </table>
         </div>
 
+        <!-- Liste des Services -->
         <div class="table-container">
             <h2>Liste des services</h2>
             <button>Ajouter un Service</button>
@@ -99,12 +107,12 @@ try {
                         <td><?= htmlspecialchars($row["nom_service"]) ?></td>
                         <td><?= htmlspecialchars($row["addr_reseau"]) ?></td>
                         <td>
-                            <a href="modifier_service.php?id=<?= $row['id_pro'] ?>">
+                            <a href="modifier_service.php?id=<?= $row['id_service'] ?>">
                                 <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
                             </a>
                         </td>
                         <td>
-                            <a href="supprimer.php?id=<?= $row['id_pro'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                            <a href="supprimer.php?id=<?= $row['id_service'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
                                 <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
                             </a>
                         </td>
@@ -112,6 +120,48 @@ try {
                 <?php endwhile; ?>
             </table>
         </div>
+
+        <!-- Liste des Pré-admissions -->
+        <div class="table-container">
+            <h2>Liste des Pré-admissions</h2>
+            <table class="table-style">
+                <tr>
+                    <th>ID Pré-admission</th>
+                    <th>ID Patient</th>
+                    <th>ID Choix Pré-admission</th>
+                    <th>Date Hospitalisation</th>
+                    <th>Heure Intervention</th>
+                    <th>ID Professionnel</th>
+                    <th>ID Service</th>
+                    <th>ID Chambre</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+                <?php while ($row = $result_Pre_admission->fetch(PDO::FETCH_ASSOC)) : ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row["id_pre_admission"]) ?></td>
+                        <td><?= htmlspecialchars($row["id_patient"]) ?></td>
+                        <td><?= htmlspecialchars($row["id_choix_pre_admission"]) ?></td>
+                        <td><?= htmlspecialchars($row["date_hospitalisation"]) ?></td>
+                        <td><?= htmlspecialchars($row["heure_intervention"]) ?></td>
+                        <td><?= htmlspecialchars($row["id_pro"]) ?></td>
+                        <td><?= htmlspecialchars($row["id_service"]) ?></td>
+                        <td><?= htmlspecialchars($row["id_chambre"]) ?></td>
+                        <td>
+                            <a href="modifier_pre_admission.php?id=<?= $row['id_pre_admission'] ?>">
+                                <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="supprimer.php?id=<?= $row['id_pre_admission'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette pré-admission ?');">
+                                <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
+                            </a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </table>
+        </div>
+
     </main>
 </body>
 </html>
