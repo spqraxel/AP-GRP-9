@@ -14,25 +14,25 @@ try {
         // Requête SQL pour récupérer les données du patient
         $query = "
             SELECT 
-                patient.num_secu, 
-                patient.nom_patient, 
-                patient.prenom_patient, 
-                pre_admission.date_hospitalisation, 
-                pre_admission.heure_intervention, 
-                CONCAT(professionnel.nom_pro, ' ', professionnel.prenom_pro) AS medecin, 
-                service.nom_service AS service
+                Patient.num_secu, 
+                Patient.nom_patient, 
+                Patient.prenom_patient, 
+                Pre_admission.date_hospitalisation, 
+                Pre_admission.heure_intervention, 
+                CONCAT(Professionnel.nom_pro, ' ', Professionnel.prenom_pro) AS medecin, 
+                Service.nom_service AS service
             FROM 
-                patient
+                Patient
             INNER JOIN 
-                pre_admission ON pre_admission.id_patient = patient.num_secu
+                Pre_admission ON Pre_admission.id_patient = Patient.num_secu
             INNER JOIN 
-                professionnel ON professionnel.id_pro = pre_admission.id_pro
+                Professionnel ON Professionnel.id_pro = Pre_admission.id_pro
             INNER JOIN 
-                service ON service.id_service = pre_admission.id_service
+                Service ON Service.id_service = Pre_admission.id_service
             WHERE 
-                pre_admission.id_patient = :num_secu
+                Pre_admission.id_patient = :num_secu
             ORDER BY 
-                pre_admission.date_hospitalisation DESC 
+                Pre_admission.date_hospitalisation DESC 
             LIMIT 1
         ";
 
