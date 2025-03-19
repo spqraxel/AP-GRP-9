@@ -48,7 +48,10 @@ try {
         <div class="table-container">
             <h2>Liste des Professionnels</h2>
             <a href="ajout_pro.php">
-                <button type="button">Ajouter un professionnel</button>
+                <button type="button" class="button-pro">Ajouter un professionnel</button> 
+                <br>
+                <br>
+                <br>
             </a>
 
             <table class="table-style">
@@ -90,7 +93,12 @@ try {
         <!-- Liste des Services -->
         <div class="table-container">
             <h2>Liste des services</h2>
-            <button>Ajouter un Service</button>
+            <a href="ajout_serv.php">
+                <button type="button" class="button-serv">Ajouter un service</button>
+                <br>
+                <br>
+                <br>
+            </a>
             <table class="table-style">
                 <tr>
                     <th>ID Service</th>

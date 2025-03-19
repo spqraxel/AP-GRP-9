@@ -1,6 +1,5 @@
 <?php
 require('Logout.php');
-
 require('logs.php');
 
 $table = "professionnel"; // Modification pour correspondre à la table professionnel
@@ -16,8 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $premiere_connection = 1; // Première connexion est toujours à 1
 
     // Insertion dans la base de données
-    $requete = $connexion->prepare("INSERT INTO $table (nom_pro, prenom_pro, mail_pro, mdp_pro, id_metier, id_service) 
-                                    VALUES (:nom_pro, :prenom_pro, :mail_pro, :mdp_pro, :id_metier, :id_service)");
+    $requete = $connexion->prepare("INSERT INTO Professionnel (nom_pro, prenom_pro, mail_pro, mdp_pro, id_metier, id_service, premiere_connection) 
+                                VALUES (:nom_pro, :prenom_pro, :mail_pro, :mdp_pro, :id_metier, :id_service, :premiere_connection)");
+
+    $requete->bindParam(':premiere_connection', $premiere_connection);
 
     $requete->bindParam(':nom_pro', $nom_pro);
     $requete->bindParam(':prenom_pro', $prenom_pro);
@@ -27,13 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $requete->bindParam(':id_service', $id_service);
 
     if ($requete->execute()) {
-        header("Location: Modif_admin.php");
+        header("Location: admin.php");
         exit;
     } else {
         echo "Erreur lors de l'ajout du professionnel.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </header>
 
-<body>
     <div class="container-modif">
         <h2>Ajout d'un professionnel</h2>
         <form action="Ajout_professionnel.php" method="post">
@@ -79,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="number" id="id_service" name="id_service" required><br><br>
 
             <div class="button-container">
-                <button><a href="admin.php" class="btn-shine">Retour</a></button>
+                <button type="button" class="btn-shine" onclick="history.back();">Retour</button>
                 <button type="submit" class="btn-submit">Ajouter le professionnel</button>
             </div>
         </form>
