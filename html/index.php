@@ -28,6 +28,7 @@ try {
                     $_SESSION['loggedin'] = true;
                     $_SESSION['mail_pro'] = $mail;
                     $_SESSION['id_metier'] = $resultat['id_metier'];
+                    $_SESSION['id_pro'] = $resultat['id_pro'];
 
                     // Vérification de la première connexion
                     if ($resultat['premiere_connection'] == 1) {

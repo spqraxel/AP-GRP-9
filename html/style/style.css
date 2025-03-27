@@ -294,3 +294,59 @@ input[type="file"] {
     padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+
+
+/* pannel médecins */
+
+.filter-container {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.no-data {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}
+.btn {
+    padding: 8px 15px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn:hover {
+    background: #45a049;
+}
+.btn-secondary {
+    background: #6c757d;
+}
+.btn-secondary:hover {
+    background: #5a6268;
+}
+.btn-pdf {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-pdf:hover {
+    background-color: #c0392b;
+}

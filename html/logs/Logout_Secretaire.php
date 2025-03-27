@@ -2,7 +2,7 @@
     session_start();
 
     //Vérifier si l'utilisateur est connecté 
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    if (!isset($_SESSION['loggedin']) || !isset($_SESSION['id_pro']) || $_SESSION['loggedin'] !== true){
         header("location: index.php");
         exit;
     }
