@@ -24,7 +24,7 @@ try {
             $resultat = $requete->fetch();
 
             if ($resultat) {
-                if ($mdp === $resultat['mdp_pro']) {
+                if (password_verify($mdp, $resultat['mdp_pro'])) {
                     $_SESSION['loggedin'] = true;
                     $_SESSION['mail_pro'] = $mail;
                     $_SESSION['id_metier'] = $resultat['id_metier'];
