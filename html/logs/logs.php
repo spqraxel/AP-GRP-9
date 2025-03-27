@@ -1,9 +1,9 @@
 <?php
 
-$serveur = "192.168.10.27:3306";
-$utilisateur = "dev";
-$motdepasse = "sio2425";
-$nomBDD = "AP_BTS2";
+$serveur = "localhost";
+$utilisateur = "root";
+$motdepasse = "";
+$nomBDD = "ap_bts2";
 $erreur = "";
 
 try {

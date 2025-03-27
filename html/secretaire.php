@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require('Logout.php');
+require('logs/Logout_Secretaire.php');
 session_start();
 ?>
 <html lang="fr">
@@ -16,7 +16,7 @@ session_start();
             <img src="img/LPFS_logo.png" alt="Logo" class="logo">
         </div>
         <div class="page">
-            <a href="admin.php">Accueil</a>
+            <a href="secretaire.php">Accueil</a>
             <a href="Pre_admission_Choix.php">Pré-admission</a>
             <a href="?logout=true">Se déconnecter</a>
         </div>

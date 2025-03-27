@@ -1,8 +1,8 @@
 <?php
-require('Logout.php');
+require('logs/Logout.php');
 session_start();
 
-require('logs.php');
+require('logs/logs.php');
 $success = "";
 
 try {

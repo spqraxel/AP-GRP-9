@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require('logs.php');
+require('logs/logs.php');
 
 try {
     $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);

@@ -1,7 +1,7 @@
 <?php
-require('Logout.php');
+require('logs/Logout_admin.php');
 
-require('logs.php');
+require('logs/logs.php');
 
 // Récupérer les métiers depuis la table "Metier"
 $requete_metier = $connexion->prepare("SELECT * FROM $table_metier");

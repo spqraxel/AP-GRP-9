@@ -1,9 +1,9 @@
 <?php
-require('Logout.php');
+require('logs/Logout_Secretaire.php');
 session_start();
 
 // Connexion à la base de données
-require('logs.php');
+require('logs/logs.php');
 
 try {
     $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);

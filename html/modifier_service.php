@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
-require('Logout.php');
+require('logs/Logout_admin.php');
 
-require('logs.php');
+require('logs/logs.php');
 ?>
 <html lang="fr">
 <head>

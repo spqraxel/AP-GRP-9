@@ -1,7 +1,7 @@
 <?php
 session_start();
-require('Logout.php');
-require('logs.php');
+require('logs/Logout_medecin.php');
+require('logs/logs.php');
 
 // Vérifier si la connexion à la base de données est établie
 if (!isset($connexion)) {
@@ -52,7 +52,7 @@ try {
             <img src="img/LPFS_logo.png" alt="Logo" class="logo">
         </div>
         <div class="page">
-            <a href="admin.php">Accueil</a>
+            <a href="medecin.php">Accueil</a>
             <a href="?logout=true">Se déconnecter</a>
         </div>
     </header>

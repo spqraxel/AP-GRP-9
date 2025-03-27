@@ -2,8 +2,8 @@
 session_start(); // Démarrer la session si nécessaire
 ob_start(); // Évite les problèmes de redirection
 
-require('Logout.php');
-require('logs.php');
+require('logs/Logout_admin.php');
+require('logs/logs.php');
 
 $table = "Service"; // Table modifiée pour correspondre à la table Service
 

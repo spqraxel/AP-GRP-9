@@ -1,7 +1,7 @@
 <?php
 session_start();
-require('Logout.php');
-require('logs.php');
+require('logs/Logout_admin.php');
+require('logs/logs.php');
 
 // Vérifier si la connexion à la base de données est établie
 if (!isset($connexion)) {

@@ -1,6 +1,6 @@
 <?php
-require('Logout.php');
-require('logs.php');
+require('logs/Logout_admin.php');
+require('logs/logs.php');
 
 $table = "professionnel"; // Modification pour correspondre à la table professionnel
 

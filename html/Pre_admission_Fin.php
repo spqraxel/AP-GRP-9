@@ -1,8 +1,8 @@
 <?php
-require('Logout.php');
+require('logs/Logout_Secretaire.php');
 session_start();
 
-require('logs.php');
+require('logs/logs.php');
 
 $donneesPatient = []; // Initialiser un tableau pour stocker les données
 
