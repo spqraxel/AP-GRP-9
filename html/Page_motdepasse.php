@@ -34,12 +34,12 @@ try {
             
             // Redirection vers la page appropriée après la mise à jour
             if ($_SESSION['id_metier'] == 1) {
-                header("Location: scretaire.php");
+                header("Location: secretaire.php");
                 exit();
             } elseif ($_SESSION['id_metier'] == 2) {
                 header("Location: admin.php");
                 exit();
-            } elseif ($resultat['id_metier'] == 3 || $resultat['id_metier'] == 4) {
+            } elseif ($_SESSION['id_metier'] == 3 || $_SESSION['id_metier'] == 4) {
                 header("Location: medecin.php");
                 exit();
             }
