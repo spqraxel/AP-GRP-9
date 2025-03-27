@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "La date d'hospitalisation est obligatoire.";
     } elseif (strtotime($date_hospitalisation) < strtotime(date('Y-m-d'))) {
         $erreur = "La date d'hospitalisation ne peut pas être dans le passé.";
-    } if (strtotime($date_hospitalisation) > strtotime($date_maxi)) {
+    } elseif (strtotime($date_hospitalisation) > strtotime($date_maxi)) {
         $erreur = "La date d'hospitalisation ne peut pas dépasser 2 ans à partir d'aujourd'hui.";
     } elseif (empty($heure_intervention)) {
         $erreur = "L'heure de l'intervention est obligatoire.";
@@ -76,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Nettoyer les données de session après l'insertion
             unset($_SESSION['etape2']);
             unset($_SESSION['etape3']);
-            unset($_SESSION['form_data']);
 
             header('Location: Pre_admission_Fin.php');
             exit();
@@ -146,7 +145,7 @@ error_reporting(E_ALL);
 
             <label for="date_hospitalisation">Date d'hospitalisation :<span class= "requis"> *</span></label>
             <br>
-            <input type="date" id="date_hospitalisation" name="date_hospitalisation" value="<?php echo htmlspecialchars($_SESSION['form_data']['date_hospitalisation'] ?? ''); ?>" required>
+            <input type="date" id="date_hospitalisation" name="date_hospitalisation" min="<?php echo date('Y-m-d'); ?>" value="<?php echo htmlspecialchars($_SESSION['form_data']['date_hospitalisation'] ?? ''); ?>" required>
             <br><br>
 
             <label for="heure_intervention">Heure de l'intervention :<span class= "requis"> *</span></label>

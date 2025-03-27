@@ -7,38 +7,51 @@ require('logs/logs.php');
 $donneesPatient = []; // Initialiser un tableau pour stocker les données
 
 try {
-    // Récupérer le numéro de sécurité sociale depuis la session etape1
-    $num_secu = $_SESSION['etape1']['num_secu'] ?? null;
+    // Vérifier que nous avons toutes les données nécessaires
+    if (isset($_SESSION['etape1']['num_secu']) && isset($_SESSION['form_data'])) {
+        $num_secu = $_SESSION['etape1']['num_secu'];
+        $form_data = $_SESSION['form_data'];
 
-    if ($num_secu) {
         // Requête SQL pour récupérer les données du patient
         $query = "
             SELECT 
-                Patient.num_secu, 
-                Patient.nom_patient, 
-                Patient.prenom_patient, 
-                Pre_admission.date_hospitalisation, 
-                Pre_admission.heure_intervention, 
-                CONCAT(Professionnel.nom_pro, ' ', Professionnel.prenom_pro) AS medecin, 
-                Service.nom_service AS service
+                p.num_secu, 
+                p.nom_patient, 
+                p.prenom_patient, 
+                pa.date_hospitalisation, 
+                pa.heure_intervention, 
+                CONCAT(pr.nom_pro, ' ', pr.prenom_pro) AS medecin, 
+                s.nom_service AS service
             FROM 
-                Patient
+                Patient p
             INNER JOIN 
-                Pre_admission ON Pre_admission.id_patient = Patient.num_secu
+                Pre_admission pa ON pa.id_patient = p.num_secu
             INNER JOIN 
-                Professionnel ON Professionnel.id_pro = Pre_admission.id_pro
+                Professionnel pr ON pr.id_pro = pa.id_pro
             INNER JOIN 
-                Service ON Service.id_service = Pre_admission.id_service
+                Service s ON s.id_service = pa.id_service
             WHERE 
-                Pre_admission.id_patient = :num_secu
+                pa.id_patient = :num_secu
+                AND pa.id_choix_pre_admission = :id_choix_pre_admission
+                AND pa.date_hospitalisation = :date_hospitalisation
+                AND pa.heure_intervention = :heure_intervention
+                AND pa.id_pro = :id_pro
+                AND pa.id_service = :id_service
+                AND pa.id_chambre = :id_chambre
             ORDER BY 
-                Pre_admission.date_hospitalisation DESC 
+                pa.date_hospitalisation DESC 
             LIMIT 1
         ";
 
         // Préparation et exécution de la requête
         $stmt = $connexion->prepare($query);
         $stmt->bindParam(':num_secu', $num_secu, PDO::PARAM_STR);
+        $stmt->bindParam(':id_choix_pre_admission', $form_data['pre_admission'], PDO::PARAM_INT);
+        $stmt->bindParam(':date_hospitalisation', $form_data['date_hospitalisation'], PDO::PARAM_STR);
+        $stmt->bindParam(':heure_intervention', $form_data['heure_intervention'], PDO::PARAM_STR);
+        $stmt->bindParam(':id_pro', $form_data['medecin'], PDO::PARAM_INT);
+        $stmt->bindParam(':id_service', $form_data['service'], PDO::PARAM_INT);
+        $stmt->bindParam(':id_chambre', $form_data['chambre_particuliere'], PDO::PARAM_INT);
         $stmt->execute();
 
         $donneesPatient = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +61,7 @@ try {
             ? date('d/m/Y', strtotime($donneesPatient['date_hospitalisation'])) 
             : 'Inconnu';
     } else {
-        $erreur = "Aucun numéro de sécurité sociale trouvé dans la session.";
+        $erreur = "Données de session incomplètes. Veuillez recommencer le processus de pré-admission.";
     }
 } catch (PDOException $e) {
     $erreur = "Erreur de connexion : " . $e->getMessage();
