@@ -41,6 +41,9 @@ try {
                     } elseif ($resultat['id_metier'] == 2) {
                         header("Location: admin.php");
                         exit();
+                    } elseif ($resultat['id_metier'] == 3 || $resultat['id_metier'] == 4) {
+                        header("Location: medecin.php");
+                        exit();
                     } else {
                         $erreur = "Vous n'avez pas les droits.";
                     }

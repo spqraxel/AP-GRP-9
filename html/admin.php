@@ -32,16 +32,7 @@ try {
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
-        </div>
-        <div class="page">
-            <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Choix.php">Pré-admission</a>
-            <a href="?logout=true">Se déconnecter</a>
-        </div>
-    </header>
+    <?php require('require/navbar.php'); ?>
 
     <main>
         <!-- Liste des Professionnels -->
