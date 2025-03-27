@@ -3,6 +3,27 @@ session_start();
 require('logs/Logout_medecin.php');
 require('logs/logs.php');
 
+// Fonction pour obtenir le nom du mois en français
+function getFrenchMonthName($date) {
+    $months = [
+        'January' => 'janvier',
+        'February' => 'février',
+        'March' => 'mars',
+        'April' => 'avril',
+        'May' => 'mai',
+        'June' => 'juin',
+        'July' => 'juillet',
+        'August' => 'août',
+        'September' => 'septembre',
+        'October' => 'octobre',
+        'November' => 'novembre',
+        'December' => 'décembre'
+    ];
+    
+    $english_month = date('F', strtotime($date));
+    return $months[$english_month] ?? $english_month;
+}
+
 if (!isset($connexion)) {
     die("Échec de la connexion : " . $connexion->connect_error);
 }
@@ -24,6 +45,9 @@ $id_service_pro = $service_pro['id_service'];
 $show_all = isset($_GET['show_all']) && $_GET['show_all'] == 1;
 $selected_month = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
 
+// Préparation du titre du mois
+$month_title = $show_all ? 'Tous les rendez-vous' : 'Rendez-vous pour ' . getFrenchMonthName($selected_month) . ' ' . date('Y', strtotime($selected_month));
+
 try {
     // Construction de la requête de base
     $sql = "SELECT pa.*, p.num_secu, p.nom_patient, p.prenom_patient, t.type_admission, s.nom_service 
@@ -35,7 +59,7 @@ try {
     $params = [];
     
     // Conditions de base (toujours filtrer par service pour les médecins)
-    if ($id_metier == 3) { // Si c'est un médecin (id_metier = 3)
+    if ($id_metier == 3) {
         $sql .= " WHERE pa.id_service = ?";
         $params[] = $id_service_pro;
     }
@@ -47,9 +71,6 @@ try {
         $sql .= ($id_metier == 3 ? " AND" : " WHERE") . " pa.date_hospitalisation BETWEEN ? AND ?";
         $params = array_merge($params, [$month_start, $month_end]);
     }
-    
-    // Pour les admins (id_metier = 2), pas de filtre supplémentaire
-    // Pour les autres rôles (si existent), adapter selon vos besoins
     
     $sql .= " ORDER BY pa.date_hospitalisation, pa.heure_intervention";
     
@@ -96,7 +117,7 @@ try {
 
         <div class="table-container">
             <h2>
-                <?= $show_all ? 'Tous les rendez-vous' : 'Rendez-vous pour ' . date('F Y', strtotime($selected_month)) ?>
+            <?= $month_title ?>
             </h2>
             
             <?php if (empty($result_PreAdmission)): ?>
