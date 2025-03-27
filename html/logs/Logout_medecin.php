@@ -7,7 +7,7 @@
         exit;
     }
 
-    if ($_SESSION['id_metier'] !== 2 && $_SESSION['id_metier'] !== 3){
+    if ($_SESSION['id_metier'] !== 2 && $_SESSION['id_metier'] !== 3 && $_SESSION['id_metier'] !== 4){
         header("location: index.php");
         exit;
     }
