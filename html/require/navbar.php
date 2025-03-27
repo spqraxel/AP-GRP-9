@@ -12,6 +12,7 @@ $id_metier = $_SESSION['id_metier'] ?? null;
             <!-- Navbar pour l'admin -->
             <a href="secretaire.php">Accueil</a>
             <a href="Pre_admission_Choix.php">Pré-admission</a>
+            <a href="medecin.php">Médecin</a>
             <a href="?logout=true">Se déconnecter</a>
 
         <?php elseif ($id_metier == 2): ?>
