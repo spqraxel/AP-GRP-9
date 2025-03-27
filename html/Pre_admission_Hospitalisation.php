@@ -13,7 +13,11 @@ try {
 }
 
 // Récupérer la liste des services
-$query_services = $connexion->query("SELECT id_service, nom_service FROM Service");
+$query_services = $connexion->query("
+    SELECT id_service, nom_service 
+    FROM Service 
+    WHERE nom_service NOT LIKE 'Administration%'
+");
 $services = $query_services->fetchAll(PDO::FETCH_ASSOC);
 
 // Traitement du formulaire
@@ -27,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $service = htmlspecialchars($_POST['service']);
     $medecin = htmlspecialchars($_POST['medecin']);
     $chambre_particuliere = htmlspecialchars($_POST['chambre_particuliere']);
+    $date_maxi = (new DateTime())->modify('+2 years')->format('Y-m-d');
 
     // Vérification des champs obligatoires
     if (empty($pre_admission) || $pre_admission === "-1") {
@@ -35,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "La date d'hospitalisation est obligatoire.";
     } elseif (strtotime($date_hospitalisation) < strtotime(date('Y-m-d'))) {
         $erreur = "La date d'hospitalisation ne peut pas être dans le passé.";
+    } if (strtotime($date_hospitalisation) > strtotime($date_maxi)) {
+        $erreur = "La date d'hospitalisation ne peut pas dépasser 2 ans à partir d'aujourd'hui.";
     } elseif (empty($heure_intervention)) {
         $erreur = "L'heure de l'intervention est obligatoire.";
     } elseif (empty($service) || $service === "-1") {
