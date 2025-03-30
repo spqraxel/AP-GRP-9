@@ -35,11 +35,13 @@ if (!isset($_SESSION["id_pro"]) || !isset($_SESSION["id_metier"])) {
 $id_pro = $_SESSION["id_pro"];
 $id_metier = $_SESSION["id_metier"];
 
-// Récupérer le service du professionnel connecté
-$stmt_service = $connexion->prepare("SELECT id_service FROM Professionnel WHERE id_pro = ?");
-$stmt_service->execute([$id_pro]);
-$service_pro = $stmt_service->fetch(PDO::FETCH_ASSOC);
-$id_service_pro = $service_pro['id_service'];
+// Récupérer les infos du professionnel connecté
+$stmt_pro = $connexion->prepare("SELECT nom_pro, prenom_pro, id_service FROM Professionnel WHERE id_pro = ?");
+$stmt_pro->execute([$id_pro]);
+$pro_info = $stmt_pro->fetch(PDO::FETCH_ASSOC);
+$nom_medecin = $pro_info['nom_pro'] ?? '';
+$prenom_medecin = $pro_info['prenom_pro'] ?? '';
+$id_service_pro = $pro_info['id_service'] ?? '';
 
 // Déterminer si on veut voir tous les rendez-vous ou filtrer par mois
 $show_all = isset($_GET['show_all']) && $_GET['show_all'] == 1;
@@ -49,12 +51,14 @@ $selected_month = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
 $month_title = $show_all ? 'Tous les rendez-vous' : 'Rendez-vous pour ' . getFrenchMonthName($selected_month) . ' ' . date('Y', strtotime($selected_month));
 
 try {
-    // Construction de la requête de base
-    $sql = "SELECT pa.*, p.num_secu, p.nom_patient, p.prenom_patient, t.type_admission, s.nom_service 
+    // Construction de la requête de base (ajout du nom du médecin)
+    $sql = "SELECT pa.*, p.num_secu, p.nom_patient, p.prenom_patient, t.type_admission, 
+                   s.nom_service AS service, pr.nom_pro, pr.prenom_pro
             FROM pre_admission pa
             JOIN Patient p ON pa.id_patient = p.num_secu
             JOIN Type_pre_admission t ON pa.id_choix_pre_admission = t.id_type_admission
-            JOIN Service s ON pa.id_service = s.id_service";
+            JOIN Service s ON pa.id_service = s.id_service
+            JOIN Professionnel pr ON pa.id_pro = pr.id_pro";
     
     $params = [];
     
@@ -116,9 +120,7 @@ try {
         </div>
 
         <div class="table-container">
-            <h2>
-            <?= $month_title ?>
-            </h2>
+            <h2><?= $month_title ?></h2>
             
             <?php if (empty($result_PreAdmission)): ?>
                 <p class="no-data">Aucun rendez-vous trouvé.</p>
@@ -132,18 +134,20 @@ try {
                         <th>Heure</th>
                         <th>Patient</th>
                         <th>Type</th>
+                        <th>Médecin</th>
                         <th>Chambre</th>
                         <th>PDF</th>
                     </tr>
                     <?php foreach ($result_PreAdmission as $row): ?>
                         <tr>
                             <?php if ($id_metier == 2 || $id_metier == 3): ?>
-                                <td><?= htmlspecialchars($row['nom_service'] ?? '') ?></td>
+                                <td><?= htmlspecialchars($row['service'] ?? '') ?></td>
                             <?php endif; ?>
                             <td><?= date('d/m/Y', strtotime($row["date_hospitalisation"] ?? '')) ?></td>
                             <td><?= substr($row["heure_intervention"] ?? '', 0, 5) ?></td>
                             <td><?= htmlspecialchars(($row["prenom_patient"] ?? '') . ' ' . ($row["nom_patient"] ?? '')) ?></td>
                             <td><?= htmlspecialchars($row["type_admission"] ?? '') ?></td>
+                            <td><?= htmlspecialchars(($row["prenom_pro"] ?? '') . ' ' . ($row["nom_pro"] ?? '')) ?></td>
                             <td><?= htmlspecialchars(($row["id_chambre"] ?? '') == 1 ? 'Simple' : 'Double') ?></td>
                             <td>
                                 <button onclick="genererPDF(
@@ -152,8 +156,10 @@ try {
                                     '<?= $row['num_secu'] ?? '' ?>',
                                     '<?= date('d/m/Y', strtotime($row["date_hospitalisation"] ?? '')) ?>',
                                     '<?= substr($row["heure_intervention"] ?? '', 0, 5) ?>',
-                                    '<?= $row['nom_service'] ?? '' ?>',
-                                    '<?= $row['type_admission'] ?? '' ?>'
+                                    '<?= $row['service'] ?? '' ?>',
+                                    '<?= $row['type_admission'] ?? '' ?>',
+                                    '<?= $row['prenom_pro'] ?? '' ?>',
+                                    '<?= $row['nom_pro'] ?? '' ?>'
                                 )" class="btn-pdf">
                                     Télécharger
                                 </button>
@@ -166,7 +172,7 @@ try {
     </main>
 
     <script>
-    function genererPDF(nomPatient, prenomPatient, numSecu, datePreAdmission, heureIntervention, service, typeAdmission) {
+    function genererPDF(nomPatient, prenomPatient, numSecu, datePreAdmission, heureIntervention, service, typeAdmission, prenomMedecin, nomMedecin) {
         // Vérification des données obligatoires
         if(!nomPatient || !prenomPatient || !datePreAdmission) {
             alert("Données insuffisantes pour générer le PDF");
@@ -197,9 +203,10 @@ try {
             if(heureIntervention) doc.text(`Heure: ${heureIntervention}`, 20, 80);
             if(service) doc.text(`Service: ${service}`, 20, 90);
             if(typeAdmission) doc.text(`Type: ${typeAdmission}`, 20, 100);
+            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${prenomMedecin} ${nomMedecin}`, 20, 110);
 
             // Sauvegarder le PDF
-            const fileName = `pre_admission_${nomPatient}_${prenomPatient}_${datePreAdmission.replace(/\//g, '-')}.pdf`;
+            const fileName = `pre_admission_${nomPatient}_${datePreAdmission.replace(/\//g, '-')}.pdf`;
             doc.save(fileName);
         };
     }
