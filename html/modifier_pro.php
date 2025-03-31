@@ -1,49 +1,45 @@
 <?php
+session_start();
 require('logs/Logout_admin.php');
 require('logs/logs.php');
 
-$table = "professionnel";
-$erreur = "";
-
-// Vérifier si un ID est passé dans l'URL
+// Vérifier si l'id du professionnel est passé en paramètre
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $id_pro = intval($_GET['id']);
 
-    // Récupérer les informations du professionnel depuis la base de données
-    $requete = $connexion->prepare("SELECT * FROM Professionnel WHERE id = :id");
-    $requete->bindParam(':id', $id);
+    // Récupérer les données du professionnel depuis la base de données
+    $requete = $connexion->prepare("SELECT * FROM Professionnel WHERE id_pro = :id_pro");
+    $requete->bindParam(':id_pro', $id_pro);
     $requete->execute();
     $professionnel = $requete->fetch(PDO::FETCH_ASSOC);
 
     if (!$professionnel) {
-        $erreur = "Professionnel non trouvé.";
+        die("Professionnel introuvable.");
     }
 } else {
-    $erreur = "ID non fourni.";
+    die("ID professionnel non spécifié.");
 }
 
-// Vérifier si le formulaire a été soumis
+// Vérifier si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nom_pro = $_POST["nom_pro"];
-    $prenom_pro = $_POST["prenom_pro"];
-    $mail_pro = $_POST["mail_pro"];
-    $id_metier = $_POST["id_metier"];
-    $id_service = $_POST["id_service"];
+    $nom_pro = trim($_POST["nom_pro"]);
+    $prenom_pro = trim($_POST["prenom_pro"]);
+    $mail_pro = trim($_POST["mail_pro"]);
+    $id_service = intval($_POST["id_service"]);
 
-    // Mise à jour dans la base de données
-    $requete = $connexion->prepare("UPDATE Professionnel SET nom_pro = :nom_pro, prenom_pro = :prenom_pro, mail_pro = :mail_pro, id_metier = :id_metier, id_service = :id_service WHERE id = :id");
+    // Mise à jour des données dans la base
+    $requete = $connexion->prepare("UPDATE Professionnel SET nom_pro = :nom_pro, prenom_pro = :prenom_pro, mail_pro = :mail_pro, id_service = :id_service WHERE id_pro = :id_pro");
+    $requete->bindParam(':id_pro', $id_pro);
     $requete->bindParam(':nom_pro', $nom_pro);
     $requete->bindParam(':prenom_pro', $prenom_pro);
     $requete->bindParam(':mail_pro', $mail_pro);
-    $requete->bindParam(':id_metier', $id_metier);
     $requete->bindParam(':id_service', $id_service);
-    $requete->bindParam(':id', $id);
 
     if ($requete->execute()) {
-        header("Location: /html/admin.php");
+        header("Location: admin.php"); // Redirige vers la page admin après la mise à jour
         exit;
     } else {
-        $erreur = "Erreur lors de la mise à jour du professionnel.";
+        echo "Erreur lors de la mise à jour.";
     }
 }
 ?>
@@ -53,34 +49,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modification Médecin</title>
+    <title>Modifier le médecin</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <?php require('require/navbar.php'); ?>
 
     <div class="container-modif">
-        <h2>Modification d'un médecin</h2>
-        <?php if ($erreur) { echo "<p class='erreur'>$erreur</p>"; } ?>
-        <form action="Modification_professionnel.php?id=<?php echo $id; ?>" method="post">
+        <h2>Modifier un médecin</h2>
+        <form action="modifier_pro.php?id=<?= $id_pro ?>" method="post">
             <label for="nom_pro">Nom :</label>
-            <input type="text" id="nom_pro" name="nom_pro" value="<?php echo $professionnel['nom_pro']; ?>" required><br><br>
+            <input type="text" id="nom_pro" name="nom_pro" value="<?= htmlspecialchars($professionnel['nom_pro']) ?>" required><br><br>
 
             <label for="prenom_pro">Prénom :</label>
-            <input type="text" id="prenom_pro" name="prenom_pro" value="<?php echo $professionnel['prenom_pro']; ?>" required><br><br>
+            <input type="text" id="prenom_pro" name="prenom_pro" value="<?= htmlspecialchars($professionnel['prenom_pro']) ?>" required><br><br>
 
             <label for="mail_pro">Email :</label>
-            <input type="email" id="mail_pro" name="mail_pro" value="<?php echo $professionnel['mail_pro']; ?>" required><br><br>
-
-            <label for="id_metier">ID Métier :</label>
-            <input type="number" id="id_metier" name="id_metier" value="<?php echo $professionnel['id_metier']; ?>" required><br><br>
+            <input type="email" id="mail_pro" name="mail_pro" value="<?= htmlspecialchars($professionnel['mail_pro']) ?>" required><br><br>
 
             <label for="id_service">ID Service :</label>
-            <input type="number" id="id_service" name="id_service" value="<?php echo $professionnel['id_service']; ?>" required><br><br>
+            <input type="number" id="id_service" name="id_service" value="<?= htmlspecialchars($professionnel['id_service']) ?>" required><br><br>
 
             <div class="button-container">
                 <button type="button" class="btn-shine" onclick="history.back();">Retour</button>
-                <button type="submit" class="btn-submit">Enregistrer les modifications</button>
+                <button type="submit" class="btn-submit">Modifier</button>
             </div>
         </form>
     </div>
