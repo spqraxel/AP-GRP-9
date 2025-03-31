@@ -6,16 +6,14 @@ require('logs/logs.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $VLAN = trim($_POST["VLAN"]);
     $nom_service = trim($_POST["nom_service"]);
-    $addr_reseau = trim($_POST["addr_reseau"]);
 
     // Insérer le service dans la base
     try {
-        $sql = "INSERT INTO Service (VLAN, nom_service, addr_reseau) 
-                VALUES (:VLAN, :nom_service, :addr_reseau)";
+        $sql = "INSERT INTO Service (VLAN, nom_service) 
+                VALUES (:VLAN, :nom_service)";
         $stmt = $connexion->prepare($sql);
         $stmt->bindParam(':VLAN', $VLAN);
         $stmt->bindParam(':nom_service', $nom_service);
-        $stmt->bindParam(':addr_reseau', $addr_reseau);
         $stmt->execute();
 
         // Rediriger vers la page liste des services après l'ajout
@@ -46,9 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <label for="nom_service">Nom du Service :</label>
             <input type="text" id="nom_service" name="nom_service" required><br><br>
-
-            <label for="addr_reseau">Adresse Réseau :</label>
-            <input type="text" id="addr_reseau" name="addr_reseau" required><br><br>
 
             <div class="button-container">
                 <button type="submit" class="btn-submit">Ajouter</button>
