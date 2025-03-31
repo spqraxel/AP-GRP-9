@@ -40,14 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajout Professionnel</title>
+    <title>Ajout médecin</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <?php require('require/navbar.php'); ?>
 
     <div class="container-modif">
-        <h2>Ajout d'un professionnel</h2>
+        <h2>Ajout d'un médecin</h2>
         <form action="Ajout_professionnel.php" method="post">
             <label for="nom_pro">Nom :</label>
             <input type="text" id="nom_pro" name="nom_pro" required><br><br>
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="button-container">
                 <button type="button" class="btn-shine" onclick="history.back();">Retour</button>
-                <button type="submit" class="btn-submit">Ajouter le professionnel</button>
+                <button type="submit" class="btn-submit">Ajouter le médecin</button>
             </div>
         </form>
     </div>
