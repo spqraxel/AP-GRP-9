@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         // Rediriger vers la page liste des services après l'ajout
-        header("Location: services.php");
+        header("Location: admin.php");
         exit;
     } catch (PDOException $e) {
         die("Erreur lors de l'ajout du service : " . $e->getMessage());
