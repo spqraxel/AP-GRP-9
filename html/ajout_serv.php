@@ -4,15 +4,13 @@ require('logs/logs.php');
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $VLAN = trim($_POST["VLAN"]);
     $nom_service = trim($_POST["nom_service"]);
 
     // Insérer le service dans la base
     try {
-        $sql = "INSERT INTO Service (VLAN, nom_service) 
-                VALUES (:VLAN, :nom_service)";
+        $sql = "INSERT INTO Service ( nom_service) 
+                VALUES (:nom_service)";
         $stmt = $connexion->prepare($sql);
-        $stmt->bindParam(':VLAN', $VLAN);
         $stmt->bindParam(':nom_service', $nom_service);
         $stmt->execute();
 
