@@ -17,15 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insérer les données dans la base
     try {
-        $sql = "INSERT INTO Professionnel (nom_pro, prenom_pro, mail_pro, id_metier, id_service, mot_de_passe)
-                VALUES (:nom_pro, :prenom_pro, :mail_pro, :id_metier, :id_service, :mot_de_passe)";
+        $sql = "INSERT INTO Professionnel (nom_pro, prenom_pro, mail_pro, id_metier, id_service, mdp_pro)
+                VALUES (:nom_pro, :prenom_pro, :mail_pro, :id_metier, :id_service, :mdp_pro)";
         $stmt = $connexion->prepare($sql);
         $stmt->bindParam(':nom_pro', $nom_pro);
         $stmt->bindParam(':prenom_pro', $prenom_pro);
         $stmt->bindParam(':mail_pro', $mail_pro);
         $stmt->bindParam(':id_metier', $id_metier);
         $stmt->bindParam(':id_service', $id_service);
-        $stmt->bindParam(':mot_de_passe', $mot_de_passe_hache); // Lier le mot de passe haché
+        $stmt->bindParam(':mdp_pro', $mot_de_passe_hache); // Lier le mot de passe haché
         $stmt->execute();
 
         header("Location: admin.php"); // Redirige vers la page admin après l'ajout
@@ -59,14 +59,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="mail_pro">Email :</label>
             <input type="email" id="mail_pro" name="mail_pro" required><br><br>
 
-            <label for="mot_de_passe">Mot de passe :</label>
-            <input type="password" id="mot_de_passe" name="mot_de_passe" required><br><br>
-
             <label for="id_metier">ID Métier :</label>
             <input type="number" id="id_metier" name="id_metier" required><br><br>
 
             <label for="id_service">ID Service :</label>
             <input type="number" id="id_service" name="id_service" required><br><br>
+
+            <!-- Champ pour le mot de passe -->
+            <label for="mot_de_passe">Mot de passe :</label>
+            <input type="password" id="mot_de_passe" name="mot_de_passe" required><br><br>
 
             <div class="button-container">
                 <button type="submit" class="btn-submit">Ajouter</button>
