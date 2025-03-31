@@ -100,9 +100,7 @@ try {
                 <?php while ($row = $result_Service->fetch(PDO::FETCH_ASSOC)) : ?>
                     <tr>
                         <td><?= htmlspecialchars($row["id_service"]) ?></td>
-                        <td><?= htmlspecialchars($row["VLAN"]) ?></td>
                         <td><?= htmlspecialchars($row["nom_service"]) ?></td>
-                        <td><?= htmlspecialchars($row["addr_reseau"]) ?></td>
                         <td>
                             <a href="modifier_service.php?id=<?= $row['id_service'] ?>">
                                 <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
