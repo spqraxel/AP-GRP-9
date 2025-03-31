@@ -13,7 +13,8 @@ try {
     $sql_Service = "SELECT * FROM Service";
     $result_Service = $connexion->query($sql_Service);
 
-    $sql_Professionnel = "SELECT * FROM Professionnel";
+    // Requête pour récupérer uniquement les professionnels avec id_metier = 3
+    $sql_Professionnel = "SELECT * FROM Professionnel WHERE id_metier = 3";
     $result_Professionnel = $connexion->query($sql_Professionnel);
 
     $sql_Pre_admission = "SELECT * FROM Pre_admission";
@@ -35,14 +36,13 @@ try {
     <?php require('require/navbar.php'); ?>
 
     <main>
+
         <!-- Liste des Professionnels -->
         <div class="table-container">
-            <h2>Liste des Professionnels</h2>
+            <h2>Liste des Professionnels (Métier ID = 3)</h2>
             <a href="ajout_pro.php">
-                <button type="button" class="button-pro">Ajouter un professionnel</button> 
-                <br>
-                <br>
-                <br>
+                <button type="button" class="button-pro">Ajouter un professionnel</button>
+                <br><br><br>
             </a>
 
             <table class="table-style">
@@ -83,12 +83,10 @@ try {
 
         <!-- Liste des Services -->
         <div class="table-container">
-            <h2>Liste des services</h2>
+            <h2>Liste des Services</h2>
             <a href="ajout_serv.php">
                 <button type="button" class="button-serv">Ajouter un service</button>
-                <br>
-                <br>
-                <br>
+                <br><br><br>
             </a>
             <table class="table-style">
                 <tr>
