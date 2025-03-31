@@ -1,44 +1,30 @@
 <?php
-session_start(); // Démarrer la session si nécessaire
-ob_start(); // Évite les problèmes de redirection
-
-require('logs/Logout_admin.php');
+// Connexion à la base de données
 require('logs/logs.php');
 
-$table = "Service"; // Table modifiée pour correspondre à la table Service
-
+// Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Vérification de la connexion à la base de données
-    if (!isset($connexion)) {
-        die("Erreur : connexion à la base de données non établie.");
-    }
-
-    // Récupération et sécurisation des données du formulaire
-    $id_service = intval($_POST["id_service"]);
     $VLAN = trim($_POST["VLAN"]);
     $nom_service = trim($_POST["nom_service"]);
     $addr_reseau = trim($_POST["addr_reseau"]);
 
-    // Préparation de la requête SQL
-    $requete = $connexion->prepare("INSERT INTO $table (id_service, VLAN, nom_service, addr_reseau) 
-                                    VALUES (:id_service, :VLAN, :nom_service, :addr_reseau)");
+    // Insérer le service dans la base
+    try {
+        $sql = "INSERT INTO Service (VLAN, nom_service, addr_reseau) 
+                VALUES (:VLAN, :nom_service, :addr_reseau)";
+        $stmt = $connexion->prepare($sql);
+        $stmt->bindParam(':VLAN', $VLAN);
+        $stmt->bindParam(':nom_service', $nom_service);
+        $stmt->bindParam(':addr_reseau', $addr_reseau);
+        $stmt->execute();
 
-    // Liaison des paramètres
-    $requete->bindParam(':id_service', $id_service);
-    $requete->bindParam(':VLAN', $VLAN);
-    $requete->bindParam(':nom_service', $nom_service);
-    $requete->bindParam(':addr_reseau', $addr_reseau);
-
-    // Exécution de la requête et gestion des erreurs
-    if ($requete->execute()) {
-        header("Location: Modif_admin.php");
+        // Rediriger vers la page liste des services après l'ajout
+        header("Location: services.php");
         exit;
-    } else {
-        $errorInfo = $requete->errorInfo();
-        die("Erreur lors de l'ajout du service : " . $errorInfo[2]);
+    } catch (PDOException $e) {
+        die("Erreur lors de l'ajout du service : " . $e->getMessage());
     }
 }
-ob_end_flush(); // Libère le tampon de sortie
 ?>
 
 <!DOCTYPE html>
@@ -46,30 +32,26 @@ ob_end_flush(); // Libère le tampon de sortie
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajout d'un service</title>
+    <title>Ajouter un Service</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <?php require('require/navbar.php'); ?>
 
-    <div class="container-modif">
-        <h2>Ajout d'un service</h2>
-        <form action="Ajout_service.php" method="post">
-            <label for="id_service">ID Service :</label>
-            <input type="number" id="id_service" name="id_service" required><br><br>
-
+    <div class="container">
+        <h2>Ajouter un Service</h2>
+        <form action="ajout_serv.php" method="post">
             <label for="VLAN">VLAN :</label>
             <input type="text" id="VLAN" name="VLAN" required><br><br>
 
-            <label for="nom_service">Nom du service :</label>
+            <label for="nom_service">Nom du Service :</label>
             <input type="text" id="nom_service" name="nom_service" required><br><br>
 
-            <label for="addr_reseau">Adresse réseau :</label>
+            <label for="addr_reseau">Adresse Réseau :</label>
             <input type="text" id="addr_reseau" name="addr_reseau" required><br><br>
 
             <div class="button-container">
-                <button type="button" class="btn-shine" onclick="history.back();">Retour</button>
-                <button type="submit" class="btn-submit">Ajouter le service</button>
+                <button type="submit" class="btn-submit">Ajouter</button>
             </div>
         </form>
     </div>
