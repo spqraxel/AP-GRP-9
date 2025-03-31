@@ -37,11 +37,11 @@ try {
 
     <main>
 
-        <!-- Liste des Professionnels -->
+        <!-- Liste des médecins -->
         <div class="table-container">
-            <h2>Liste des Professionnels (Métier ID = 3)</h2>
+            <h2>Liste des médecins</h2>
             <a href="ajout_pro.php">
-                <button type="button" class="button-pro">Ajouter un professionnel</button>
+                <button type="button" class="button-pro">Ajouter un médecin</button>
                 <br><br><br>
             </a>
 
