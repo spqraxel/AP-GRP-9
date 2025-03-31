@@ -44,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <?php require('require/navbar.php'); ?>
 
     <div class="container-modif">
         <h2>Ajout d'un médecin</h2>
