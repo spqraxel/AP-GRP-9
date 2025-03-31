@@ -349,3 +349,193 @@ input[type="file"] {
 .btn-pdf:hover {
     background-color: #c0392b;
 }
+
+/* Pour les tablettes et petits écrans (768px - 1024px) */
+@media (max-width: 1024px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .logo-container .logo {
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    
+    .page {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .page a {
+        margin: 0 15px;
+        font-size: 18px;
+    }
+    
+    .container-index, 
+    .container-mdp,
+    .container-pre-admission,
+    .table-container,
+    .container-modif {
+        width: 90%;
+        padding: 25px;
+        margin: 30px auto;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .filter-group {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Pour les smartphones (jusqu'à 767px) */
+@media (max-width: 767px) {
+    html, body {
+        background-attachment: scroll;
+    }
+    
+    .navbar {
+        padding: 8px;
+    }
+    
+    .page a {
+        margin: 0 8px;
+        font-size: 16px;
+    }
+    
+    .container-index, 
+    .container-mdp,
+    .container-pre-admission,
+    .table-container,
+    .container-modif {
+        width: 95%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+    
+    .image-au-dessus {
+        width: 120px;
+    }
+    
+    h6 {
+        font-size: 20px;
+    }
+    
+    .table-style th, 
+    .table-style td {
+        padding: 8px;
+        font-size: 10px;
+    }
+    
+    .icon-action {
+        width: 20px;
+        height: 20px;
+    }
+    
+    input, 
+    select,
+    .information-login, 
+    .information-mdp {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .button-login, 
+    .button-mdp, 
+    .button-next, 
+    .btn-submit, 
+    .btn-shine, 
+    .button-pro, 
+    .button-serv {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    /* Adaptation spécifique pour les tables sur mobile */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Pour les très petits écrans (jusqu'à 480px) */
+@media (max-width: 480px) {
+    .page a {
+        margin: 0 5px;
+        font-size: 14px;
+    }
+    
+    .container-index, 
+    .container-mdp {
+        padding: 15px;
+    }
+    
+    .image-au-dessus {
+        width: 100px;
+    }
+    
+    /* Adaptation des formulaires */
+    .form-group {
+        margin-bottom: 10px;
+    }
+    
+    /* Boutons en bloc sur très petits écrans */
+    .button-choice {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}
+
+/* Orientation paysage sur mobile */
+@media (max-height: 480px) and (orientation: landscape) {
+    .container-index, 
+    .container-mdp {
+        top: 60%;
+        transform: translate(-50%, -60%);
+        padding: 15px;
+    }
+    
+    .image-au-dessus {
+        width: 80px;
+        margin-bottom: 10px;
+    }
+    
+    .information-login, 
+    .information-mdp {
+        padding: 6px;
+        margin-bottom: 8px;
+    }
+    
+    .button-login, 
+    .button-mdp, 
+    .button-next {
+        padding: 6px 12px;
+        margin-top: 8px;
+    }
+}
+
+/* Pour les écrans très larges (min-width: 1600px) */
+@media (min-width: 1600px) {    
+    .table-style th {
+        font-size: 18px;
+        padding: 15px;
+    }
+    
+    .table-style td {
+        font-size: 16px;
+        padding: 15px;
+    }
+}
