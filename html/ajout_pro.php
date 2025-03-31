@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prenom_pro = $_POST["prenom_pro"];
     $mail_pro = $_POST["mail_pro"];
     $mdp_pro = password_hash($_POST["mdp_pro"], PASSWORD_BCRYPT); // Hachage du mot de passe
-    $id_metier = $_POST["id_metier"];
+    $id_metier = 3; // ID métier par défaut
     $id_service = $_POST["id_service"];
     $premiere_connection = 1; // Première connexion est toujours à 1
 
@@ -19,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 VALUES (:nom_pro, :prenom_pro, :mail_pro, :mdp_pro, :id_metier, :id_service, :premiere_connection)");
 
     $requete->bindParam(':premiere_connection', $premiere_connection);
-
     $requete->bindParam(':nom_pro', $nom_pro);
     $requete->bindParam(':prenom_pro', $prenom_pro);
     $requete->bindParam(':mail_pro', $mail_pro);
@@ -41,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modification Professionnel</title>
+    <title>Ajout Professionnel</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -62,8 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="mdp_pro">Mot de passe :</label>
             <input type="password" id="mdp_pro" name="mdp_pro" required><br><br>
 
-            <label for="id_metier">ID Métier :</label>
-            <input type="number" id="id_metier" name="id_metier" required><br><br>
+            <input type="hidden" id="id_metier" name="id_metier" value="3">
 
             <label for="id_service">ID Service :</label>
             <input type="number" id="id_service" name="id_service" required><br><br>
