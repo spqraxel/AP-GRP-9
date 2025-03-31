@@ -91,9 +91,7 @@ try {
             <table class="table-style">
                 <tr>
                     <th>ID Service</th>
-                    <th>VLAN</th>
                     <th>Nom du Service</th>
-                    <th>Adresse Réseau</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
