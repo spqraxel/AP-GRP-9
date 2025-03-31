@@ -54,7 +54,7 @@ try {
     // Construction de la requête de base (ajout du nom du médecin)
     $sql = "SELECT pa.*, p.num_secu, p.nom_patient, p.prenom_patient, t.type_admission, 
                    s.nom_service AS service, pr.nom_pro, pr.prenom_pro
-            FROM pre_admission pa
+            FROM Pre_admission pa
             JOIN Patient p ON pa.id_patient = p.num_secu
             JOIN Type_pre_admission t ON pa.id_choix_pre_admission = t.id_type_admission
             JOIN Service s ON pa.id_service = s.id_service
