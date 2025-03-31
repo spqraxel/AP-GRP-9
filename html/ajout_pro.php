@@ -14,28 +14,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_service = $_POST["id_service"];
     $premiere_connection = 1; // Première connexion est toujours à 1
 
-    try {
-        // Insertion dans la base de données
-        $requete = $connexion->prepare("INSERT INTO Professionnel (nom_pro, prenom_pro, mail_pro, mdp_pro, id_metier, id_service, premiere_connection) 
-                                        VALUES (:nom_pro, :prenom_pro, :mail_pro, :mdp_pro, :id_metier, :id_service, :premiere_connection)");
+    // Insertion dans la base de données
+    $requete = $connexion->prepare("INSERT INTO Professionnel (nom_pro, prenom_pro, mail_pro, mdp_pro, id_metier, id_service, premiere_connection) 
+                                VALUES (:nom_pro, :prenom_pro, :mail_pro, :mdp_pro, :id_metier, :id_service, :premiere_connection)");
 
-        $requete->bindParam(':premiere_connection', $premiere_connection);
-        $requete->bindParam(':nom_pro', $nom_pro);
-        $requete->bindParam(':prenom_pro', $prenom_pro);
-        $requete->bindParam(':mail_pro', $mail_pro);
-        $requete->bindParam(':mdp_pro', $mdp_pro);
-        $requete->bindParam(':id_metier', $id_metier);
-        $requete->bindParam(':id_service', $id_service);
+    $requete->bindParam(':premiere_connection', $premiere_connection);
+    $requete->bindParam(':nom_pro', $nom_pro);
+    $requete->bindParam(':prenom_pro', $prenom_pro);
+    $requete->bindParam(':mail_pro', $mail_pro);
+    $requete->bindParam(':mdp_pro', $mdp_pro);
+    $requete->bindParam(':id_metier', $id_metier);
+    $requete->bindParam(':id_service', $id_service);
 
-        if ($requete->execute()) {
-            // Redirection après un ajout réussi
-            header("Location: admin.php");
-            exit;
-        } else {
-            echo "Erreur lors de l'ajout du médecin.";
-        }
-    } catch (PDOException $e) {
-        echo "Erreur lors de l'ajout du médecin : " . $e->getMessage();
+    if ($requete->execute()) {
+        header("Location: admin.php");
+        exit;
+    } else {
+        echo "Erreur lors de l'ajout du professionnel.";
     }
 }
 ?>
@@ -45,10 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajout médecin</title>
+    <title>Ajout Professionnel</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+    <?php require('require/navbar.php'); ?>
 
     <div class="container-modif">
         <h2>Ajout d'un médecin</h2>
@@ -72,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="button-container">
                 <button type="button" class="btn-shine" onclick="history.back();">Retour</button>
-                <button type="submit" class="btn-submit">Ajouter le médecin</button>
+                <button type="submit" class="btn-submit">Ajouter le médecin </button>
             </div>
         </form>
     </div>
