@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insertion dans la base de données
     $requete = $connexion->prepare("INSERT INTO Professionnel (nom_pro, prenom_pro, mail_pro, mdp_pro, id_metier, id_service, premiere_connection) 
-                                VALUES (:nom_pro, :prenom_pro, :mail_pro, :mdp_pro, :id_metier, :id_service, :premiere_connection)");
+                                    VALUES (:nom_pro, :prenom_pro, :mail_pro, :mdp_pro, :id_metier, :id_service, :premiere_connection)");
 
     $requete->bindParam(':premiere_connection', $premiere_connection);
     $requete->bindParam(':nom_pro', $nom_pro);
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $requete->bindParam(':id_service', $id_service);
 
     if ($requete->execute()) {
-        header("Location: admin.php");
+        header("Location: /html/admin.php"); // Chemin corrigé
         exit;
     } else {
         echo "Erreur lors de l'ajout du professionnel.";
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajout Professionnel</title>
+    <title>Ajout médecin</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="button-container">
                 <button type="button" class="btn-shine" onclick="history.back();">Retour</button>
-                <button type="submit" class="btn-submit">Ajouter le médecin </button>
+                <button type="submit" class="btn-submit">Ajouter le médecin</button>
             </div>
         </form>
     </div>
