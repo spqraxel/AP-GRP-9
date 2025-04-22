@@ -28,14 +28,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Service</title>
+    <title>Ajouter un service</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <?php require('require/navbar.php'); ?>
 
     <div class="container">
-        <h2>Ajouter un Service</h2>
+        <h2>Ajouter un service</h2>
+        <br><br>
         <form action="ajout_serv.php" method="post">
             <label for="VLAN">VLAN :</label>
             <input type="text" id="VLAN" name="VLAN" required><br><br>
@@ -44,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="nom_service" name="nom_service" required><br><br>
 
             <div class="button-container">
+                <button type="button" class="btn-shine" onclick="history.back();">Retour</button>
                 <button type="submit" class="btn-submit">Ajouter</button>
             </div>
         </form>

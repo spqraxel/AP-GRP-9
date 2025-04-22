@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('logs/logs.php'); // Contient la connexion PDO $connexion
 
 // Vérifier si l'ID du professionnel est passé en paramètre GET

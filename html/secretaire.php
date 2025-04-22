@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
 require('logs/Logout_Secretaire.php');
-session_start();
 require('logs/logs.php');
 
 // Connexion à la base déjà établie dans logs.php (via $connexion)
@@ -99,7 +98,6 @@ try {
                 <th>ID Pers. 1</th>
                 <th>ID Pers. 2</th>
                 <th>Modifier</th>
-                <th>Supprimer</th>
             </tr>
             <?php while ($row = $result_Patient->fetch(PDO::FETCH_ASSOC)) : ?>
                 <tr>
@@ -124,7 +122,6 @@ try {
                 </tr>
             <?php endwhile; ?>
         </table>
-    </div>
-
+    </div>                  
 </body>
 </html>

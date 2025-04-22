@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require('logs/Logout_medecin.php');
 require('logs/logs.php');
 

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('logs/logs.php'); // Connexion à la BDD via $connexion
 
 // Vérifie si le numéro de sécurité sociale est passé en GET

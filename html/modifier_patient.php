@@ -1,13 +1,7 @@
 <?php
-session_start();
+
 require('logs/Logout_admin.php');
 require('logs/logs.php');
-
-// Vérification de la session et du métier
-if (!isset($_SESSION['id_metier']) || !in_array($_SESSION['id_metier'], [1, 2])) {
-    header("Location: index.php");
-    exit;
-}
 
 // Vérifier si le numéro de sécurité sociale est passé en paramètre
 if (isset($_GET['num_secu'])) {
@@ -64,7 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Erreur lors de la mise à jour.";
     }
-    
 }
 ?>
 
@@ -81,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-modif">
         <h2>Modifier un patient</h2>
+        <br><br>
         <form action="modifier_patient.php?num_secu=<?= htmlspecialchars($num_secu) ?>" method="post">
             <label for="nom_patient">Nom :</label>
             <input type="text" id="nom_patient" name="nom_patient" value="<?= htmlspecialchars($patient['nom_patient']) ?>" required><br><br>

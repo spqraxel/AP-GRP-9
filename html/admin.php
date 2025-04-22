@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('logs/Logout_admin.php');
 require('logs/logs.php');
 
@@ -134,6 +133,7 @@ try {
     <!-- Liste des Pré-admissions -->
     <div class="table-container">
         <h2>Liste des pré-admissions</h2>
+        <br><br><br>
         <table class="table-style">
             <tr>
                 <th>ID Pré-admission</th>
@@ -175,10 +175,7 @@ try {
     <!-- Liste des Patients -->
     <div class="table-container">
         <h2>Liste des patients</h2>
-        <a href="ajout_patient.php">
-            <button type="button" class="button-serv">Ajouter un patient</button>
-            <br><br><br>
-        </a>
+        <br><br><br>
         <table class="table-style">
             <tr>
                 <th>Numéro Sécurité Sociale</th>

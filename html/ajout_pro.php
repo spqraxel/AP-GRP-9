@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('logs/Logout_admin.php');
 require('logs/logs.php');
 
@@ -41,14 +40,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Médecin</title>
+    <title>Ajouter un professionnel</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <?php require('require/navbar.php'); ?>
 
     <div class="container">
-        <h2>Ajouter un Médecin</h2>
+        <h2>Ajouter un professionnel</h2>
+        <br><br>
         <form action="ajout_pro.php" method="post">
             <label for="nom_pro">Nom :</label>
             <input type="text" id="nom_pro" name="nom_pro" required><br><br>
@@ -65,11 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="id_service">ID Service :</label>
             <input type="number" id="id_service" name="id_service" required><br><br>
 
-            <!-- Champ pour le mot de passe -->
             <label for="mot_de_passe">Mot de passe :</label>
             <input type="password" id="mot_de_passe" name="mot_de_passe" required><br><br>
 
             <div class="button-container">
+                <button type="button" class="btn-shine" onclick="history.back();">Retour</button>
                 <button type="submit" class="btn-submit">Ajouter</button>
             </div>
         </form>
