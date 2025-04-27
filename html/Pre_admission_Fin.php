@@ -109,6 +109,18 @@ try {
         const heureIntervention = "<?php echo $donneesPatient['heure_intervention'] ?? 'Inconnu'; ?>";
         const service = "<?php echo $donneesPatient['service'] ?? 'Inconnu'; ?>";
         const medecin = "<?php echo $donneesPatient['medecin'] ?? 'Inconnu'; ?>";
+        const typeAdmission = "<?php echo isset($form_data['pre_admission']) ? ($form_data['pre_admission'] == 1 ? 'Programmée' : 'Urgente') : 'Inconnu'; ?>";
+
+        // Séparer le nom et prénom du médecin
+        const medecinParts = medecin.split(' ');
+        const prenomMedecin = medecinParts.length > 0 ? medecinParts[0] : '';
+        const nomMedecin = medecinParts.length > 1 ? medecinParts.slice(1).join(' ') : '';
+
+        // Vérification des données obligatoires
+        if(!nomPatient || !prenomPatient || !datePreAdmission) {
+            alert("Données insuffisantes pour générer le PDF");
+            return;
+        }
 
         // Créer une nouvelle instance de jsPDF
         const { jsPDF } = window.jspdf;
@@ -118,39 +130,29 @@ try {
         const logo = new Image();
         logo.src = 'img/LPFS_logo.png';
         logo.onload = function () {
-            doc.addImage(logo, 'PNG', 10, 10, 30, 15); // Position et taille du logo
+            doc.addImage(logo, 'PNG', 10, 10, 30, 15);
 
             // Titre du document
             doc.setFontSize(16);
             doc.setFont('helvetica', 'bold');
-            doc.text('Pré-admission du patient', 105, 30, { align: 'center' });
+            doc.text('Fiche de pré-admission', 105, 30, { align: 'center' });
 
             // Informations du patient
             doc.setFontSize(12);
             doc.setFont('helvetica', 'normal');
-            doc.text(`Nom du patient : ${nomPatient} ${prenomPatient}`, 10, 50);
-            doc.text(`Numéro de sécurité sociale : ${numSecu}`, 10, 60);
-            doc.text(`Date de pré-admission : ${datePreAdmission}`, 10, 70);
-            doc.text(`Heure de l'intervention : ${heureIntervention}`, 10, 80);
-            doc.text(`Service : ${service}`, 10, 90);
-            doc.text(`Médecin : ${medecin}`, 10, 100);
+            doc.text(`Nom du patient: ${prenomPatient} ${nomPatient}`, 20, 50);
+            if(numSecu && numSecu !== 'Inconnu') doc.text(`N° Sécurité Sociale: ${numSecu}`, 20, 60);
+            doc.text(`Date: ${datePreAdmission}`, 20, 70);
+            if(heureIntervention && heureIntervention !== 'Inconnu') doc.text(`Heure: ${heureIntervention}`, 20, 80);
+            if(service && service !== 'Inconnu') doc.text(`Service: ${service}`, 20, 90);
+            if(typeAdmission && typeAdmission !== 'Inconnu') doc.text(`Type: ${typeAdmission}`, 20, 100);
+            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${prenomMedecin} ${nomMedecin}`, 20, 110);
 
             // Sauvegarder le PDF
-            doc.save('pre_admission.pdf');
+            const fileName = `pre_admission_${nomPatient}_${datePreAdmission.replace(/\//g, '-')}.pdf`;
+            doc.save(fileName);
         };
     }
-
-    // Détecter lorsque l'utilisateur quitte la page
-    window.addEventListener('beforeunload', function() {
-        // Envoyer une requête au serveur pour supprimer la session etape1
-        fetch('unset_etape1.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ action: 'unset_etape1' })
-        });
-    });
     </script>
 </body>
 </html>

@@ -1,12 +1,15 @@
 <?php
 require('logs/logs.php');
+require('logs/logs.php');
 
+// Vérification de l'existence de 'num_secu' dans l'URL
 // Vérification de l'existence de 'num_secu' dans l'URL
 if (!isset($_GET['num_secu']) || empty($_GET['num_secu'])) {
     echo "Numéro de sécurité sociale invalide.";
     exit;
 }
 
+$num_secu = $_GET['num_secu'];
 $num_secu = $_GET['num_secu'];
 
 try {
@@ -21,7 +24,7 @@ try {
     }
 
     // Vérification des dépendances dans la table couverture_sociale
-    $stmtCheck = $connexion->prepare("SELECT COUNT(*) FROM couverture_sociale WHERE id_patient = :num_secu");
+    $stmtCheck = $connexion->prepare("SELECT COUNT(*) FROM Couverture_sociale WHERE id_patient = :num_secu");
     $stmtCheck->bindParam(':num_secu', $num_secu, PDO::PARAM_STR);
     $stmtCheck->execute();
     $count_check = $stmtCheck->fetchColumn();
