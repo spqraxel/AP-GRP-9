@@ -43,6 +43,7 @@ try {
     <title>Page Admin</title>
     <link rel="stylesheet" href="style/style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <?php require('require/navbar.php'); ?>
@@ -129,31 +130,52 @@ try {
 
     <!-- Liste des Pré-admissions -->
     <div class="table-container">
-        <h2>Liste des pré-admissions</h2>
+        <h2>Liste des Pré-admissions</h2>
         <table class="table-style">
         <br><br>
             <tr>
                 <th>ID Pré-admission</th>
                 <th>ID Patient</th>
-                <th>ID Choix Pré-admission</th>
+                <th>Type Admission</th>
                 <th>Date Hospitalisation</th>
                 <th>Heure Intervention</th>
                 <th>Professionnel</th>
                 <th>Service</th>
                 <th>Chambre</th>
+                <th>PDF</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
-            <?php while ($row = $result_Pre_admission->fetch(PDO::FETCH_ASSOC)) : ?>
+            <?php while ($row = $result_Pre_admission->fetch(PDO::FETCH_ASSOC)) : 
+                // Formatage des données pour le PDF
+                $dateFormatted = date('d/m/Y', strtotime($row["date_hospitalisation"]));
+                $heureFormatted = substr($row["heure_intervention"], 0, 5);
+                $typeAdmission = $row["id_choix_pre_admission"] == 1 ? 'Chirurgie ambulatoire' : 'Hospitalisation';
+            ?>
                 <tr>
                     <td><?= htmlspecialchars($row["id_pre_admission"]) ?></td>
                     <td><?= htmlspecialchars($row["id_patient"]) ?></td>
-                    <td><?= htmlspecialchars($row["id_choix_pre_admission"]) ?></td>
-                    <td><?= htmlspecialchars($row["date_hospitalisation"]) ?></td>
-                    <td><?= htmlspecialchars($row["heure_intervention"]) ?></td>
+                    <td><?= htmlspecialchars($typeAdmission) ?></td>
+                    <td><?= htmlspecialchars($dateFormatted) ?></td>
+                    <td><?= htmlspecialchars($heureFormatted) ?></td>
                     <td><?= htmlspecialchars($row["prenom_pro"] . " " . $row["nom_pro"]) ?></td>
                     <td><?= htmlspecialchars($row["nom_service"]) ?></td>
                     <td><?= htmlspecialchars($row["type_chambre"]) ?></td>
+                    <td>
+                        <button onclick="genererPDF(
+                            '<?= $row['nom_pro'] ?? '' ?>',
+                            '<?= $row['prenom_pro'] ?? '' ?>',
+                            '<?= $row['id_patient'] ?? '' ?>',
+                            '<?= $dateFormatted ?>',
+                            '<?= $heureFormatted ?>',
+                            '<?= $row['nom_service'] ?? '' ?>',
+                            '<?= $typeAdmission ?>',
+                            '<?= $row['prenom_pro'] ?? '' ?>',
+                            '<?= $row['nom_pro'] ?? '' ?>'
+                        )" class="btn-pdf">
+                            Télécharger
+                        </button>
+                    </td>
                     <td>
                         <a href="modifier_pread.php?id=<?= $row['id_pre_admission'] ?>">
                             <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
@@ -214,7 +236,7 @@ try {
                         </a>
                     </td>
                     <td>
-                        <a href="supprimer_patient.php?num_secu=<?= $row['num_secu'] ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
+                        <a href="supprimer_patient.php?num_secu=<?= $row['num_secu'] ?>">
                             <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
                         </a>
                     </td>
@@ -224,5 +246,45 @@ try {
     </div>
 
 </main>
+    <script>
+    function genererPDF(nomPatient, prenomPatient, numSecu, datePreAdmission, heureIntervention, service, typeAdmission, prenomMedecin, nomMedecin) {
+        // Vérification des données obligatoires
+        if(!nomPatient || !prenomPatient || !datePreAdmission) {
+            alert("Données insuffisantes pour générer le PDF");
+            return;
+        }
+
+        // Créer une nouvelle instance de jsPDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Ajouter le logo
+        const logo = new Image();
+        logo.src = 'img/LPFS_logo.png';
+        logo.onload = function () {
+            doc.addImage(logo, 'PNG', 10, 10, 30, 15);
+
+            // Titre du document
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Fiche de pré-admission', 105, 30, { align: 'center' });
+
+            // Informations du patient
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Nom du patient: ${prenomPatient} ${nomPatient}`, 20, 50);
+            if(numSecu && numSecu !== 'Inconnu') doc.text(`N° Sécurité Sociale: ${numSecu}`, 20, 60);
+            doc.text(`Date: ${datePreAdmission}`, 20, 70);
+            if(heureIntervention && heureIntervention !== 'Inconnu') doc.text(`Heure: ${heureIntervention}`, 20, 80);
+            if(service && service !== 'Inconnu') doc.text(`Service: ${service}`, 20, 90);
+            if(typeAdmission && typeAdmission !== 'Inconnu') doc.text(`Type: ${typeAdmission}`, 20, 100);
+            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${prenomMedecin} ${nomMedecin}`, 20, 110);
+
+            // Sauvegarder le PDF
+            const fileName = `pre_admission_${nomPatient}_${datePreAdmission.replace(/\//g, '-')}.pdf`;
+            doc.save(fileName);
+        };
+    }
+    </script>
 </body>
 </html>

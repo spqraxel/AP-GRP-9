@@ -109,7 +109,7 @@ try {
         const heureIntervention = "<?php echo $donneesPatient['heure_intervention'] ?? 'Inconnu'; ?>";
         const service = "<?php echo $donneesPatient['service'] ?? 'Inconnu'; ?>";
         const medecin = "<?php echo $donneesPatient['medecin'] ?? 'Inconnu'; ?>";
-        const typeAdmission = "<?php echo isset($form_data['pre_admission']) ? ($form_data['pre_admission'] == 1 ? 'Programmée' : 'Urgente') : 'Inconnu'; ?>";
+        const typeAdmission = "<?php echo isset($form_data['pre_admission']) ? ($form_data['pre_admission'] == 1 ? 'Chirurgie ambulatoire' : 'Hospitalisation') : 'Inconnu'; ?>";
 
         // Séparer le nom et prénom du médecin
         const medecinParts = medecin.split(' ');
@@ -153,6 +153,18 @@ try {
             doc.save(fileName);
         };
     }
+
+    // Détecter lorsque l'utilisateur quitte la page
+    window.addEventListener('beforeunload', function() {
+        // Envoyer une requête au serveur pour supprimer la session etape1
+        fetch('unset_etape1.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action: 'unset_etape1' })
+        });
+    });
     </script>
 </body>
 </html>

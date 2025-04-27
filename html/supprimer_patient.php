@@ -1,15 +1,12 @@
 <?php
 require('logs/logs.php');
-require('logs/logs.php');
 
-// Vérification de l'existence de 'num_secu' dans l'URL
 // Vérification de l'existence de 'num_secu' dans l'URL
 if (!isset($_GET['num_secu']) || empty($_GET['num_secu'])) {
     echo "Numéro de sécurité sociale invalide.";
     exit;
 }
 
-$num_secu = $_GET['num_secu'];
 $num_secu = $_GET['num_secu'];
 
 try {

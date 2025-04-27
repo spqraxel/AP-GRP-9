@@ -202,7 +202,7 @@ try {
             if(heureIntervention) doc.text(`Heure: ${heureIntervention}`, 20, 80);
             if(service) doc.text(`Service: ${service}`, 20, 90);
             if(typeAdmission) doc.text(`Type: ${typeAdmission}`, 20, 100);
-            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${prenomMedecin} ${nomMedecin}`, 20, 110);
+            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${nomMedecin} ${prenomMedecin}`, 20, 110);
 
             // Sauvegarder le PDF
             const fileName = `pre_admission_${nomPatient}_${datePreAdmission.replace(/\//g, '-')}.pdf`;
