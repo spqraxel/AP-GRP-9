@@ -196,7 +196,7 @@ try {
             // Informations du patient
             doc.setFontSize(12);
             doc.setFont('helvetica', 'normal');
-            doc.text(`Nom du patient: ${prenomPatient} ${nomPatient}`, 20, 50);
+            doc.text(`Nom du patient: ${nomPatient} ${prenomPatient}`, 20, 50);
             if(numSecu) doc.text(`N° Sécurité Sociale: ${numSecu}`, 20, 60);
             doc.text(`Date: ${datePreAdmission}`, 20, 70);
             if(heureIntervention) doc.text(`Heure: ${heureIntervention}`, 20, 80);

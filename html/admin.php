@@ -19,13 +19,15 @@ try {
 
     $sql_Pre_admission = "
         SELECT pa.*, 
-               s.nom_service, 
-               c.type_chambre, 
-               pr.nom_pro, pr.prenom_pro
+            s.nom_service, 
+            pr.nom_pro, pr.prenom_pro, 
+            c.type_chambre,
+            p.nom_patient, p.prenom_patient
         FROM Pre_admission pa
         LEFT JOIN Service s ON pa.id_service = s.id_service
+        LEFT JOIN Professionnel pr ON pa.id_pro = pr.id_pro
         LEFT JOIN Chambre c ON pa.id_chambre = c.id_chambre
-        LEFT JOIN Professionnel pr ON pa.id_pro = pr.id_pro";
+        LEFT JOIN Patient p ON pa.id_patient = p.num_secu";
     $result_Pre_admission = $connexion->query($sql_Pre_admission);
 
     $sql_Patient = "SELECT * FROM Patient";
@@ -163,8 +165,8 @@ try {
                     <td><?= htmlspecialchars($row["type_chambre"]) ?></td>
                     <td>
                         <button onclick="genererPDF(
-                            '<?= $row['nom_pro'] ?? '' ?>',
-                            '<?= $row['prenom_pro'] ?? '' ?>',
+                            '<?= $row['nom_patient'] ?? '' ?>',
+                            '<?= $row['prenom_patient'] ?? '' ?>',
                             '<?= $row['id_patient'] ?? '' ?>',
                             '<?= $dateFormatted ?>',
                             '<?= $heureFormatted ?>',
@@ -272,13 +274,13 @@ try {
             // Informations du patient
             doc.setFontSize(12);
             doc.setFont('helvetica', 'normal');
-            doc.text(`Nom du patient: ${prenomPatient} ${nomPatient}`, 20, 50);
+            doc.text(`Nom du patient: ${nomPatient} ${prenomPatient}`, 20, 50);
             if(numSecu && numSecu !== 'Inconnu') doc.text(`N° Sécurité Sociale: ${numSecu}`, 20, 60);
             doc.text(`Date: ${datePreAdmission}`, 20, 70);
             if(heureIntervention && heureIntervention !== 'Inconnu') doc.text(`Heure: ${heureIntervention}`, 20, 80);
             if(service && service !== 'Inconnu') doc.text(`Service: ${service}`, 20, 90);
             if(typeAdmission && typeAdmission !== 'Inconnu') doc.text(`Type: ${typeAdmission}`, 20, 100);
-            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${prenomMedecin} ${nomMedecin}`, 20, 110);
+            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${nomMedecin} ${prenomMedecin}`, 20, 110);
 
             // Sauvegarder le PDF
             const fileName = `pre_admission_${nomPatient}_${datePreAdmission.replace(/\//g, '-')}.pdf`;

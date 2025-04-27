@@ -113,8 +113,8 @@ try {
 
         // Séparer le nom et prénom du médecin
         const medecinParts = medecin.split(' ');
-        const prenomMedecin = medecinParts.length > 0 ? medecinParts[0] : '';
-        const nomMedecin = medecinParts.length > 1 ? medecinParts.slice(1).join(' ') : '';
+        const nomMedecin = medecinParts.length > 0 ? medecinParts[0] : '';
+        const prenomMedecin = medecinParts.length > 1 ? medecinParts.slice(1).join(' ') : '';
 
         // Vérification des données obligatoires
         if(!nomPatient || !prenomPatient || !datePreAdmission) {
@@ -140,13 +140,13 @@ try {
             // Informations du patient
             doc.setFontSize(12);
             doc.setFont('helvetica', 'normal');
-            doc.text(`Nom du patient: ${prenomPatient} ${nomPatient}`, 20, 50);
+            doc.text(`Nom du patient: ${nomPatient} ${prenomPatient}`, 20, 50);
             if(numSecu && numSecu !== 'Inconnu') doc.text(`N° Sécurité Sociale: ${numSecu}`, 20, 60);
             doc.text(`Date: ${datePreAdmission}`, 20, 70);
             if(heureIntervention && heureIntervention !== 'Inconnu') doc.text(`Heure: ${heureIntervention}`, 20, 80);
             if(service && service !== 'Inconnu') doc.text(`Service: ${service}`, 20, 90);
             if(typeAdmission && typeAdmission !== 'Inconnu') doc.text(`Type: ${typeAdmission}`, 20, 100);
-            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${prenomMedecin} ${nomMedecin}`, 20, 110);
+            if(prenomMedecin && nomMedecin) doc.text(`Médecin: Dr. ${nomMedecin} ${prenomMedecin}`, 20, 110);
 
             // Sauvegarder le PDF
             const fileName = `pre_admission_${nomPatient}_${datePreAdmission.replace(/\//g, '-')}.pdf`;
