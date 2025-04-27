@@ -1,5 +1,5 @@
 <?php
-require('logs/Logout_admin.php');
+require('logs/Logout_Secretaire.php');
 require('logs/logs.php');
 
 // Vérifier si la session est bien démarrée et si le métier de l'utilisateur est autorisé
@@ -8,11 +8,9 @@ if (!isset($_SESSION['id_metier']) || !in_array($_SESSION['id_metier'], [1, 2]))
     exit;
 }
 
-// Vérifier si l'id de la pré-admission est passé en paramètre
 if (isset($_GET['id'])) {
     $id_pre_admission = intval($_GET['id']);
 
-    // Récupérer les données de la pré-admission depuis la base de données
     $requete = $connexion->prepare("SELECT * FROM Pre_admission WHERE id_pre_admission = :id_pre_admission");
     $requete->bindParam(':id_pre_admission', $id_pre_admission);
     $requete->execute();
@@ -25,7 +23,6 @@ if (isset($_GET['id'])) {
     die("ID de pré-admission non spécifié.");
 }
 
-// Vérifier si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_patient = intval($_POST["id_patient"]);
     $id_choix_pre_admission = intval($_POST["id_choix_pre_admission"]);
@@ -35,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_service = intval($_POST["id_service"]);
     $id_chambre = intval($_POST["id_chambre"]);
 
-    // Mise à jour des données dans la base
     $requete = $connexion->prepare("UPDATE Pre_admission SET id_patient = :id_patient, id_choix_pre_admission = :id_choix_pre_admission, date_hospitalisation = :date_hospitalisation, heure_intervention = :heure_intervention, id_pro = :id_pro, id_service = :id_service, id_chambre = :id_chambre WHERE id_pre_admission = :id_pre_admission");
 
     $requete->bindParam(':id_pre_admission', $id_pre_admission);
@@ -48,17 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $requete->bindParam(':id_chambre', $id_chambre);
 
     if ($requete->execute()) {
-        // Redirection en fonction du métier de l'utilisateur après modification
         if ($_SESSION['id_metier'] == 1) {
             header("Location: secretaire.php");
-            exit;
         } elseif ($_SESSION['id_metier'] == 2) {
             header("Location: admin.php");
-            exit;
-        } else {
-            header("Location: index.php");
-            exit;
         }
+        exit;
     } else {
         echo "Erreur lors de la mise à jour.";
     }
@@ -78,7 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-modif">
         <h2>Modifier la pré-admission</h2>
-        <form action="modifier_preadmission.php?id=<?= $id_pre_admission ?>" method="post">
+        <br><br>
+        <form action="modifier_pread.php?id=<?= $id_pre_admission ?>" method="post">
             <label for="id_patient">ID Patient :</label>
             <input type="number" id="id_patient" name="id_patient" value="<?= htmlspecialchars($pre_admission['id_patient']) ?>" required><br><br>
 

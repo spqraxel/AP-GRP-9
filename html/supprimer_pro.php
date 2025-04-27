@@ -1,22 +1,33 @@
 <?php
 require('logs/logs.php'); 
 
-// Vérifier si l'ID du professionnel est passé en paramètre GET
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "ID invalide.";
     exit;
 }
 
-$id_pro = intval($_GET['id']); // Sécurise l'ID
+$id_pro = intval($_GET['id']); 
 
 try {
-    // Préparer la requête de suppression
+    $stmt_service = $connexion->prepare("SELECT COUNT(*) FROM Professionnel WHERE id_pro = :id");
+    $stmt_service->bindParam(':id', $id_pro, PDO::PARAM_INT);
+    $stmt_service->execute();
+    $count_service = $stmt_service->fetchColumn();
+
+    $stmt_preadmission = $connexion->prepare("SELECT COUNT(*) FROM Pre_admission WHERE id_pro = :id");
+    $stmt_preadmission->bindParam(':id', $id_pro, PDO::PARAM_INT);
+    $stmt_preadmission->execute();
+    $count_preadmission = $stmt_preadmission->fetchColumn();
+
+    if ($count_service > 0 || $count_preadmission > 0) {
+        echo "<script>alert('Impossible de supprimer ce professionnel car il est lié à un service ou une pré-admission.'); window.location.href = 'admin.php';</script>";
+        exit;
+    }
+
     $stmt = $connexion->prepare("DELETE FROM Professionnel WHERE id_pro = :id");
     $stmt->bindParam(':id', $id_pro, PDO::PARAM_INT);
 
-    // Exécuter la requête
     if ($stmt->execute()) {
-        // Redirection après la suppression
         header("Location: admin.php?message=suppression_reussie");
         exit;
     } else {

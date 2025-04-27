@@ -3,12 +3,6 @@
 require('logs/Logout_Secretaire.php');
 require('logs/logs.php');
 
-// Connexion à la base déjà établie dans logs.php (via $connexion)
-if (!isset($connexion)) {
-    die("Échec de la connexion : " . $connexion->connect_error);
-}
-
-// Requêtes SQL pour récupérer les données avec jointures
 try {
     $sql_Pre_admission = "
         SELECT pa.*, 
@@ -99,7 +93,6 @@ try {
                 <th>ID Pers. 1</th>
                 <th>ID Pers. 2</th>
                 <th>Modifier</th>
-                <th>Supprimer</th>
             </tr>
             <?php while ($row = $result_Patient->fetch(PDO::FETCH_ASSOC)) : ?>
                 <tr>

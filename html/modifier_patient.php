@@ -1,5 +1,5 @@
 <?php
-require('logs/Logout_admin.php');
+require('logs/Logout_Secretaire.php');
 require('logs/logs.php');
 
 // Vérification de la session et du métier
@@ -25,7 +25,6 @@ if (isset($_GET['num_secu'])) {
     die("Numéro de sécurité sociale non spécifié.");
 }
 
-// Vérifier si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom_patient = trim($_POST["nom_patient"]);
     $prenom_patient = trim($_POST["prenom_patient"]);
@@ -40,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_pers1 = intval($_POST["id_pers1"]);
     $id_pers2 = intval($_POST["id_pers2"]);
 
-    // Mise à jour des données dans la base
     $requete = $connexion->prepare("UPDATE Patient SET nom_patient = :nom_patient, prenom_patient = :prenom_patient, date_naissance = :date_naissance, adresse = :adresse, CP = :CP, ville = :ville, email_patient = :email_patient, telephone_patient = :telephone_patient, nom_epouse = :nom_epouse, civilite = :civilite, id_pers1 = :id_pers1, id_pers2 = :id_pers2 WHERE num_secu = :num_secu");
 
     $requete->bindParam(':num_secu', $num_secu);
@@ -58,12 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $requete->bindParam(':id_pers2', $id_pers2);
 
     if ($requete->execute()) {
-        header("Location: admin.php");
+        if ($_SESSION['id_metier'] == 1) {
+            header("Location: secretaire.php");
+        } elseif ($_SESSION['id_metier'] == 2) {
+            header("Location: admin.php");
+        }
         exit;
     } else {
         echo "Erreur lors de la mise à jour.";
     }
-    
 }
 ?>
 
@@ -80,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-modif">
         <h2>Modifier un patient</h2>
+        <br><br>
         <form action="modifier_patient.php?num_secu=<?= htmlspecialchars($num_secu) ?>" method="post">
             <label for="nom_patient">Nom :</label>
             <input type="text" id="nom_patient" name="nom_patient" value="<?= htmlspecialchars($patient['nom_patient']) ?>" required><br><br>

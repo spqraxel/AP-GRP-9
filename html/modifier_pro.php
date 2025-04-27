@@ -8,11 +8,9 @@ if (!isset($_SESSION['id_metier']) || !in_array($_SESSION['id_metier'], [1, 2]))
     exit;
 }
 
-// Vérifier si l'id du professionnel est passé en paramètre
 if (isset($_GET['id'])) {
     $id_pro = intval($_GET['id']);
 
-    // Récupérer les données du professionnel depuis la base de données
     $requete = $connexion->prepare("SELECT * FROM Professionnel WHERE id_pro = :id_pro");
     $requete->bindParam(':id_pro', $id_pro);
     $requete->execute();
@@ -25,14 +23,12 @@ if (isset($_GET['id'])) {
     die("ID professionnel non spécifié.");
 }
 
-// Vérifier si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom_pro = trim($_POST["nom_pro"]);
     $prenom_pro = trim($_POST["prenom_pro"]);
     $mail_pro = trim($_POST["mail_pro"]);
     $id_service = intval($_POST["id_service"]);
 
-    // Mise à jour des données dans la base
     $requete = $connexion->prepare("UPDATE Professionnel SET nom_pro = :nom_pro, prenom_pro = :prenom_pro, mail_pro = :mail_pro, id_service = :id_service WHERE id_pro = :id_pro");
     $requete->bindParam(':id_pro', $id_pro);
     $requete->bindParam(':nom_pro', $nom_pro);
@@ -46,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Erreur lors de la mise à jour.";
     }
-    
+}
 ?>
 
 <!DOCTYPE html>
@@ -54,14 +50,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier le médecin</title>
+    <title>Modifier le professionnel</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <?php require('require/navbar.php'); ?>
 
     <div class="container-modif">
-        <h2>Modifier un médecin</h2>
+        <h2>Modifier un professionnel</h2>
+        <br><br>
         <form action="modifier_pro.php?id=<?= $id_pro ?>" method="post">
             <label for="nom_pro">Nom :</label>
             <input type="text" id="nom_pro" name="nom_pro" value="<?= htmlspecialchars($professionnel['nom_pro']) ?>" required><br><br>

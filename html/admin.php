@@ -2,18 +2,14 @@
 require('logs/Logout_admin.php');
 require('logs/logs.php');
 
-// Vérifier si la connexion à la base de données est établie
 if (!isset($connexion)) {
     die("Échec de la connexion : " . $connexion->connect_error);
 }
 
-// Récupérer les données des tables Service, Professionnel, Pre_admission et Patient
 try {
-    // Requêtes enrichies avec les libellés
     $sql_Service = "SELECT * FROM Service";
     $result_Service = $connexion->query($sql_Service);
 
-    // Jointure pour récupérer le nom du service et du métier, sans condition sur le métier
     $sql_Professionnel = "
         SELECT p.*, s.nom_service, m.nom_metier 
         FROM Professionnel p
@@ -58,7 +54,7 @@ try {
         <h2>Liste des professionnels</h2>
         <a href="ajout_pro.php">
             <button type="button" class="button-pro">Ajouter un professionnel</button>
-            <br><br><br>
+            <br><br>
         </a>
 
         <table class="table-style">
@@ -88,7 +84,7 @@ try {
                         </a>
                     </td>
                     <td>
-                        <a href="supprimer_pro.php?id=<?= $row['id_pro'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                        <a href="supprimer_pro.php?id=<?= $row['id_pro'] ?>">
                             <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
                         </a>
                     </td>
@@ -99,41 +95,43 @@ try {
 
     <!-- Liste des Services -->
     <div class="table-container">
-        <h2>Liste des services</h2>
-        <a href="ajout_serv.php">
-            <button type="button" class="button-serv">Ajouter un service</button>
-            <br><br><br>
-        </a>
-        <table class="table-style">
+    <h2>Liste des services</h2>
+    <a href="ajout_serv.php">
+        <button type="button" class="button-serv">Ajouter un service</button>
+        <br><br>
+    </a>
+    <table class="table-style">
+        <tr>
+            <th>ID Service</th>
+            <th>Nom du Service</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </tr>
+        <?php while ($row = $result_Service->fetch(PDO::FETCH_ASSOC)) : ?>
             <tr>
-                <th>ID Service</th>
-                <th>Nom du Service</th>
-                <th>Modifier</th>
-                <th>Supprimer</th>
+                <td><?= htmlspecialchars($row["id_service"]) ?></td>
+                <td><?= htmlspecialchars($row["nom_service"]) ?></td>
+                <td>
+                    <a href="modifier_service.php?id=<?= urlencode($row['id_service']) ?>">
+                        <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
+                    </a>
+                </td>
+                <td>
+                    <a href="supprimer_service.php?id=<?= urlencode($row['id_service']) ?>">
+                        <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
+                    </a>
+                </td>
             </tr>
-            <?php while ($row = $result_Service->fetch(PDO::FETCH_ASSOC)) : ?>
-                <tr>
-                    <td><?= htmlspecialchars($row["id_service"]) ?></td>
-                    <td><?= htmlspecialchars($row["nom_service"]) ?></td>
-                    <td>
-                        <a href="modifier_service.php?id=<?= $row['id_service'] ?>">
-                            <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
-                        </a>
-                    </td>
-                    <td>
-                        <a href="supprimer_service.php?id=<?= $row['id_service'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
-                            <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
-                        </a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </table>
+        <?php endwhile; ?>
+    </table>
     </div>
+
 
     <!-- Liste des Pré-admissions -->
     <div class="table-container">
         <h2>Liste des pré-admissions</h2>
         <table class="table-style">
+        <br><br>
             <tr>
                 <th>ID Pré-admission</th>
                 <th>ID Patient</th>
@@ -157,12 +155,12 @@ try {
                     <td><?= htmlspecialchars($row["nom_service"]) ?></td>
                     <td><?= htmlspecialchars($row["type_chambre"]) ?></td>
                     <td>
-                        <a href="modifier_pread.php?id=<?= $row['id_pre_admission'] ?>">
+                        <a href="modifier_pread.php?id=<?= $row['id_pre_admission'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette pré-admission ?');">
                             <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
                         </a>
                     </td>
                     <td>
-                        <a href="supprimer_pread.php?id=<?= $row['id_pre_admission'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette pré-admission ?');">
+                        <a href="supprimer_pread.php?id=<?= $row['id_pre_admission'] ?>">
                             <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
                         </a>
                     </td>
@@ -175,8 +173,7 @@ try {
     <div class="table-container">
         <h2>Liste des patients</h2>
         <a href="ajout_patient.php">
-            <button type="button" class="button-serv">Ajouter un patient</button>
-            <br><br><br>
+            <br><br>
         </a>
         <table class="table-style">
             <tr>
@@ -212,12 +209,12 @@ try {
                     <td><?= htmlspecialchars($row["id_pers1"]) ?></td>
                     <td><?= htmlspecialchars($row["id_pers2"]) ?></td>
                     <td>
-                        <a href="modifier_patient.php?num_secu=<?= $row['num_secu'] ?>">
+                        <a href="modifier_patient.php?num_secu=<?= $row['num_secu'] ?>" >
                             <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
                         </a>
                     </td>
                     <td>
-                        <a href="supprimer_patient.php?num_secu=<?= $row['num_secu'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
+                        <a href="supprimer_patient.php?num_secu=<?= $row['num_secu'] ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
                             <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
                         </a>
                     </td>

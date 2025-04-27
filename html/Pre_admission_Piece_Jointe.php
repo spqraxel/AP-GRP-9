@@ -1,6 +1,5 @@
 <?php
 require('logs/Logout_Secretaire.php');
-session_start();
 
 // Connexion à la base de données
 require('logs/logs.php');

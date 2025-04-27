@@ -1,12 +1,9 @@
 <?php
-// Connexion à la base de données
 require('logs/logs.php');
 
-// Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom_service = trim($_POST["nom_service"]);
 
-    // Insérer le service dans la base
     try {
         $sql = "INSERT INTO Service ( nom_service) 
                 VALUES (:nom_service)";
@@ -14,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':nom_service', $nom_service);
         $stmt->execute();
 
-        // Rediriger vers la page liste des services après l'ajout
         header("Location: admin.php");
         exit;
     } catch (PDOException $e) {
@@ -36,10 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container">
         <h2>Ajouter un Service</h2>
+        <br><br>
         <form action="ajout_serv.php" method="post">
-            <label for="VLAN">VLAN :</label>
-            <input type="text" id="VLAN" name="VLAN" required><br><br>
-
             <label for="nom_service">Nom du Service :</label>
             <input type="text" id="nom_service" name="nom_service" required><br><br>
 
