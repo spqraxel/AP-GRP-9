@@ -155,12 +155,12 @@ try {
                     <td><?= htmlspecialchars($row["nom_service"]) ?></td>
                     <td><?= htmlspecialchars($row["type_chambre"]) ?></td>
                     <td>
-                        <a href="modifier_pread.php?id=<?= $row['id_pre_admission'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette pré-admission ?');">
+                        <a href="modifier_pread.php?id=<?= $row['id_pre_admission'] ?>">
                             <img src="img/icon_modifier.png" alt="Modifier" class="icon-action">
                         </a>
                     </td>
                     <td>
-                        <a href="supprimer_pread.php?id=<?= $row['id_pre_admission'] ?>">
+                        <a href="supprimer_pread.php?id=<?= $row['id_pre_admission'] ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette pré-admission ?');">
                             <img src="img/icon_supprimer.png" alt="Supprimer" class="icon-action">
                         </a>
                     </td>
