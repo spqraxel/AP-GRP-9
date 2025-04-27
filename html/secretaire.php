@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <?php
 require('logs/Logout_Secretaire.php');
 require('logs/logs.php');
@@ -28,6 +28,7 @@ try {
     die("Erreur lors de la récupération des données : " . $e->getMessage());
 }
 ?>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -98,6 +99,7 @@ try {
                 <th>ID Pers. 1</th>
                 <th>ID Pers. 2</th>
                 <th>Modifier</th>
+                <th>Supprimer</th>
             </tr>
             <?php while ($row = $result_Patient->fetch(PDO::FETCH_ASSOC)) : ?>
                 <tr>
@@ -122,6 +124,7 @@ try {
                 </tr>
             <?php endwhile; ?>
         </table>
-    </div>                  
+    </div>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-require('logs/logs.php'); // Contient la connexion PDO $connexion
+require('logs/logs.php'); 
 
 // Vérifier si l'ID du professionnel est passé en paramètre GET
 if (!isset($_GET['id']) || empty($_GET['id'])) {

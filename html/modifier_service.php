@@ -2,6 +2,12 @@
 require('logs/Logout_admin.php');
 require('logs/logs.php');
 
+// Vérification de la session et du métier
+if (!isset($_SESSION['id_metier']) || !in_array($_SESSION['id_metier'], [1, 2])) {
+    header("Location: index.php");
+    exit;
+}
+
 // Vérifier si l'id du service est passé en paramètre
 if (isset($_GET['id'])) {
     $id_service = intval($_GET['id']);
@@ -55,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-modif">
         <h2>Modifier un service</h2>
-        <br><br>
         <form action="modifier_service.php?id=<?= $id_service ?>" method="post">
             <label for="VLAN">VLAN :</label>
             <input type="text" id="VLAN" name="VLAN" value="<?= htmlspecialchars($service['VLAN']) ?>" required><br><br>

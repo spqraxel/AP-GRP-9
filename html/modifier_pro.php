@@ -2,6 +2,12 @@
 require('logs/Logout_admin.php');
 require('logs/logs.php');
 
+// Vérification de la session et du métier
+if (!isset($_SESSION['id_metier']) || !in_array($_SESSION['id_metier'], [1, 2])) {
+    header("Location: index.php");
+    exit;
+}
+
 // Vérifier si l'id du professionnel est passé en paramètre
 if (isset($_GET['id'])) {
     $id_pro = intval($_GET['id']);
@@ -27,13 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_service = intval($_POST["id_service"]);
 
     // Mise à jour des données dans la base
-    $requete = $connexion->prepare("UPDATE Professionnel 
-        SET nom_pro = :nom_pro, 
-            prenom_pro = :prenom_pro, 
-            mail_pro = :mail_pro, 
-            id_service = :id_service 
-        WHERE id_pro = :id_pro");
-
+    $requete = $connexion->prepare("UPDATE Professionnel SET nom_pro = :nom_pro, prenom_pro = :prenom_pro, mail_pro = :mail_pro, id_service = :id_service WHERE id_pro = :id_pro");
     $requete->bindParam(':id_pro', $id_pro);
     $requete->bindParam(':nom_pro', $nom_pro);
     $requete->bindParam(':prenom_pro', $prenom_pro);
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Erreur lors de la mise à jour.";
     }
-} 
+    
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-modif">
         <h2>Modifier un médecin</h2>
-        <br><br>
         <form action="modifier_pro.php?id=<?= $id_pro ?>" method="post">
             <label for="nom_pro">Nom :</label>
             <input type="text" id="nom_pro" name="nom_pro" value="<?= htmlspecialchars($professionnel['nom_pro']) ?>" required><br><br>
