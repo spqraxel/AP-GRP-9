@@ -1,8 +1,8 @@
 <?php
-require('Logout.php');
+require('logs/Logout.php');
 session_start();
 
-require('logs.php');
+require('logs/logs.php');
 $success = "";
 
 try {
@@ -12,7 +12,7 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $new_password = $_POST['new_password'];
         $confirm_password = $_POST['confirm_password'];
-        $mail = $_SESSION['mail_pro']; // Récupère l'e-mail de la session
+        $mail = $_SESSION['mail_pro']; 
 
         $pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/";
 
@@ -21,10 +21,8 @@ try {
         } elseif (!preg_match($pattern, $new_password)) {
             $erreur = "Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
         } else {
-            // Hachage du mot de passe avant stockage
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-            // Mise à jour du mot de passe et du statut de première connexion
             $requete = $connexion->prepare("UPDATE Professionnel SET mdp_pro = :mdp_pro, premiere_connection = 0 WHERE mail_pro = :mail_pro");
             $requete->bindParam(':mdp_pro', $hashed_password);
             $requete->bindParam(':mail_pro', $mail);
@@ -32,12 +30,14 @@ try {
 
             $success = "Mot de passe mis à jour avec succès !";
             
-            // Redirection vers la page appropriée après la mise à jour
             if ($_SESSION['id_metier'] == 1) {
-                header("Location: scretaire.php");
+                header("Location: secretaire.php");
                 exit();
             } elseif ($_SESSION['id_metier'] == 2) {
                 header("Location: admin.php");
+                exit();
+            } elseif ($_SESSION['id_metier'] == 3 || $_SESSION['id_metier'] == 4) {
+                header("Location: medecin.php");
                 exit();
             }
         }

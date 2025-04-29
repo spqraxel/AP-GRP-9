@@ -72,7 +72,7 @@ html, body {
 }
 
 /* Style pour les boutons */
-.button-login, .button-mdp, .button-next {
+.button-login, .button-mdp, .button-next, .btn-submit, .btn-shine, .button-pro, .button-serv{
     display: inline-block;
     padding: 10px 20px;
     margin-top: 10px;
@@ -176,26 +176,28 @@ input[type="file"] {
 
 /* Conteneur des tables */
 .table-container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 20px;
+    width: 95%;
+    max-width: 1600px; 
+    margin: 35px auto;
+    padding: 25px; 
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
+    overflow-x: auto;
 }
 
 /* Titres des sections */
 .table-container h2 {
-    margin-bottom: 15px;
-    font-size: 24px;
+    margin-bottom: 20px;
+    font-size: 25px;
     color: #333;
 }
 
 /* Style de la table */
 .table-style {
     width: 100%;
+    min-width: 800px;
     border-collapse: collapse;
     background-color: #f9f9f9;
     border-radius: 10px;
@@ -206,15 +208,17 @@ input[type="file"] {
 .table-style th {
     background-color: #007bff;
     color: white;
-    padding: 12px;
+    padding: 10px;
     text-align: left;
-    font-size: 16px;
+    font-size: 10px;
 }
 
 /* Lignes de la table */
 .table-style td, .table-style th {
-    padding: 12px;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
+    word-break: break-word;
+    max-width: 150px; 
 }
 
 /* Alternance des couleurs pour les lignes */
@@ -226,18 +230,20 @@ input[type="file"] {
 .table-style tr:hover {
     background-color: #dce9ff;
 }
+
 /* Style pour les icônes d'action */
 .icon-action {
-    width: 24px; /* Ajuste la taille des icônes */
+    width: 24px;
     height: 24px;
-    margin: 0 5px; /* Espacement entre les icônes */
-    cursor: pointer; /* Change le curseur pour indiquer qu'elles sont cliquables */
+    margin: 0 6px;
+    cursor: pointer;
     transition: transform 0.2s ease-in-out;
 }
 
 .icon-action:hover {
-    transform: scale(1.2); /* Effet d'agrandissement au survol */
+    transform: scale(1.2);
 }
+
 
 /* pre-admission fin */
 .container {
@@ -281,4 +287,261 @@ input[type="file"] {
 .button-container button.danger {
     background-color: #dc3545;
     color: white;
+}
+
+/* Style pour le formulaire de modification service/professionnel */
+.container-modif {
+    background-color: #f9f9f9;
+    text-align: center;
+    border-radius: 10px;
+    margin: 60px auto;
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* pannel médecins */
+
+.filter-container {
+    margin: 0 0 20px 0;
+    padding: 15px;
+    background: #f5f5f5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.no-data {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}
+.btn {
+    padding: 8px 15px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn:hover {
+    background: #45a049;
+}
+.btn-secondary {
+    background: #6c757d;
+}
+.btn-secondary:hover {
+    background: #5a6268;
+}
+.btn-pdf {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-pdf:hover {
+    background-color: #c0392b;
+}
+
+/* Pour les tablettes et petits écrans (768px - 1024px) */
+@media (max-width: 1024px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .logo-container .logo {
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    
+    .page {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .page a {
+        margin: 0 15px;
+        font-size: 18px;
+    }
+    
+    .container-index, 
+    .container-mdp,
+    .container-pre-admission,
+    .table-container,
+    .container-modif {
+        width: 90%;
+        padding: 25px;
+        margin: 30px auto;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .filter-group {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Pour les smartphones (jusqu'à 767px) */
+@media (max-width: 767px) {
+    html, body {
+        background-attachment: scroll;
+    }
+    
+    .navbar {
+        padding: 8px;
+    }
+    
+    .page a {
+        margin: 0 8px;
+        font-size: 16px;
+    }
+    
+    .container-index, 
+    .container-mdp,
+    .container-pre-admission,
+    .table-container,
+    .container-modif {
+        width: 95%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+    
+    .image-au-dessus {
+        width: 120px;
+    }
+    
+    h6 {
+        font-size: 20px;
+    }
+    
+    .table-style th, 
+    .table-style td {
+        padding: 8px;
+        font-size: 10px;
+    }
+    
+    .icon-action {
+        width: 20px;
+        height: 20px;
+    }
+    
+    input, 
+    select,
+    .information-login, 
+    .information-mdp {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .button-login, 
+    .button-mdp, 
+    .button-next, 
+    .btn-submit, 
+    .btn-shine, 
+    .button-pro, 
+    .button-serv {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    /* Adaptation spécifique pour les tables sur mobile */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Pour les très petits écrans (jusqu'à 480px) */
+@media (max-width: 480px) {
+    .page a {
+        margin: 0 5px;
+        font-size: 14px;
+    }
+    
+    .container-index, 
+    .container-mdp {
+        padding: 15px;
+    }
+    
+    .image-au-dessus {
+        width: 100px;
+    }
+    
+    /* Adaptation des formulaires */
+    .form-group {
+        margin-bottom: 10px;
+    }
+    
+    /* Boutons en bloc sur très petits écrans */
+    .button-choice {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}
+
+/* Orientation paysage sur mobile */
+@media (max-height: 480px) and (orientation: landscape) {
+    .container-index, 
+    .container-mdp {
+        top: 60%;
+        transform: translate(-50%, -60%);
+        padding: 15px;
+    }
+    
+    .image-au-dessus {
+        width: 80px;
+        margin-bottom: 10px;
+    }
+    
+    .information-login, 
+    .information-mdp {
+        padding: 6px;
+        margin-bottom: 8px;
+    }
+    
+    .button-login, 
+    .button-mdp, 
+    .button-next {
+        padding: 6px 12px;
+        margin-top: 8px;
+    }
+}
+
+/* Pour les écrans très larges (min-width: 1600px) */
+@media (min-width: 1600px) {    
+    .table-style th {
+        font-size: 18px;
+        padding: 15px;
+    }
+    
+    .table-style td {
+        font-size: 16px;
+        padding: 15px;
+    }
 }

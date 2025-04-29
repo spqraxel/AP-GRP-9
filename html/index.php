@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require('logs.php');
+require('logs/logs.php');
 
 try {
     $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);
@@ -24,10 +24,11 @@ try {
             $resultat = $requete->fetch();
 
             if ($resultat) {
-                if ($mdp === $resultat['mdp_pro']) {
+                if (password_verify($mdp, $resultat['mdp_pro']) || $mdp === $resultat['mdp_pro']) {
                     $_SESSION['loggedin'] = true;
                     $_SESSION['mail_pro'] = $mail;
                     $_SESSION['id_metier'] = $resultat['id_metier'];
+                    $_SESSION['id_pro'] = $resultat['id_pro'];
 
                     // Vérification de la première connexion
                     if ($resultat['premiere_connection'] == 1) {
@@ -40,6 +41,9 @@ try {
                         exit();
                     } elseif ($resultat['id_metier'] == 2) {
                         header("Location: admin.php");
+                        exit();
+                    } elseif ($resultat['id_metier'] == 3 || $resultat['id_metier'] == 4) {
+                        header("Location: medecin.php");
                         exit();
                     } else {
                         $erreur = "Vous n'avez pas les droits.";

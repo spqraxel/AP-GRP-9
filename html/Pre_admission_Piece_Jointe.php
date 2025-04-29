@@ -1,9 +1,8 @@
 <?php
-require('Logout.php');
-session_start();
+require('logs/Logout_Secretaire.php');
 
 // Connexion à la base de données
-require('logs.php');
+require('logs/logs.php');
 
 try {
     $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);
@@ -98,11 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Activer l'affichage des erreurs
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -113,16 +107,8 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
-        </div>
-        <div class="page">
-            <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Choix.php">Pré-admission</a>        
-            <a href="?logout=true">Se déconnecter</a>
-        </div>
-    </header>
+    <?php require('require/navbar.php'); ?>
+
     <div class="container-pre-admission">
         <!-- Formulaire -->
         <form method="POST" action="" enctype="multipart/form-data">

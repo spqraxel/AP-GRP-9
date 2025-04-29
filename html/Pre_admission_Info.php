@@ -1,8 +1,7 @@
 <?php
-require('Logout.php');
-session_start();
+require('logs/Logout_Secretaire.php');
 
-require('logs.php');
+require('logs/logs.php');
 
 try {
     $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);
@@ -24,7 +23,6 @@ function verifierCodePostalVille($cp, $ville) {
 
     if (is_array($data) && !empty($data)) {
         foreach ($data as $commune) {
-            // Vérifie si la ville correspond en ignorant la casse
             if (isset($commune['nom']) && strtolower($commune['nom']) === strtolower($ville)) {
                 return true;
             }
@@ -90,33 +88,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (($civilite == "0" && $premierChiffre != "1") || ($civilite == "1" && $premierChiffre != "2")) {
                 $erreur = "La civilité sélectionnée ne correspond pas au numéro de sécurité sociale.";
             } else {
-                // Stocker les données dans la session
-                $_SESSION['etape1'] = [
-                    'num_secu' => $num_secu,
-                    'civilite' => $civilite,
-                    'nom_patient' => $nom_patient,
-                    'nom_epouse' => $nom_epouse,
-                    'prenom_patient' => $prenom_patient,
-                    'date_naissance' => $date_naissance,
-                    'adresse' => $adresse,
-                    'CP' => $CP,
-                    'ville' => $ville,
-                    'email_patient' => $email_patient,
-                    'telephone_patient' => $telephone_patient,
-                ];
+                // Vérification de la correspondance date de naissance / NIR
+                $anneeNaissanceNIR = substr($num_secu, 1, 2); // Année dans le NIR
+                $moisNaissanceNIR = substr($num_secu, 3, 2);  // Mois dans le NIR
 
-                // Rediriger vers l'étape 2
-                header('Location: Pre_admission_Inscription.php');
-                exit();
+                // Extraction de la date de naissance
+                $dateNaissance = new DateTime($date_naissance);
+                $anneeNaissance = $dateNaissance->format('y'); // Année sur 2 chiffres
+                $moisNaissance = $dateNaissance->format('m'); // Mois sur 2 chiffres
+
+                // Vérification mois valide (01-12)
+                if ($moisNaissanceNIR < 1 || $moisNaissanceNIR > 12) {
+                    $erreur = "Le mois de naissance dans le NIR est invalide.";
+                } 
+                // Vérification année (avec gestion post-2000)
+                elseif (!in_array($anneeNaissanceNIR, [$anneeNaissance, $anneeNaissance + 20])) {
+                    $erreur = "L'année de naissance ne correspond pas au numéro de sécurité sociale.";
+                } 
+                // Vérification mois
+                elseif ($moisNaissanceNIR != $moisNaissance) {
+                    $erreur = "Le mois de naissance ne correspond pas au numéro de sécurité sociale.";
+                } else {
+                    // Stocker les données dans la session
+                    $_SESSION['etape1'] = [
+                        'num_secu' => $num_secu,
+                        'civilite' => $civilite,
+                        'nom_patient' => $nom_patient,
+                        'nom_epouse' => $nom_epouse,
+                        'prenom_patient' => $prenom_patient,
+                        'date_naissance' => $date_naissance,
+                        'adresse' => $adresse,
+                        'CP' => $CP,
+                        'ville' => $ville,
+                        'email_patient' => $email_patient,
+                        'telephone_patient' => $telephone_patient,
+                    ];
+
+                    // Rediriger vers l'étape 2
+                    header('Location: Pre_admission_Inscription.php');
+                    exit();
+                }
             }
         }
     }
 }
-
-// Activer l'affichage des erreurs
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 ?>
 <!DOCTYPE html>
@@ -128,16 +143,8 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
-        </div>
-        <div class="page">
-            <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Choix.php">Pré-admission</a>        
-            <a href="?logout=true">Se déconnecter</a>
-        </div>
-    </header>
+    <?php require('require/navbar.php'); ?>
+
     <div class="container-pre-admission">
         <!-- Formulaire -->
         <form method="POST" action="Pre_admission_Info.php">

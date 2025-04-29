@@ -1,8 +1,7 @@
 <?php
-require('Logout.php');
-session_start();
+require('logs/Logout_Secretaire.php');
 
-require('logs.php');
+require('logs/logs.php');
 
 try {
     $connexion = new PDO("mysql:host=$serveur;dbname=$nomBDD", $utilisateur, $motdepasse);
@@ -13,7 +12,11 @@ try {
 }
 
 // Récupérer la liste des services
-$query_services = $connexion->query("SELECT id_service, nom_service FROM Service");
+$query_services = $connexion->query("
+    SELECT id_service, nom_service 
+    FROM Service 
+    WHERE nom_service NOT LIKE 'Administration%'
+");
 $services = $query_services->fetchAll(PDO::FETCH_ASSOC);
 
 // Traitement du formulaire
@@ -27,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $service = htmlspecialchars($_POST['service']);
     $medecin = htmlspecialchars($_POST['medecin']);
     $chambre_particuliere = htmlspecialchars($_POST['chambre_particuliere']);
+    $date_maxi = (new DateTime())->modify('+2 years')->format('Y-m-d');
 
     // Vérification des champs obligatoires
     if (empty($pre_admission) || $pre_admission === "-1") {
@@ -35,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erreur = "La date d'hospitalisation est obligatoire.";
     } elseif (strtotime($date_hospitalisation) < strtotime(date('Y-m-d'))) {
         $erreur = "La date d'hospitalisation ne peut pas être dans le passé.";
+    } elseif (strtotime($date_hospitalisation) > strtotime($date_maxi)) {
+        $erreur = "La date d'hospitalisation ne peut pas dépasser 2 ans à partir d'aujourd'hui.";
     } elseif (empty($heure_intervention)) {
         $erreur = "L'heure de l'intervention est obligatoire.";
     } elseif (empty($service) || $service === "-1") {
@@ -69,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Nettoyer les données de session après l'insertion
             unset($_SESSION['etape2']);
             unset($_SESSION['etape3']);
-            unset($_SESSION['form_data']);
 
             header('Location: Pre_admission_Fin.php');
             exit();
@@ -78,11 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
-// Activer l'affichage des erreurs
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 ?>
 <!DOCTYPE html>
@@ -94,16 +94,8 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="img/LPFS_logo.png" alt="Logo" class="logo">
-        </div>
-        <div class="page">
-            <a href="admin.php">Accueil</a>
-            <a href="Pre_admission_Choix.php">Pré-admission</a>        
-            <a href="?logout=true">Se déconnecter</a>
-        </div>
-    </header>
+    <?php require('require/navbar.php'); ?>
+
     <div class="container-pre-admission">
         <!-- Formulaire -->
         <form method="POST" action="">
@@ -147,7 +139,7 @@ error_reporting(E_ALL);
 
             <label for="date_hospitalisation">Date d'hospitalisation :<span class= "requis"> *</span></label>
             <br>
-            <input type="date" id="date_hospitalisation" name="date_hospitalisation" value="<?php echo htmlspecialchars($_SESSION['form_data']['date_hospitalisation'] ?? ''); ?>" required>
+            <input type="date" id="date_hospitalisation" name="date_hospitalisation" min="<?php echo date('Y-m-d'); ?>" value="<?php echo htmlspecialchars($_SESSION['form_data']['date_hospitalisation'] ?? ''); ?>" required>
             <br><br>
 
             <label for="heure_intervention">Heure de l'intervention :<span class= "requis"> *</span></label>
