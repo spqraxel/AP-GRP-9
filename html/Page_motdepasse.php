@@ -1,6 +1,5 @@
 <?php
 require('logs/Logout.php');
-session_start();
 
 require('logs/logs.php');
 $success = "";
